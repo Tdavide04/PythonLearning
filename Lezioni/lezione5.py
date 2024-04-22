@@ -60,8 +60,13 @@ def word_count(s: str) -> dict[str, int]:
             wordcount[word] += 1
         else:
             wordcount[word] = 1
-    print(f"il risultato è {wordcount}")
-    return wordcount
+
+    filter = {}
+    for key, val in wordcount.items():
+        if val > 1:
+            filter[key] = val
+    print(f"il risultato è {filter}")
+    return filter
 
 word_count(s)
 

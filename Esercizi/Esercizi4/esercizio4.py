@@ -82,8 +82,21 @@ city_country("Valencia", "Spain")
 #If the calling line includes a value for the number of songs, add that value to the album’s dictionary. 
 #Make at least one new function call that includes the number of songs on an album.
 
-def make_album():
-    pass
+def make_album(artist, title):
+    album_dict = {
+        "artist": artist.title(),
+        "title": title.title()
+    }
+    print(f"here there are your album {album_dict}")
+    return album_dict
+
+album = make_album("Queen", "Queen")
+album = make_album("Kanye West", "Ye")
+album = make_album("Taylor Swift", "Lover")
+
+# -> here there are your album {'artist': 'Queen', 'title': 'Queen'}
+#here there are your album {'artist': 'Kanye West', 'title': 'Ye'}
+#here there are your album {'artist': 'Taylor Swift', 'title': 'Lover'}
 
 #8-8. User Albums: Start with your program from Exercise 8-7. Write a while loop that allows users to enter an album’s artist and title. 
 #Once you have that information, call make_album() with the user’s input and print the dictionary that’s created. Be sure to include a quit value in the while loop.
