@@ -33,11 +33,12 @@ print(f"{famous_person} once said, \"{famous_quote}\"")
 #2-8. File Extensions: Python has a removesuffix() method that works exactly like removeprefix(). 
 #Assign the value 'python_notes.txt' to a variable called filename. 
 #Then use the removesuffix() method to display the filename without the file extension, like some file browsers do.
-'''
+
 filename = "python_notes.txt"
 filename1= filename.removesuffix(".txt")
 print(filename1)
-'''
+
+# -> "python_notes"
 #3-1. Names: Store the names of a few of your friends in a list called names. 
 # Print each person’s name by accessing each element in the list, one at a time.
 
