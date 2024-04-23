@@ -144,15 +144,18 @@ for pizza in list_pizza:
 #4-12. More Loops: All versions of foods.py in this section have avoided using for loops when printing, to save space. 
 #Choose a version of foods.py, and write two for loops to print each list of foods.
 
-
-
-
-
+# -> done
 
 #4-14. PEP 8: Look through the original PEP 8 style guide at https://python.org/dev/peps/pep-0008. 
 #You won’t use much of it now, but it might be interesting to skim through it.
 
+# -> done
+
 #4-15. Code Review: Choose three of the programs you’ve written in this chapter and modify each one to comply with PEP 8.
+
+
+
+
 
 #5-1. Conditional Tests: Write a series of conditional tests. 
 #Print a statement describing each test and your prediction for the results of each test. Your code should look something like this:
