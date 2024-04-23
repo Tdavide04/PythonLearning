@@ -6,37 +6,113 @@
 #The output should consist of three or more lines about the kinds of pizza you like and then an additional sentence, 
 #such as I really love pizza!
 
+list_pizza = ["capricciosa","rossa", "margherita"]
+for pizza in list_pizza:
+    print(pizza)
+for pizza in list_pizza:
+    print(f"This is my favorite pizza {pizza}")
+print("I really like pizza")
+
+# -> capricciosa
+#rossa
+#margherita
+#This is my favorite pizza capricciosa
+#This is my favorite pizza rossa
+#This is my favorite pizza margherita
+#I really like pizza
+
 #4-2. Animals: Think of at least three different animals that have a common characteristic. 
 #Store the names of these animals in a list, and then use a for loop to print out the name of each animal.
 #Modify your program to print a statement about each animal, such as A dog would make a great pet.
 #Add a line at the end of your program, stating what these animals have in common. 
 #You could print a sentence, such as Any of these animals would make a great pet!
 
+list_animals = ["dog", "cat", "fox"]
+for animal in list_animals:
+    print(animal)
+for animal in list_animals:
+    print(f"{animal} is a cute animal")
+print("Any of these animals would make a great pet!")
+
+# -> dog
+#cat
+#fox
+#dog is a cute animal
+#cat is a cute animal
+#fox is a cute animal
+#Any of these animals would make a great pet!
+
 #4-3. Counting to Twenty: Use a for loop to print the numbers from 1 to 20, inclusive.
+
+for x in range(21):
+    print(x)
+
+# -> 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
 
 #4-4. One Million: Make a list of the numbers from one to one million, and then use a for loop to print the numbers. 
 #(If the output is taking too long, stop it by pressing CTRL-C or by closing the output window.)
+
+my_list: list = [index for index in range(1000001)]
+print(my_list)
+
+# -> a list with numbers between 0 and 1000000
 
 #4-5. Summing a Million: Make a list of the numbers from one to one million, 
 #and then use min() and max() to make sure your list actually starts at one and ends at one million. 
 #Also, use the sum() function to see how quickly Python can add a million numbers.
 
+print(min(my_list)) 
+print(max(my_list))
+print(sum(my_list))
+
+# -> 0
+#1000000
+#500000500000
+
 #4-6. Odd Numbers: Use the third argument of the range() function to make a list of the odd numbers from 1 to 20. 
 #Use a for loop to print each number.
 
+for x in range(1, 21, 2):
+    print(x)
+
+# -> 1,3,5,7,9,11,13,14,15,17,19
+
 #4-7. Threes: Make a list of the multiples of 3, from 3 to 30. Use a for loop to print the numbers in your list.
+
+for x in range(3,33,3):
+    print(x)
+
+# -> 3,6,9,12,15,18,21,24,27,30
 
 #4-8. Cubes: A number raised to the third power is called a cube. For example, the cube of 2 is written as 2**3 in Python. 
 #Make a list of the first 10 cubes (that is, the cube of each integer from 1 through 10), 
 #and use a for loop to print out the value of each cube.
 
+for x in range(11):
+    print(x**3)
+
+# -> 0,1,8,27,64,125,216,343,512,729,1000
+
 #4-9. Cube Comprehension: Use a list comprehension to generate a list of the first 10 cubes.
+
+cube_list: list = [index**3 for index in range(11)]
+print(cube_list)
+
+# -> [0, 1, 8, 27, 64, 125, 216, 343, 512, 729, 1000]
 
 #4-10. Slices: Using one of the programs you wrote in this chapter, 
 #add several lines to the end of the program that do the following:
 #Print the message The first three items in the list are:. Then use a slice to print the first three items from that program’s list.
 #Print the message Three items from the middle of the list are:. Then use a slice to print three items from the middle of the list.
 #Print the message The last three items in the list are:. Then use a slice to print the last three items in the list.
+
+print(f"The first three items in the list are: {cube_list[:3]}")
+print(f"Three items from the middle of the list are: {cube_list[3:7]}")
+print(f"The last three items in the list are: {cube_list[7:]}")
+
+# -> The first three items in the list are: [0, 1, 8]
+#Three items from the middle of the list are: [27, 64, 125, 216]
+#The last three items in the list are: [343, 512, 729, 1000]
 
 #4-11. My Pizzas, Your Pizzas: Start with your program from Exercise 4-1. 
 #Make a copy of the list of pizzas, and call it friend_pizzas. Then, do the following:
@@ -46,8 +122,32 @@
 #and then use a for loop to print the first list. Print the message My friend’s favorite pizzas are:, 
 #and then use a for loop to print the second list. Make sure each new pizza is stored in the appropriate list.
 
+friend_pizzas = list_pizza
+list_pizza.append("Quattro Stagioni")
+friend_pizzas.append("Napoli")
+for pizza in friend_pizzas:
+    print(f"My friend’s favorite pizzas are: {pizza}")
+for pizza in list_pizza:
+    print(f"My favorite pizzas are: {pizza}")
+
+# -> My friend’s favorite pizzas are: capricciosa
+#My friend’s favorite pizzas are: rossa
+#My friend’s favorite pizzas are: margherita
+#My friend’s favorite pizzas are: Quattro Stagioni
+#My friend’s favorite pizzas are: Napoli
+#My favorite pizzas are: capricciosa
+#My favorite pizzas are: rossa
+#My favorite pizzas are: margherita
+#My favorite pizzas are: Quattro Stagioni
+#My favorite pizzas are: Napoli
+
 #4-12. More Loops: All versions of foods.py in this section have avoided using for loops when printing, to save space. 
 #Choose a version of foods.py, and write two for loops to print each list of foods.
+
+
+
+
+
 
 #4-14. PEP 8: Look through the original PEP 8 style guide at https://python.org/dev/peps/pep-0008. 
 #You won’t use much of it now, but it might be interesting to skim through it.
