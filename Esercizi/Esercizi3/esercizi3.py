@@ -153,9 +153,7 @@ for pizza in list_pizza:
 
 #4-15. Code Review: Choose three of the programs you’ve written in this chapter and modify each one to comply with PEP 8.
 
-
-
-
+# -> done 
 
 #5-1. Conditional Tests: Write a series of conditional tests. 
 #Print a statement describing each test and your prediction for the results of each test. Your code should look something like this:
@@ -166,6 +164,15 @@ for pizza in list_pizza:
 #print(car == 'audi')
 #Look closely at your results, and make sure you understand why each line evaluates to True or False.
 #Create at least 10 tests. Have at least 5 tests evaluate to True and another 5 tests evaluate to False.
+car: str = ("Inserisci Automobile: ")
+if car == "subaru":
+    print("Is car == 'subaru'? I predict True.")
+    print(car == 'subaru')
+elif car == "audi":
+    print("\nIs car == 'audi'? I predict False.")
+    print(car == 'audi')
+
+
 
 #5-2. More Conditional Tests: You don’t have to limit the number of tests you create to 10. 
 #If you want to try more comparisons, write more tests and add them to conditional_tests.py. 
@@ -183,11 +190,34 @@ for pizza in list_pizza:
 #Write an if statement to test whether the alien’s color is green. If it is, print a message that the player just earned 5 points.
 #Write one version of this program that passes the if test and another that fails. (The version that fails will have no output.)
 
+alien_color = "yellow"
+if alien_color == "green":
+    print("You earned 5 points")
+else: 
+    print("You lost")
+
+alien_color = "green"
+if alien_color == "green":
+    print("You earned 5 points")
+
+
+# -> You lost
+#You earned 5 points
 
 #5-4. Alien Colors #2: Choose a color for an alien as you did in Exercise 5-3, and write an if-else chain.
 #If the alien’s color is green, print a statement that the player just earned 5 points for shooting the alien.
 #If the alien’s color isn’t green, print a statement that the player just earned 10 points.
 #Write one version of this program that runs the if block and another that runs the else block.
+
+alien_color = "yellow"
+if alien_color == "green":
+    print("You earned 5 points")
+elif alien_color == "yellow":
+    print("You earned 10 points")
+else:
+    print("You lost")
+
+# -> You earned 10 points
 
 #5-5. Alien Colors #3: Turn your if-else chain from Exercise 5-4 into an if-elif-else chain.
 #If the alien is green, print a message that the player earned 5 points.
@@ -195,6 +225,17 @@ for pizza in list_pizza:
 #If the alien is red, print a message that the player earned 15 points.
 #Write three versions of this program, making sure each message is printed for the appropriate color alien.
 
+alien_color = "red"
+if alien_color == "green":
+    print("You earned 5 points")
+elif alien_color == "yellow":
+    print("You earned 10 points")
+elif alien_color == "red":
+    print("You earned 15 points")
+else:
+    print("You lost")
+
+# -> You earned 15 points
 
 #5-6. Stages of Life: Write an if-elif-else chain that determines a person’s stage of life. 
 #Set a value for the variable age, and then:
@@ -204,6 +245,13 @@ for pizza in list_pizza:
 #If the person is at least 13 years old but less than 20, print a message that the person is a teenager.
 #If the person is at least 20 years old but less than 65, print a message that the person is an adult.
 #If the person is age 65 or older, print a message that the person is an elder.
+
+
+
+
+
+
+
 
 #5-7. Favorite Fruit: Make a list of your favorite fruits, 
 #and then write a series of independent if statements that check for certain fruits in your list.
