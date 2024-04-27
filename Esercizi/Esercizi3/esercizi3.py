@@ -164,15 +164,45 @@ for pizza in list_pizza:
 #print(car == 'audi')
 #Look closely at your results, and make sure you understand why each line evaluates to True or False.
 #Create at least 10 tests. Have at least 5 tests evaluate to True and another 5 tests evaluate to False.
-car: str = ("Inserisci Automobile: ")
-if car == "subaru":
-    print("Is car == 'subaru'? I predict True.")
-    print(car == 'subaru')
-elif car == "audi":
-    print("\nIs car == 'audi'? I predict False.")
-    print(car == 'audi')
 
+car = 'subaru'
+print("Is car == 'subaru'? I predict True.")
+print(car == 'subaru')
+print("Is car == 'audi'? I predict False.")
+print(car == 'audi')
+print("Is car == 'ferrari'? I predict False.")
+print(car == 'ferrari')
+print("Is car != 'toyota'? I predict True.")
+print(car != 'toyota')
+print("Is car == 'volkswagen'? I predict False.")
+print(car == 'volkswagen')
+print("Is car == 'honda'? I predict False.")
+print(car == 'honda')
+print("Is car != 'tesla'? I predict True.")
+print(car != 'tesla')
+print("Is car != 'nissan'? I predict True.")
+print(car != 'nissan')
+print("Is car != 'bmw'? I predict True.")
+print(car != 'bmw')
 
+#Is car == 'subaru'? I predict True.
+# True
+# Is car == 'audi'? I predict False.
+# False
+# Is car == 'ferrari'? I predict False.
+# False
+# Is car != 'toyota'? I predict True.
+# True
+# Is car == 'volkswagen'? I predict False.
+# False
+# Is car == 'honda'? I predict False.
+# False
+# Is car != 'tesla'? I predict True.
+# True
+# Is car != 'nissan'? I predict True.
+# True
+# Is car != 'bmw'? I predict True.
+# True
 
 #5-2. More Conditional Tests: You don’t have to limit the number of tests you create to 10. 
 #If you want to try more comparisons, write more tests and add them to conditional_tests.py. 
@@ -184,6 +214,37 @@ elif car == "audi":
 #Tests using the and keyword and the or keyword
 #Test whether an item is in a list
 #Test whether an item is not in a list
+
+'''
+# Test for equality: 
+'apple' == 'apple' (True)
+# Test for inequality:
+'apple' != 'orange' (True)
+# Test for equality with lower(): 
+'Apple'.lower() == 'apple' (True)
+# Test for inequality with lower(): 
+'OrAnge'.lower() != 'orange' (False)
+# Numerical equality: 
+5 == 5 (True)
+# Numerical inequality: 
+10 != 5 (True)
+# Greater than: 
+15 > 10 (True)
+# Less than: 
+20 < 30 (True)
+# Greater than or equal to: 
+25 >= 25 (True)
+# Less than or equal to: 
+30 <= 30 (True)
+# Using and: 
+(5 > 3) and (10 < 15) (True)
+# Using or:
+(5 < 3) or (10 == 10) (True)
+if 'apple' is in ['apple', 'orange', 'banana'] (True)
+if 'grape' is in ['apple', 'orange', 'banana'] (False)
+if 'pear' is not in ['apple', 'orange', 'banana'] (True)
+if 'orange' is not in ['apple', 'orange', 'banana'] (False)
+'''
 
 #5-3. Alien Colors #1: Imagine an alien was just shot down in a game. 
 #Create a variable called alien_color and assign it a value of 'green', 'yellow', or 'red'.
@@ -246,12 +307,21 @@ else:
 #If the person is at least 20 years old but less than 65, print a message that the person is an adult.
 #If the person is age 65 or older, print a message that the person is an elder.
 
+age = 30
+if age < 2:
+    print("the person is a baby")
+elif age >= 2 and age < 4:
+    print("the person is a toddler")
+elif age >= 4 and age < 13:
+    print("the person is a kid")
+elif age >= 13 and age < 20:
+    print("the person is an teenager")
+elif age >= 20 and age < 65:
+    print("the person is a adult")
+else:
+    print("the person is elder")
 
-
-
-
-
-
+# -> the person is an adult
 
 #5-7. Favorite Fruit: Make a list of your favorite fruits, 
 #and then write a series of independent if statements that check for certain fruits in your list.
@@ -259,16 +329,50 @@ else:
 #Write five if statements. Each should check whether a certain kind of fruit is in your list. 
 #If the fruit is in your list, the if block should print a statement, such as You really like Apples!
 
+favorite_fruits: list = ['apple', 'banana', 'orange']
+if 'apple' in favorite_fruits:
+    print("You really like Apples")
+elif 'banana' in favorite_fruits:
+    print("You really like Bananas")
+elif 'orange' in favorite_fruits:
+    print("You really like Oranges")
+elif 'kiwi' in favorite_fruits:
+    print("You really like Kiwis.")
+elif 'strawberry' in favorite_fruits:
+    print("You really like Strawberries.")
+
+# -> You really like Apples!
+# You really like Bananas!
+# You really like Oranges!
+
 #5-8. Hello Admin: Make a list of five or more usernames, including the name 'admin'. 
 #Imagine you are writing code that will print a greeting to each user after they log in to a website. 
 #Loop through the list, and print a greeting to each user.
 #If the username is 'admin', print a special greeting, such as Hello admin, would you like to see a status report?
 #Otherwise, print a generic greeting, such as Hello Jaden, thank you for logging in again.
 
+usernames: list = ["admin", "davide", "simone", "alessia", "philip"]
+if "admin" in usernames:
+    print("Hello admin, would you like to see a status report?")
+for x in usernames:
+    if x is not "admin":
+        print(f"Hello {x}, thank you for logging in again")
+
+# -> Hello admin, would you like to see a status report?
+# Hello davide, thank you for logging in again
+# Hello simone, thank you for logging in again
+# Hello alessia, thank you for logging in again
+# Hello philip, thank you for logging in again
 
 #5-9. No Users: Add an if test to hello_admin.py to make sure the list of users is not empty.
 #If the list is empty, print the message We need to find some users!
 #Remove all of the usernames from your list, and make sure the correct message is printed.
+
+usernames = []
+if usernames == []:
+    print("We need to find some users!")
+
+# -> We need to find some users!
 
 #5-10. Checking Usernames: Do the following to create a program that simulates how websites ensure that everyone has a unique username.
 #Make a list of five or more usernames called current_users.
@@ -280,6 +384,19 @@ else:
 #Make sure your comparison is case insensitive. If 'John' has been used, 'JOHN' should not be accepted. 
 #(To do this, you’ll need to make a copy of current_users containing the lowercase versions of all existing users.)
 
+current_users: list = ["davide", "simone", "alessia", "philip", "antonio"]
+new_users: list = ["admin", "alessia", "DAVIDE", "bruce", "giovanni"]
+for user in new_users:
+    if user.lower() in current_users:
+        print(f"the username {user} has already been used")
+    else:
+        print(f"the username {user} is available")
+
+# -> the username admin is available
+# the username alessia has already been used
+# the username DAVIDE has already been used
+# the username bruce is available
+# the username giovanni is available
 
 #5-11. Ordinal Numbers: Ordinal numbers indicate their position in a list, such as 1st or 2nd. 
 #Most ordinal numbers end in th, except 1, 2, and 3.
@@ -287,3 +404,25 @@ else:
 #Loop through the list.
 #Use an if-elif-else chain inside the loop to print the proper ordinal ending for each number. 
 #Your output should read "1st 2nd 3rd 4th 5th 6th 7th 8th 9th", and each result should be on a separate line.
+
+numbers: list = [index for index in range(1,10)]
+for number in numbers:
+    if number == 1:
+        print(f"{number}st")
+    elif number == 2:
+        print(f"{number}nd")
+    elif number == 3:
+        print(f"{number}rd")
+    else:
+        print(f"{number}th")
+
+# -> 1st
+# 2nd
+# 3rd
+# 4th
+# 5th
+# 6th
+# 7th
+# 8th
+# 9th
+
