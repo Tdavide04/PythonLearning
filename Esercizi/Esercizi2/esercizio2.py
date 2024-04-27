@@ -363,3 +363,4 @@ for keys, values in cities.items():
 #6-1 = changed
 dict = [{"first_name":"Philip", "last_name":"Vicari", "age":19, "city":"Napoli"},
 {"first_name":"Davide", "last_name":"Trischitta", "age":20, "city":"Roma"}]
+
