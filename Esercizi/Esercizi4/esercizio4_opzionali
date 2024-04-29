@@ -4,6 +4,11 @@
 # Create a for loop to iterate over a list of students and scores, calling the function for each student.
 
 def school_grading_system(name: str, scores: list):
+    """
+    This function takes a student's name and their scores.
+    The function calculates the average score and print:
+    the student's name, the average score and a message inticating if the student passed the exam.
+    """
     average_score = sum(scores) / len(scores)
     if average_score >= 60:
         result = "Pass"
@@ -21,7 +26,7 @@ for student in students:
 
 '''
 name = input("write here your name: ")
-scores_input = (input("write here your scores: "))
+scores_input = (input("write here your scores: "))           #tentativo di non usare una lista gia creata ma tramite input
 scores_list = scores_input.split(", ")
 scores = [int(numero) for numero in scores_input]
 student = [name, scores]
