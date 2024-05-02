@@ -69,7 +69,7 @@ def word_count(s: str) -> dict[str, int]:
     return filter
 
 word_count(s)
-
+'''
 def is_palindrome(s: str) -> bool:
     """
     Restistuisce True se è palindromo, altrimenti restituisce False
@@ -82,3 +82,10 @@ def is_palindrome(s: str) -> bool:
 
 s = "Amo Roma"
 is_palindrome(s)
+
+
+
+'''
+
+
+
