@@ -69,4 +69,26 @@ def check_parentheses(expression: str) -> bool:
             return False
     return count == 0
 
-#Q8: 
+#Q8: Scrivi una funzione che conta e ritorna quante volte un elemento appare isolato in una lista di numeri interi. 
+#Un elemento è considerato isolato se non è affiancato sia a destra che a sinistra da elementi uguali.
+
+def count_isolated(n) -> int:
+    count = 0
+    if n == []:
+        return count
+    else:
+        
+        if n[0] != n[1]:
+            count += 1
+        for number in range(1, len(n) -1):
+            if n[number] != n[number + 1] and n[number] != n[number - 1]:
+                count += 1
+        if n[-1] != n[-2]:
+            count += 1
+        return count
+    
+#Q9: Scrivi una funzione che, dato un insieme e una lista di numeri interi da rimuovere, 
+#ritorni un nuovo insieme senza i numeri specificati nella lista.
+
+
+#Q10: Scrivi una funzione che unisce due dizionari. Se una chiave è presente in entrambi, somma i loro valori.
