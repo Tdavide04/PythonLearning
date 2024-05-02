@@ -14,6 +14,13 @@ def countdown(n: int) -> int:
 #l'elemento iniziale viene spostato alla fine della lista. Per la rotazione utilizzare lo slicing e gestire il caso in cui il 
 #numero specificato di posizioni sia maggiore della lunghezza della lista.
 
+def rotate_left(elements: list, k: int) -> list:
+    n = len(elements)
+    if k > n:
+        k = k%n
+    new_list = elements[k:] + elements[:k]
+    return new_list
+
 #Q3: Scrivi una funzione che verifica se una combinazione di condizioni (A, B, e C) è soddisfatta per procedere con un'operazione. 
 #L'operazione può procedere solo se la condizione A è vera o se entrambe le condizioni B e C sono vere. 
 #La funzione deve ritornare "Operazione permessa" oppure "Operazione negata" a seconda delle condizioni che sono soddisfatte.
