@@ -106,11 +106,28 @@ tree = {4: [3,5], 3:[2, None], 5:[4.5,6], 2:[None, None], 4.5:[None, None], 6:[N
 visit_tree_interative_F(tree, 4)
 
 
+def avg_level(tree: dict[int, list[int]], root: int):
+    avg_for_level: dict[int, float] = {}
+    stack: list[int] = [(root, 0)]
+    nood_for_level: dict[int, float] = {}
+    while stack: 
+        curr_node, curr_level = stack.pop(0)
 
+        nood_for_level[curr_level] = nood_for_level.get(curr_level, 0) + 1
 
+        left_child, right_child = tree.get(curr_node, [None, None])
 
+        if right_child:
+            stack.append((right_child, curr_level +1))
+            avg_for_level[curr_level] = avg_for_level.get(curr_level, 0) + left_child
+        if left_child:
+            stack.append((left_child, curr_level +1))
+            avg_for_level[curr_level] = avg_for_level.get(curr_level, 0) + right_child
 
+    for level in avg_for_level:
+        avg_for_level[level] /= nood_for_level[level]
+    
+    return avg_for_level
 
-
-
-
+tree = {4: [3,5], 3:[2, None], 5:[4.5,6], 2:[None, None], 4.5:[None, None], 6:[None, None]}
+avg_level(tree, 4)
