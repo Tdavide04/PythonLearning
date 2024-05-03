@@ -77,7 +77,7 @@ def visit_tree(tree: dict[int, list[int]], node: int):
 tree = {4: [3,5], 3:[2, None], 5:[4.5,6], 2:[None, None], 4.5:[None, None], 6:[None, None]}
 visit_tree(tree, 4)
 
-def visit_tree_interative(tree: dict[int, list[int]], root: int):
+def visit_tree_interative_L(tree: dict[int, list[int]], root: int):
     stack: list[int] = [root] # Last-In-First-Out (LIFO)
     while stack: #while len(stack) > 0
         curr_node = stack.pop()
@@ -89,9 +89,21 @@ def visit_tree_interative(tree: dict[int, list[int]], root: int):
             stack.append(left_child)
 
 tree = {4: [3,5], 3:[2, None], 5:[4.5,6], 2:[None, None], 4.5:[None, None], 6:[None, None]}
-visit_tree_interative(tree, 4)
+visit_tree_interative_L(tree, 4)
 
+def visit_tree_interative_F(tree: dict[int, list[int]], root: int):
+    stack: list[int] = [root] # First-In-First-Out (FIFO)
+    while stack: #while len(stack) > 0
+        curr_node = stack.pop(0)
+        print(curr_node)
+        left_child, right_child = tree.get(curr_node, [None, None])
+        if right_child:
+            stack.append(right_child)
+        if left_child:
+            stack.append(left_child)
 
+tree = {4: [3,5], 3:[2, None], 5:[4.5,6], 2:[None, None], 4.5:[None, None], 6:[None, None]}
+visit_tree_interative_F(tree, 4)
 
 
 
