@@ -65,12 +65,17 @@ elena.printInfo()
 
 
 class Animal:
-    def __init__(self, name: str):
+    def __init__(self, name: str, legs: str):
         self.name = name
+        self.legs = legs
     
+    def get_legs(self) -> int:
+        return self.legs
     
+    def set_legs(self, new_legs: int):
+        self.legs = new_legs
 
-dog = Animal("Dog")
-cat = Animal("Cat")
-
-print(cat.name)
+dog = Animal("Dog", 4)
+print(dog.get_legs())
+dog.set_legs(3)
+print(dog.get_legs())
