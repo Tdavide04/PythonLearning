@@ -60,3 +60,17 @@ alessia = Student("Elena", "class", 17, "female")
 erik = Student("Erik", "class", 30, "male")
 
 elena.printInfo()
+
+
+
+
+class Animal:
+    def __init__(self, name: str):
+        self.name = name
+    
+    
+
+dog = Animal("Dog")
+cat = Animal("Cat")
+
+print(cat.name)
