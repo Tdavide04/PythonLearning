@@ -80,10 +80,6 @@ class Animal:
         self.preferred_habitat = preferred_habitat
         self.health = health
 
-    def health (age):
-        health = round(100 * (1 / age), 3)
-        return f"the health of ypur animal is {health}"
-
 class Fence:
     def __init__(self, area, temperature, habitat) -> None:
         self.area = area
@@ -108,4 +104,9 @@ class ZooKeepers:
     def clean(fence: Fence):
         pass
 
-gatto = Animal("gatto", "animale", 6, 15, 3, "casa")
+def health(age):
+        health = round(100 * (1 / age), 3)
+        print(f"the health of your animal is {health}")
+        return health
+    
+gatto = Animal("gatto", "animale", 6, 15, 3, "casa", health(6))
