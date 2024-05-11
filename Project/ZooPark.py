@@ -69,6 +69,8 @@ class Zoo:
 
 
 class Animal:
+
+    
     def __init__(self, name, species, age, height, width, preferred_habitat, health) -> None:
         self.name = name
         self.species = species
@@ -78,6 +80,10 @@ class Animal:
         self.preferred_habitat = preferred_habitat
         self.health = health
 
+    def health (age):
+        health = round(100 * (1 / age), 3)
+        return f"the health of ypur animal is {health}"
+
 class Fence:
     def __init__(self, area, temperature, habitat) -> None:
         self.area = area
@@ -85,9 +91,9 @@ class Fence:
         self.habitat = habitat
 
 class ZooKeepers:
-    def __init__(self, nome, cognome, id) -> None:
-        self.nome = nome
-        self.cognome = cognome
+    def __init__(self, name, surname, id) -> None:
+        self.name = name
+        self.surname = surname
         self.id = id
 
     def add_animal(animal: Animal, fence: Fence):
@@ -101,4 +107,5 @@ class ZooKeepers:
     
     def clean(fence: Fence):
         pass
-    
+
+gatto = Animal("gatto", "animale", 6, 15, 3, "casa")
