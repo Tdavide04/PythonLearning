@@ -60,25 +60,30 @@ Fra un recinto e l'altro mettete 30 volte il carattere #.
 
 
 class Zoo:
-    def __init__(self, zoo, zoo_keepers) -> None:
-        self.zoo = zoo
+    def __init__(self, fences, zoo_keepers) -> None:
+        self.fences = fences
         self.zoo_keepers = zoo_keepers
 
     def describe_zoo():
-        pass
+        print(f"Guardians: Zookeeper(name = {ZooKeepers})")
 
 
 class Animal:
-
-    
-    def __init__(self, name, species, age, height, width, preferred_habitat, health) -> None:
+ 
+    def __init__(self, name, species, age, height, width, preferred_habitat) -> None:
         self.name = name
         self.species = species
         self.age = age
         self.height = height
         self.width = width
         self.preferred_habitat = preferred_habitat
-        self.health = health
+        #self.health = Animal.calculate_health(self.age)
+    '''    
+    def calculate_health(self, age):
+        health = round(100 * (1 / age), 3)
+        print(f"the health of your animal is {health}")
+        return health
+    '''    
 
 class Fence:
     def __init__(self, area, temperature, habitat) -> None:
@@ -92,21 +97,22 @@ class ZooKeepers:
         self.surname = surname
         self.id = id
 
-    def add_animal(animal: Animal, fence: Fence):
+    def get_name(self):
+        return self.name
+    
+    def add_animal(self, animal: Animal, fence: Fence):
         pass
 
-    def remove_animal(animal: Animal, fence: Fence):
+    def remove_animal(self, animal: Animal, fence: Fence):
         pass
 
-    def feed(animal: Animal):
+    def feed(self, animal: Animal):
         pass
     
-    def clean(fence: Fence):
+    def clean(self, fence: Fence):
         pass
 
-def health(age):
-        health = round(100 * (1 / age), 3)
-        print(f"the health of your animal is {health}")
-        return health
-    
-gatto = Animal("gatto", "animale", 6, 15, 3, "casa", health(6))
+
+Matteo = ZooKeepers("matteo", "blabla", 1763)
+Zoo.describe_zoo()
+print(Matteo.get_name())
