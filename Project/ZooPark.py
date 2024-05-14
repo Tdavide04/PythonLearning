@@ -129,11 +129,9 @@ class ZooKeepers:
         return fence.occupied_area() / fence.residual_area()
 
 
-Matteo = ZooKeepers("matteo", "blabla", 1763)
-Gatto = Animal("Gatto", "gattus", 98, 120, 80, "Continental")
-Continental = Fence(100, 38, "Continental")
-Matteo.add_animal(Gatto, Continental)
-print(Continental.occupied_area())
-
-zoo = Zoo([Continental], Matteo)
-zoo.describe_zoo()
+#Matteo = ZooKeepers("matteo", "blabla", 1763)
+#Gatto = Animal("Gatto", "gattus", 98, 120, 80, "Continental")
+#Continental = Fence(100, 38, "Continental")
+#Matteo.add_animal(Gatto, Continental)
+#zoo = Zoo([Continental], Matteo)
+#zoo.describe_zoo()
