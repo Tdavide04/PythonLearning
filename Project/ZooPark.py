@@ -131,13 +131,7 @@ class Zoo:
     def __init__(self, fences: Fence, zoo_keepers: list):
         self.fences = fences
         self.zoo_keepers = zoo_keepers
-        '''
-    def add_fence(self, fence):
-        self.fences.append(fence)
 
-    def add_zoo_keeper(self, zoo_keeper):
-        self.zoo_keepers.append(ZooKeepers)
- '''       
     def describe_zoo(self):
         print("Guardian:")
         for keeper in self.zoo_keepers:
@@ -154,36 +148,25 @@ class Zoo:
 
 
 
-Matteo = ZooKeepers("Matteo", "Rossi", 123)
-Giacomo = ZooKeepers("Giacomo", "tonto", 45)
+#Matteo = ZooKeepers("Matteo", "Rossi", 123)
+#Giacomo = ZooKeepers("Giacomo", "tonto", 45)
 
-# Creiamo alcuni animali
-Gatto = Animal("Gatto", "Felis catus", 5, 30, 20, "Domestico")
-Lupo = Animal("Lupo", "Canis lupus", 8, 80, 100, "Domestico")
+#Gatto = Animal("Gatto", "Felis catus", 5, 30, 20, "Domestico")
+#Lupo = Animal("Lupo", "Canis lupus", 8, 80, 100, "Blabla")
 
-# Creiamo un recinto
-Recinto1 = Fence(2000000, 25, "Domestico")
-Recinto2 = Fence(4000000, 32, "Blabla")
-# Aggiungiamo gli animali al recinto usando il guardiano
-Matteo.add_animal(Gatto, Recinto1)
-Matteo.add_animal(Lupo, Recinto2)
+#Recinto1 = Fence(2000000, 25, "Domestico")
+#Recinto2 = Fence(4000000, 32, "Blabla")
 
-# Creiamo uno zoo e aggiungiamo il recinto e il guardiano
-zoo = Zoo([Recinto1, Recinto2], [Matteo, Giacomo])
+#Matteo.add_animal(Gatto, Recinto1)
+#Matteo.add_animal(Lupo, Recinto2)
 
-# Visualizziamo le informazioni sullo zoo
-zoo.describe_zoo()
-print(Recinto1.residual_area())
-print(Gatto.animal_area)
-# Nutriamo gli animali
-Matteo.feed(Gatto)
-Matteo.feed(Lupo)
+#zoo = Zoo([Recinto1, Recinto2], [Matteo, Giacomo])
+#zoo.describe_zoo()
 
-# Puliamo il recinto
-print(Recinto1.residual_area())
-print(Recinto1.list_of_animal)
-print(Gatto.animal_area)
+#Matteo.feed(Gatto)
+#Matteo.feed(Lupo)
 
+##zoo.describe_zoo()
 
 
 
