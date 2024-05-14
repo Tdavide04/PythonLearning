@@ -64,8 +64,18 @@ class Zoo:
         self.fences = fences
         self.zoo_keepers = zoo_keepers
 
-    def describe_zoo():
-        print(f"Guardians: Zookeeper(name = {ZooKeepers})")
+    def describe_zoo(self):
+        print("Guardians:")
+        for keeper in self.zoo_keepers:
+            print(f"Zookeeper(name = {keeper.name}, surname = {keeper.surname}, id = {keeper.id})")
+            
+        print("Fences:")
+        for fence in self.fences:
+            print(f"Fence(area = {fence.area}, temperature = {fence.temperature}, habitat = {fence.habitat})")
+            print("with animal:")
+            for animal in fence.animals:
+                print(f"Animal(name = {animal.name}, species = {animal.species}, age = {animal.age})")
+            print("#"*30)
 
 
 class Animal:
@@ -77,20 +87,16 @@ class Animal:
         self.height = height
         self.width = width
         self.preferred_habitat = preferred_habitat
-        #self.health = Animal.calculate_health(self.age)
-    '''    
-    def calculate_health(self, age):
-        health = round(100 * (1 / age), 3)
-        print(f"the health of your animal is {health}")
-        return health
-    '''    
+        self.health = round(100 * (1 / age), 3)
+    
 
 class Fence:
     def __init__(self, area, temperature, habitat) -> None:
         self.area = area
         self.temperature = temperature
         self.habitat = habitat
-
+        self.list_of_animal = []
+        
 class ZooKeepers:
     def __init__(self, name, surname, id) -> None:
         self.name = name
@@ -101,18 +107,24 @@ class ZooKeepers:
         return self.name
     
     def add_animal(self, animal: Animal, fence: Fence):
-        pass
+        if animal.preferred_habitat == fence.habitat:
+            fence.list_of_animal.append(animal.name)
 
     def remove_animal(self, animal: Animal, fence: Fence):
-        pass
+        if animal in Fence.list_of_animal:
+            animal.pop(Fence.list_of_animal)
 
     def feed(self, animal: Animal):
         pass
     
     def clean(self, fence: Fence):
         pass
+    
+
 
 
 Matteo = ZooKeepers("matteo", "blabla", 1763)
-Zoo.describe_zoo()
-print(Matteo.get_name())
+Gatto = Animal("Gatto", "gattus", 98, 120, 80, "Continental")
+Continental = Fence(100, 38, "Continental")
+Matteo.add_animal(Gatto, Continental)
+print(Continental.list_of_animal)
