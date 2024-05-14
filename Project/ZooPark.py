@@ -129,9 +129,29 @@ class ZooKeepers:
         return fence.occupied_area() / fence.residual_area()
 
 
-#Matteo = ZooKeepers("matteo", "blabla", 1763)
-#Gatto = Animal("Gatto", "gattus", 98, 120, 80, "Continental")
-#Continental = Fence(100, 38, "Continental")
-#Matteo.add_animal(Gatto, Continental)
-#zoo = Zoo([Continental], Matteo)
+
+#Matteo = ZooKeepers("Matteo", "Rossi", 123)
+
+# Creiamo alcuni animali
+#Gatto = Animal("Gatto", "Felis catus", 5, 30, 20, "Domestico")
+#Lupo = Animal("Lupo", "Canis lupus", 8, 80, 100, "Forestale")
+
+# Creiamo un recinto
+#Recinto1 = Fence(200, 25, "Domestico")
+
+# Aggiungiamo gli animali al recinto usando il guardiano
+#Matteo.add_animal(Gatto, Recinto1)
+#Matteo.add_animal(Lupo, Recinto1)
+
+# Creiamo uno zoo e aggiungiamo il recinto e il guardiano
+#zoo = Zoo([Recinto1], Matteo)
+
+# Visualizziamo le informazioni sullo zoo
 #zoo.describe_zoo()
+
+# Nutriamo gli animali
+#Matteo.feed(Gatto)
+#Matteo.feed(Lupo)
+
+# Puliamo il recinto
+#Matteo.clean(Recinto1)
