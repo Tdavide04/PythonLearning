@@ -63,17 +63,16 @@ class Zoo:
     def __init__(self, fences, zoo_keepers) -> None:
         self.fences = fences
         self.zoo_keepers = zoo_keepers
-
+    
     def describe_zoo(self):
-        print("Guardians:")
-        for keeper in self.zoo_keepers:
-            print(f"Zookeeper(name = {keeper.name}, surname = {keeper.surname}, id = {keeper.id})")
+        print("Guardian:")
+        print(f"Zookeeper(name = {self.zoo_keepers.name}, surname = {self.zoo_keepers.surname}, id = {self.zoo_keepers.id})")
             
         print("Fences:")
         for fence in self.fences:
             print(f"Fence(area = {fence.area}, temperature = {fence.temperature}, habitat = {fence.habitat})")
             print("with animal:")
-            for animal in fence.animals:
+            for animal in fence.list_of_animal:
                 print(f"Animal(name = {animal.name}, species = {animal.species}, age = {animal.age})")
             print("#"*30)
 
@@ -88,8 +87,8 @@ class Animal:
         self.width = width
         self.preferred_habitat = preferred_habitat
         self.health = round(100 * (1 / age), 3)
-    
-
+        self.animal_area = self.height*self.width
+       
 class Fence:
     def __init__(self, area, temperature, habitat) -> None:
         self.area = area
@@ -97,34 +96,44 @@ class Fence:
         self.habitat = habitat
         self.list_of_animal = []
         
+    def occupied_area(self) -> int:
+        return sum(animal.animal_area for animal in self.list_of_animal)
+    
+    def residual_area(self) -> int:
+        return self.area - self.occupied_area()
+        
+        
 class ZooKeepers:
     def __init__(self, name, surname, id) -> None:
         self.name = name
         self.surname = surname
         self.id = id
-
-    def get_name(self):
-        return self.name
     
     def add_animal(self, animal: Animal, fence: Fence):
         if animal.preferred_habitat == fence.habitat:
-            fence.list_of_animal.append(animal.name)
+            fence.list_of_animal.append(animal)
 
     def remove_animal(self, animal: Animal, fence: Fence):
-        if animal in Fence.list_of_animal:
-            animal.pop(Fence.list_of_animal)
+        if animal in fence.list_of_animal:
+            fence.list_of_animal.remove(animal)
 
     def feed(self, animal: Animal):
-        pass
+        animal.width == animal.width*(2/100)
+        animal.height == animal.height*(2/100)
+        animal.health == animal.health*(1/100)
     
     def clean(self, fence: Fence):
-        pass
-    
-
+        fence.list_of_animal = []
+        if fence.residual_area() == 0:
+            return fence.occupied_area()
+        return fence.occupied_area() / fence.residual_area()
 
 
 Matteo = ZooKeepers("matteo", "blabla", 1763)
 Gatto = Animal("Gatto", "gattus", 98, 120, 80, "Continental")
 Continental = Fence(100, 38, "Continental")
 Matteo.add_animal(Gatto, Continental)
-print(Continental.list_of_animal)
+print(Continental.occupied_area())
+
+zoo = Zoo([Continental], Matteo)
+zoo.describe_zoo()
