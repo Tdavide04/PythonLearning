@@ -110,11 +110,11 @@ class ZooKeepers:
         if animal.fence is None:
             return "Animal is not in any fence"
         
-        new_height = animal.height + (animal.height * 1.02)
-        new_width = animal.width + (animal.width * 1.02)
-        new_area = new_height * new_width
+        new_height = animal.height  * 1.02
+        new_width = animal.width * 1.02
+        animal.animal_area = new_height * new_width
         
-        if new_area <= animal.fence.residual_area():
+        if animal.animal_area <= animal.fence.residual_area():
             for animal_in_fence in animal.fence.list_of_animal:
                 animal_in_fence.width = new_width
                 animal_in_fence.height = new_height
@@ -128,7 +128,7 @@ class ZooKeepers:
         return fence.occupied_area() / fence.residual_area()
     
 class Zoo:
-    def __init__(self, fences: Fence, zoo_keepers:ZooKeepers):
+    def __init__(self, fences: Fence, zoo_keepers: list):
         self.fences = fences
         self.zoo_keepers = zoo_keepers
         '''
@@ -140,9 +140,9 @@ class Zoo:
  '''       
     def describe_zoo(self):
         print("Guardian:")
+        for keeper in self.zoo_keepers:
+            print(f"Zookeeper(name = {keeper.name}, surname = {keeper.surname}, id = {keeper.id})")
         
-        print(f"Zookeeper(name = {self.zoo_keepers.name}, surname = {self.zoo_keepers.surname}, id = {self.zoo_keepers.id})")
-            
         print("Fences:")
         for fence in self.fences:
             print(f"Fence(area = {fence.area}, temperature = {fence.temperature}, habitat = {fence.habitat})")
@@ -169,7 +169,7 @@ Matteo.add_animal(Gatto, Recinto1)
 Matteo.add_animal(Lupo, Recinto2)
 
 # Creiamo uno zoo e aggiungiamo il recinto e il guardiano
-zoo = Zoo([Recinto1, Recinto2], Matteo)
+zoo = Zoo([Recinto1, Recinto2], [Matteo, Giacomo])
 
 # Visualizziamo le informazioni sullo zoo
 zoo.describe_zoo()
