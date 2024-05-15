@@ -12,14 +12,12 @@ class Challenge:
         pass
 
 class Pokemon:
-    def __init__(self):
-        self.party = []
 
     def add_pokemon(self, species: str):
         self.species = species
         
-        if len(self.party) < 6:
-            self.party.append(self.species)
+        if len(party) < 6:
+            party.append(self.species)
         else:
             print("Your party is full")
 
@@ -38,27 +36,16 @@ class Pokemon:
         self.met_date = met_date
         self.met_level = met_level
     
-    def get_party(self):
-        print(f"Your Pokemon party contains: {self.party}")
 
-'''
 party = []
-
-def add_pokemon(species: str):
-        
-        if len(party) < 6:
-            party.append(species)
-        else:
-            print("Your party is full")
-
-        return party
 
 def get_party():
         print(f"Your Pokemon party contains: {party}")
 
 #valutare togliere le classi e tutti i self
 
-add_pokemon("Emboar")
-get_party()
-'''
 
+
+Pokemon1 = Pokemon()
+Pokemon1.add_pokemon("Emboar")
+get_party()
