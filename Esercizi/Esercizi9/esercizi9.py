@@ -124,10 +124,12 @@ def remove_elements(original_set: set[int], elements_to_remove: list[int]) -> se
 # -> {'x': 0}
 
 def merge_dictionaries(dict1: dict, dict2: dict) -> dict:
-    for key, value in dict2:
-        if key in dict1:
-            dict1[key] += value
+    merged_dict = {}
+    for key, value in dict1.items():
+        merged_dict[key] = value
+    for key, value in dict2.items():
+        if key in merged_dict:
+            merged_dict[key] += value
         else:
-            dict1[key] += value
-    
-print(merge_dictionaries({'a': 1, 'b': 2}, {'b': 3, 'c': 4}))
+            merged_dict[key] = value
+    return merged_dict
