@@ -235,11 +235,11 @@ printing_functions.printing("audi", "sedans", color = "red", seats = 2)
 
 #8-16. Imports: Using a program you wrote that has one function in it, store that function in a separate file. 
 #Import the function into your main program file, and call the function using each of these approaches:
-
+'''
 import printing_functions
 from printing_functions import printing
 from printing_functions import printing as fn
 import printing_functions as mn
 from printing_functions import *
-
+'''
 #8-17. Styling Functions: Choose any three programs you wrote for this chapter, and make sure they follow the styling guidelines described in this section.
