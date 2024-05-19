@@ -175,26 +175,43 @@ Classe Bank:
         get_balance(account_id): restituisce il saldo del conto con l'ID specificato.
 '''
 
-class Acoount:
-    def __init__(self, account_id: str, balance: float):
+class Account:
+    def __init__(self, account_id: str):
         self.account_id = account_id
-        self.balance = balance
+        self.balance = 0.0
         
     def deposit(self, amount: float):
-        pass
-    
-    def get_balance(self):
-        pass
+        if amount > 0:
+            self.balance += amount  
+        else:
+            raise ValueError("L'importo del deposito deve essere positivo")
+        
+    def get_balance(self) -> float:
+        return self.balance
     
 class Bank:
-    def __init__(self) -> None:
+    def __init__(self) -> float:
         self.accounts = {}
         
     def create_account(self, account_id):
-        pass
+        if account_id not in self.accounts:
+            if account_id not in self.accounts:
+                new_account = Account(account_id)
+                self.accounts[account_id] = new_account
+            return new_account 
+        else:
+            raise ValueError("L'account ID esiste già")
     
     def deposit(self, account_id, amount):
-        pass
+        if account_id in self.accounts:
+            self.accounts[account_id].deposit(amount) 
+        else:
+            raise ValueError("Account ID non trovato")
     
     def get_balance(self, account_id):
-        pass
+        if account_id in self.accounts:
+            return self.accounts[account_id].get_balance()
+        else:
+            raise ValueError("Account ID non trovato")
+        
+        
