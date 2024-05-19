@@ -69,46 +69,84 @@ Progettare un sistema di gestione della biblioteca con i seguenti requisiti:
 
 
 class Book:
-    def __init__(self, book_id: str, title: str, author: str, is_borrowed: bool):
+    def __init__(self, book_id: str, title: str, author: str):
         self.book_id = book_id
         self.title = title
         self.author = author
-        self.is_borrowed = is_borrowed
+        self.is_borrowed = False
 
     def borrow(self):
-        pass
+        self.is_borrowed = True
 
     def return_book(self):
-        pass
+        self.is_borrowed = False
 
 class Member:
-    def __init__(self, member_id: str, name: str, borrowed_books: list[Book]):
+    def __init__(self, member_id: str, name: str):
         self.member_id = member_id
         self.name = name
-        self.borrowed_books = borrowed_books
+        self.borrowed_books = []
+        
+    def borrow_book(self, book: Book):
+        if not book.is_borrowed:
+            self.borrowed_books.append(book)
+            book.borrow()
+        else:
+            raise ValueError("Book is already borrowed")
 
-    def borrow_book(book):
-        pass
+    def return_book(self, book: Book):
+        if book not in self.borrowed_books:
+            raise ValueError("Book not borrowed by this member")            
+        self.borrowed_books.remove(book)
+        book.return_book()
 
-    def return_book(book):
-        pass
-
-class Library:
-    def __init__(self, books: dict[str, Book], members: dict[str, Member]):
-        self.books = books
-        self.members = members
+class Library():
+    def __init__(self):
+        self.books = {}
+        self.members = {}
 
     def add_book(self, book_id: str, title: str, author: str): 
-        pass
+        book = Book(book_id, title, author)
+        self.books[book_id] = book
 
     def register_member(self, member_id:str, name: str): 
-        pass
+        member = Member(member_id, name)
+        self.members[member_id] = member
 
-    def borrow_book(member_id: str, book_id: str):
-        pass
+    def borrow_book(self, member_id: str, book_id: str):
+        if member_id in self.members and book_id in self.books:
+            member: Member = self.members[member_id]
+            book: Book = self.books[book_id]
+            member.borrow_book(book)
+        elif member_id not in self.members:
+            raise ValueError("Member not found")
+        else:
+            raise ValueError("Book not found")
+        
+    def return_book(self, member_id: str, book_id: str):
+        if member_id in self.members and book_id in self.books:
+            member: Member = self.members[member_id]
+            book: Book = self.books[book_id]
+            member.return_book(book)
 
-    def return_book(member_id: str, book_id: str):
-        pass
+        
 
-    def get_borrowed_books(member_id) -> list[Book]:
-        pass
+    def get_borrowed_books(self, member_id) -> list[Book]:
+        if member_id in self.members:
+            member: Member = self.members[member_id]
+            list_title: list[str] = []
+            for book in member.borrowed_books:
+                list_title.append(book.title)
+            return list_title
+
+#Data una stringa s e una lista di stringhe wordDict, restituisce True se s può essere segmentato in una sequenza separata da spazi di una o più parole del dizionario; 
+# False altrimenti. Tieni presente che la stessa parola nel dizionario può essere riutilizzata più volte nella segmentazione.
+#Example: print(word_break("leetcode",["leet","code"]))
+# -> True
+
+def word_break(s: str, wordDict: list[str]) -> bool:
+    for e in wordDict:     
+        if e in s:
+             return True
+             wordDict.pop(e)
+    return False
