@@ -195,9 +195,8 @@ class Bank:
         
     def create_account(self, account_id):
         if account_id not in self.accounts:
-            if account_id not in self.accounts:
-                new_account = Account(account_id)
-                self.accounts[account_id] = new_account
+            new_account = Account(account_id)
+            self.accounts[account_id] = new_account
             return new_account 
         else:
             raise ValueError("L'account ID esiste già")
