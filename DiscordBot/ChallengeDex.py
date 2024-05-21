@@ -1,5 +1,14 @@
+import discord
+from discord.ext import commands
 import json
 
+# Load your bot token from a config file or environment variable
+BOT_TOKEN = 'YOUR_DISCORD_BOT_TOKEN'
+
+intents = discord.Intents.default()
+bot = commands.Bot(command_prefix='!', intents=intents)
+
+# Pokemon class
 class Pokemon:
     def __init__(self, species, level, gender, nature, item, shiny=False, nickname=None):
         self.species = species
@@ -13,26 +22,7 @@ class Pokemon:
     def __str__(self):
         return f"{self.species} ({self.nickname}), Level: {self.level}, Gender: {self.gender}, Nature: {self.nature}, Item: {self.item}, Shiny: {self.shiny}"
 
-class Party:
-    def __init__(self) -> None:
-        self.party = []
-
-    def add_pokemon(self, pokemon):
-        if len(self.party) < 6:
-            self.party.append(pokemon.species)
-        else:
-            print("Il party è pieno! Non puoi aggiungere più di 6 Pokémon.")
-            
-    def remove_pokemon(self, pokemon):
-        if pokemon in self.party:
-            self.party.remove(pokemon)
-            print(f"{pokemon.nickname} è stato rimosso dal party.")
-        else:
-            print(f"{pokemon.nickname} non è nel party.")
-
-    def get_party(self):
-        return self.party
-
+# Pokedex class
 class Pokedex:
     def __init__(self):
         self.entries = {}
@@ -80,7 +70,29 @@ class Pokedex:
         else:
             return f"Nessun Pokémon trovato con ID {pokemon_id}."
 
+# Challenge class
 class Challenge:
+    class Party:
+        def __init__(self):
+            self.party = []
+
+        def add_pokemon(self, pokemon):
+            if len(self.party) < 6:
+                self.party.append(pokemon.species)
+                return f"{pokemon.nickname} è stato aggiunto al party."
+            else:
+                return "Il party è pieno! Non puoi aggiungere più di 6 Pokémon."
+
+        def remove_pokemon(self, pokemon):
+            if pokemon.species in self.party:
+                self.party.remove(pokemon.species)
+                return f"{pokemon.nickname} è stato rimosso dal party."
+            else:
+                return f"{pokemon.nickname} non è nel party."
+
+        def get_party(self):
+            return self.party
+
     def __init__(self) -> None:
         self.challenges = {}
 
@@ -90,7 +102,7 @@ class Challenge:
             self.challenges[challenge_name] = Party()
             return f"La tua challenge '{challenge_name}' è stata registrata."
         else:
-            raise ValueError("Questa Challenge esiste già.")
+            return "Questa Challenge esiste già."
 
     def remove_challenge(self, challenge_name: str):
         challenge_name = challenge_name.title()
@@ -98,21 +110,75 @@ class Challenge:
             del self.challenges[challenge_name]
             return f"La tua challenge '{challenge_name}' è stata rimossa."
         else:
-            raise ValueError("Questa Challenge non esiste.")
+            return "Questa Challenge non esiste."
 
     def add_pokemon_to_challenge(self, challenge_name: str, pokemon: Pokemon):
         challenge_name = challenge_name.title()
         if challenge_name in self.challenges:
-            self.challenges[challenge_name].add_pokemon(pokemon)
+            return self.challenges[challenge_name].add_pokemon(pokemon)
         else:
-            raise ValueError("Questa Challenge non esiste.")
+            return "Questa Challenge non esiste."
 
     def get_challenge_party(self, challenge_name: str):
         challenge_name = challenge_name.title()
         if challenge_name in self.challenges:
             return self.challenges[challenge_name].get_party()
         else:
-            raise ValueError("Questa Challenge non esiste.")
+            return "Questa Challenge non esiste."
 
+# Global instances
+pokedex = Pokedex()
+challenge_manager = Challenge()
 
+# Bot commands
+@bot.event
+async def on_ready():
+    print(f'We have logged in as {bot.user}')
 
+@bot.command()
+async def add_challenge(ctx, challenge_name: str):
+    response = challenge_manager.new_challenge(challenge_name)
+    await ctx.send(response)
+
+@bot.command()
+async def remove_challenge(ctx, challenge_name: str):
+    response = challenge_manager.remove_challenge(challenge_name)
+    await ctx.send(response)
+
+@bot.command()
+async def add_pokemon(ctx, challenge_name: str, species: str, level: int, gender: str, nature: str, item: str, shiny: bool = False, nickname: str = None):
+    pokemon = Pokemon(species, level, gender, nature, item, shiny, nickname)
+    response = challenge_manager.add_pokemon_to_challenge(challenge_name, pokemon)
+    await ctx.send(response)
+
+@bot.command()
+async def show_party(ctx, challenge_name: str):
+    response = challenge_manager.get_challenge_party(challenge_name)
+    await ctx.send(f"Party per la challenge '{challenge_name}': {', '.join(response)}")
+
+@bot.command()
+async def add_pokedex_entry(ctx, pokemon_name: str):
+    response = pokedex.add_entry(pokemon_name)
+    await ctx.send(response)
+
+@bot.command()
+async def remove_pokedex_entry(ctx, pokemon_name: str):
+    response = pokedex.remove_entry(pokemon_name)
+    await ctx.send(response)
+
+@bot.command()
+async def pokedex_status(ctx):
+    response = pokedex.status()
+    await ctx.send(f"Pokedex:\n{response}")
+
+@bot.command()
+async def search_by_type(ctx, pokemon_type: str):
+    response = pokedex.search_by_type(pokemon_type)
+    await ctx.send(f"Pokémon di tipo {pokemon_type}: {', '.join(response)}")
+
+@bot.command()
+async def search_by_id(ctx, pokemon_id: int):
+    response = pokedex.search_by_id(pokemon_id)
+    await ctx.send(response)
+
+bot.run(BOT_TOKEN)
