@@ -213,3 +213,18 @@ def rimbalzo() -> None:
 # -> File di 1100 byte compresso in 880.0 byte e memorizzato. Blocchi usati: 2. Blocchi rimanenti: 998.
 #File di 20000 byte compresso in 16000.0 byte e memorizzato. Blocchi usati: 31. Blocchi rimanenti: 967.
 #Non è possibile memorizzare il file di 1048576 byte. Spazio insufficiente.
+
+def memorizza_file(files: list[int]) -> None:
+    total_blocks = 1000
+    block_size = 512
+
+    for file_size in files:
+        compressed_size = file_size * 0.8
+        blocks_needed = round(compressed_size / block_size)
+        
+        if blocks_needed <= total_blocks:
+            total_blocks -= blocks_needed
+            print(f"File di {file_size} byte compresso in {compressed_size} byte e memorizzato. Blocchi usati: {blocks_needed}. Blocchi rimanenti: {total_blocks}.")
+        else:
+            print(f"Non è possibile memorizzare il file di {file_size} byte. Spazio insufficiente.")
+            break
