@@ -209,3 +209,7 @@ def rimbalzo() -> None:
 #Ad esempio, se non è possibile salvare sul supporto di memorizzazione un file avente dimensione pari a 1048576 byte, la funzione stamperà:
 #"Non è possibile memorizzare il file di 1048576 byte. Spazio insufficiente."
 #Inizialmente, il numero totale di blocchi disponibili sul supporto di memorizzazione per il salvataggio dei file è un numero intero pari a 1000 blocchi. 
+#memorizza_file([1100, 20000, 1048576, 512, 5000])
+# -> File di 1100 byte compresso in 880.0 byte e memorizzato. Blocchi usati: 2. Blocchi rimanenti: 998.
+#File di 20000 byte compresso in 16000.0 byte e memorizzato. Blocchi usati: 31. Blocchi rimanenti: 967.
+#Non è possibile memorizzare il file di 1048576 byte. Spazio insufficiente.
