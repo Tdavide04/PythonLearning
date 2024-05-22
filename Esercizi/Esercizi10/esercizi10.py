@@ -166,12 +166,14 @@ Tempo: 28 Rimbalzo!
 
 
 def rimbalzo() -> None:
-    
     tempo: int = 0
     altezza: float = 0.0
     velocita: float = 100.0
     rimbalzi: int = 0
 
     
-    # cancella pass e scrivi il tuo codice
-    pass
+    while rimbalzi <= 5:
+        pass
+
+
+    
