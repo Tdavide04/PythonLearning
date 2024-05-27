@@ -96,3 +96,51 @@ i bonus aumentano la posizione dell'animale di un numero determinato di quadrati
 I bonus sono rappresentati da un dizionario che mappa le posizioni dei bonus sul percorso (chiave) ed i relativi effetti (valore). 
 Consentire agli animali di beneficiare pienamente dei bonus, ma non oltrepassare il traguardo.
 '''
+
+import random
+
+fato = random.randint(1, 10)
+
+def tracker():
+    pass
+
+def turtle():
+    casella_turtle = 1
+    if 1 <= fato <= 5:
+        casella_turtle += 3
+    if 6 <= fato <= 7:
+        casella_turtle -= 6
+        if casella_turtle < 1:
+            casella_turtle == 1
+    if 8 <= fato <= 10:
+        casella_turtle += 1
+
+    return casella_turtle
+
+def hare():
+    casella_hare = 1
+    if 1 <= fato <= 2:
+        casella_hare += 0
+    if 3 <= fato <= 4:
+        casella_hare += 9
+    if fato == 5:
+        casella_hare -= 12
+        if casella_hare < 1:
+            casella_hare == 1
+    if 6 <= fato <= 7:
+        casella_hare += 1
+    if 8 <= fato <= 10:
+        casella_hare -= 2
+        if casella_hare < 1:
+            casella_hare == 1
+
+    return casella_hare
+
+time = 0
+
+while True:
+    if time == 0:
+        print("BANG !!!!! AND THEY'RE OFF !!!!!")
+    time += 1
+    turtle()
+    hare()
