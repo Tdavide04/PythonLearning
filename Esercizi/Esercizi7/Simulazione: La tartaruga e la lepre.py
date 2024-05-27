@@ -99,12 +99,11 @@ Consentire agli animali di beneficiare pienamente dei bonus, ma non oltrepassare
 
 import random
 
-fato = random.randint(1, 10)
 
-def tracker():
-    pass
+
 
 def turtle():
+    fato = random.randint(1, 10)
     casella_turtle = 1
     if 1 <= fato <= 5:
         casella_turtle += 3
@@ -118,6 +117,7 @@ def turtle():
     return casella_turtle
 
 def hare():
+    fato = random.randint(1, 10)
     casella_hare = 1
     if 1 <= fato <= 2:
         casella_hare += 0
@@ -136,6 +136,27 @@ def hare():
 
     return casella_hare
 
+def tracker():
+    percorso = []
+    for _ in range(71):
+        percorso.append("-")
+
+    current_position_turlte = 1
+    current_position_turlte = current_position_turlte + turtle()
+    percorso[current_position_turlte] = "T"
+
+    current_position_hare = 1
+    current_position_hare = current_position_hare + hare()
+    percorso[current_position_hare] = "H"
+
+    if current_position_hare >= 70:
+        print("HARE WINS || YUCH!!!")
+
+    if current_position_turlte >= 70:
+        print("TORTOISE WINS! || VAY!!!")        
+
+    print(percorso)
+
 time = 0
 
 while True:
@@ -144,3 +165,7 @@ while True:
     time += 1
     turtle()
     hare()
+    tracker()
+    if "HARE WINS || YUCH!!!" or "TORTOISE WINS! || VAY!!!":
+        break
+    
