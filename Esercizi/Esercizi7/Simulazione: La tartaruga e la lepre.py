@@ -138,15 +138,15 @@ def tracker():
     for _ in range(71):
         percorso.append("-")
 
-    current_position_turlte
+    current_position_turlte = 1
     current_position_turlte = current_position_turlte + turtle()
     percorso[current_position_turlte] = "T"
 
-    current_position_hare
+    current_position_hare = 1
     current_position_hare = current_position_hare + hare()
     percorso[current_position_hare] = "H"
 
-    print(percorso)
+    
 
 time = 0
 
@@ -159,6 +159,7 @@ while True:
     hare()
     turtle()
     tracker()
+    print(hare())
     if hare() >= 70:
         print("HARE WINS || YUCH!!!")
         break 
@@ -166,3 +167,4 @@ while True:
     if turtle() >= 70:
         print("TORTOISE WINS! || VAY!!!")
         break
+    
