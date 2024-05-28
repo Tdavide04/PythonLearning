@@ -133,38 +133,41 @@ def hare():
 
     return casella_hare
 
-def tracker():
+def tracker(current_position_turlte, current_position_hare):
     percorso = []
     for _ in range(71):
         percorso.append("-")
 
-    current_position_turlte = 1
     current_position_turlte = current_position_turlte + turtle()
     percorso[current_position_turlte] = "T"
-
-    current_position_hare = 1
+    
     current_position_hare = current_position_hare + hare()
     percorso[current_position_hare] = "H"
+
+    print(percorso )
+    return current_position_hare, current_position_turlte
 
     
 
 time = 0
-
+current_position_turlte = 1
+current_position_hare = 1
 
 while True:
     if time == 0:
         print("BANG !!!!! AND THEY'RE OFF !!!!!")
+    
     time += 1
     
     hare()
     turtle()
-    tracker()
-    print(hare())
-    if hare() >= 70:
+    tracker(current_position_turlte, current_position_hare)
+
+    if current_position_hare>= 70:
         print("HARE WINS || YUCH!!!")
         break 
 
-    if turtle() >= 70:
+    if current_position_turlte() >= 70:
         print("TORTOISE WINS! || VAY!!!")
         break
     
