@@ -135,13 +135,18 @@ def tracker(position_turtle, position_hare):
     percorso = ['-' for _ in range(70)]
     
     if position_turtle == position_hare:
-        percorso[position_turtle - 1] = 'OUCH!!!'
+        percorso[position_turtle - 1] = "OUCH!!!"
     else:
-        percorso[position_turtle - 1] = 'T'
-        percorso[position_hare - 1] = 'H'
+        percorso[position_turtle - 1] = "T"
+        percorso[position_hare - 1] = "H"
     
     print(percorso)
 
+def ciclo_meteo(time):
+    if (time // 10) % 2 == 1:
+        return "pioggia"
+    else:
+        return "soleggiato"
 
 position_turtle = 1
 position_hare = 1
@@ -151,6 +156,9 @@ while position_turtle < 70 and position_hare < 70:
     if time == 0:
         print("BANG !!!!! AND THEY'RE OFF !!!!!")
     
+    meteo = ciclo_meteo(time)
+    print(f"Time: {time+1} Meteo: {meteo}")
+
     position_turtle = turtle(position_turtle)
     position_hare = hare(position_hare)
     tracker(position_turtle, position_hare)
