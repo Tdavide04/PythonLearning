@@ -99,39 +99,81 @@ Consentire agli animali di beneficiare pienamente dei bonus, ma non oltrepassare
 
 import random
 
-def turtle(position):
+def turtle(position, stamina):
     penalità = 1 if meteo == "pioggia" else 0
     fato = random.randint(1, 10)
     if 1 <= fato <= 5:
         position += 3 - penalità
+        if stamina >= 5:
+            stamina -= 5
+        else:
+            stamina += 10
     elif 6 <= fato <= 7:
         position -= 6 + penalità
+        if stamina >= 10:
+            stamina -= 10
+        else:
+            stamina += 10
     else: 
         position += 1 - penalità
+        if stamina >= 3:
+            stamina -= 3
+        else:
+            stamina += 10
+    
+    if stamina < 0:
+        stamina = 0
+    if stamina > 100:
+        stamina = 100
+
     if position < 1:
         position = 1
     if position > 70:
         position = 70
-    return position
 
-def hare(position):
+    return position, stamina
+
+def hare(position, stamina):
     penalità = 2 if meteo == "pioggia" else 0
     fato = random.randint(1, 10)
     if 1 <= fato <= 2:
-        pass  
+        stamina += 10
     elif 3 <= fato <= 4:
         position += 9 - penalità
+        if stamina >= 15:
+            stamina -= 15
+        else: 
+            stamina += 10
     elif fato == 5:
         position -= 12 + penalità
+        if stamina >= 20:
+            stamina -= 20
+        else:
+            stamina += 10
     elif 6 <= fato <= 7:
         position += 1 - penalità
+        if stamina >= 5:
+            stamina -= 5
+        else:
+            stamina += 10
     else: 
         position -= 2 + penalità
+        if stamina >= 8:
+            stamina -= 8
+        else:
+            stamina += 10
+
+    if stamina < 0:
+        stamina = 0
+    if stamina > 100:
+        stamina = 100
+
     if position < 1:
         position = 1
     if position > 70:
         position = 70
-    return position
+
+    return position, stamina
 
 def tracker(position_turtle, position_hare):
     percorso = ['-' for _ in range(70)]
@@ -149,7 +191,9 @@ def ciclo_meteo(time):
         return "pioggia"
     else:
         return "soleggiato"
-
+    
+stamina_turtle = 100
+stamina_hare = 100
 position_turtle = 1
 position_hare = 1
 time = 0
@@ -161,8 +205,8 @@ while position_turtle < 70 and position_hare < 70:
     meteo = ciclo_meteo(time)
     print(f"Time: {time+1} Meteo: {meteo}")
 
-    position_turtle = turtle(position_turtle)
-    position_hare = hare(position_hare)
+    position_turtle, stamina_turtle = turtle(position_turtle, stamina_turtle)
+    position_hare, stamina_hare = hare(position_hare, stamina_hare)
     tracker(position_turtle, position_hare)
         
     if position_turtle >= 70 and position_hare >= 70:
