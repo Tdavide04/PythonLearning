@@ -100,13 +100,14 @@ Consentire agli animali di beneficiare pienamente dei bonus, ma non oltrepassare
 import random
 
 def turtle(position):
+    penalità = 1 if meteo == "pioggia" else 0
     fato = random.randint(1, 10)
     if 1 <= fato <= 5:
-        position += 3
+        position += 3 - penalità
     elif 6 <= fato <= 7:
-        position -= 6
+        position -= 6 + penalità
     else: 
-        position += 1
+        position += 1 - penalità
     if position < 1:
         position = 1
     if position > 70:
@@ -114,17 +115,18 @@ def turtle(position):
     return position
 
 def hare(position):
+    penalità = 2 if meteo == "pioggia" else 0
     fato = random.randint(1, 10)
     if 1 <= fato <= 2:
         pass  
     elif 3 <= fato <= 4:
-        position += 9
+        position += 9 - penalità
     elif fato == 5:
-        position -= 12
+        position -= 12 + penalità
     elif 6 <= fato <= 7:
-        position += 1
+        position += 1 - penalità
     else: 
-        position -= 2
+        position -= 2 + penalità
     if position < 1:
         position = 1
     if position > 70:
