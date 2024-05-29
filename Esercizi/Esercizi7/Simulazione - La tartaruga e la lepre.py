@@ -99,75 +99,67 @@ Consentire agli animali di beneficiare pienamente dei bonus, ma non oltrepassare
 
 import random
 
-def turtle():
+def turtle(position):
     fato = random.randint(1, 10)
-    casella_turtle = 1
     if 1 <= fato <= 5:
-        casella_turtle += 3
-    if 6 <= fato <= 7:
-        casella_turtle -= 6
-        if casella_turtle < 1:
-            casella_turtle == 1
-    if 8 <= fato <= 10:
-        casella_turtle += 1
+        position += 3
+    elif 6 <= fato <= 7:
+        position -= 6
+    else: 
+        position += 1
+    if position < 1:
+        position = 1
+    if position > 70:
+        position = 70
+    return position
 
-    return casella_turtle
-
-def hare():
+def hare(position):
     fato = random.randint(1, 10)
-    casella_hare = 1
     if 1 <= fato <= 2:
-        casella_hare += 0
-    if 3 <= fato <= 4:
-        casella_hare += 9
-    if fato == 5:
-        casella_hare -= 12
-        if casella_hare < 1:
-            casella_hare == 1
-    if 6 <= fato <= 7:
-        casella_hare += 1
-    if 8 <= fato <= 10:
-        casella_hare -= 2
-        if casella_hare < 1:
-            casella_hare == 1
+        pass  
+    elif 3 <= fato <= 4:
+        position += 9
+    elif fato == 5:
+        position -= 12
+    elif 6 <= fato <= 7:
+        position += 1
+    else: 
+        position -= 2
+    if position < 1:
+        position = 1
+    if position > 70:
+        position = 70
+    return position
 
-    return casella_hare
-
-def tracker(current_position_turlte, current_position_hare):
-    percorso = []
-    for _ in range(71):
-        percorso.append("-")
-
-    current_position_turlte = current_position_turlte + turtle()
-    percorso[current_position_turlte] = "T"
+def tracker(position_turtle, position_hare):
+    percorso = ['-' for _ in range(70)]
     
-    current_position_hare = current_position_hare + hare()
-    percorso[current_position_hare] = "H"
-
-    print(percorso )
-    return current_position_hare, current_position_turlte
-
+    if position_turtle == position_hare:
+        percorso[position_turtle - 1] = 'OUCH!!!'
+    else:
+        percorso[position_turtle - 1] = 'T'
+        percorso[position_hare - 1] = 'H'
     
+    print(percorso)
 
+
+position_turtle = 1
+position_hare = 1
 time = 0
-current_position_turlte = 1
-current_position_hare = 1
 
-while True:
+while position_turtle < 70 and position_hare < 70:
     if time == 0:
         print("BANG !!!!! AND THEY'RE OFF !!!!!")
     
+    position_turtle = turtle(position_turtle)
+    position_hare = hare(position_hare)
+    tracker(position_turtle, position_hare)
+        
+    if position_turtle >= 70 and position_hare >= 70:
+            print("IT'S A TIE.")
+    elif position_turtle >= 70:
+            print("TORTOISE WINS! || VAY!!!")
+    elif position_hare >= 70:
+            print("HARE WINS || YUCH!!!")
+    
     time += 1
-    
-    hare()
-    turtle()
-    tracker(current_position_turlte, current_position_hare)
-
-    if current_position_hare>= 70:
-        print("HARE WINS || YUCH!!!")
-        break 
-
-    if current_position_turlte() >= 70:
-        print("TORTOISE WINS! || VAY!!!")
-        break
-    
