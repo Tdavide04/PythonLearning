@@ -107,13 +107,18 @@ class MovieCatalog:
             raise ValueError(f"{director_name} is not in the catalog")
 
     def search_movies_by_title(self, title):
-        for key in self.catalogo:
-            if title in key:
-                print(self.catalogo)
+        diz = {}
+        for key, values in self.catalogo.items():
+            if title in values:
+                diz[key] = title     
+            else:
+                raise ValueError(f"{title} does not exist")   
+        print(diz)
 
 film1 = MovieCatalog()
 film1.add_movie("cacca", "pefforza")
 film1.add_movie("cacca", "davero")
 film1.add_movie("piscio", "letsgosky")
 film1.get_movies_by_director("cacca")
-film1.search_movies_by_title("cacca")
+film1.add_movie("maru", "pefforza")
+film1.search_movies_by_title("pefforza")
