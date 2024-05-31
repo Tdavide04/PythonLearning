@@ -21,4 +21,8 @@ class TetsCalc(unittest.TestCase):
     def test_div(self):
         calc_1 = Calculations(a=2, b=3)
         result = calc_1.get_quotient()
-        self.assertEqual(result, 0, msg=f"Error Test Failed the goal was 0 the fuction returned {result}")
+        self.assertEqual(result, 2/3, msg=f"Error Test Failed the goal was {2/3} the fuction returned {result}")
+
+if __name__ == "__main__":
+
+    unittest.main()
