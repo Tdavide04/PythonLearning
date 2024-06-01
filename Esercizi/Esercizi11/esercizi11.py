@@ -57,16 +57,18 @@ class Sala:
 
     def __init__(self) -> None:
         self.spazio = 30
-
+        
     def prenota_posti(self, num_posti):
         if num_posti < self.spazio:
-            self.spazio - num_posti
+            self.spazio -= num_posti
             print(f"Hai prenotato {num_posti} posti")
         else:
             raise ValueError("Non ci sono abbastanza posti")
         
-    def posti_disponibili(self): 
         return self.spazio
+        
+    def posti_disponibili(self): 
+        return f"Posti disponibili nella sala: {self.spazio}"
 
 class Cinema:
 
@@ -77,15 +79,58 @@ class Cinema:
     def aggiungi_sala(self, sala: Sala):
         self.sale.append(sala)
 
-    def prenota_film(self, titolo_film: Film, num_posti):
+    def prenota_film(self, film: Film, num_posti):
         sala = Sala()
 
-        if titolo_film in self.film:
+        if film in self.film:
             if num_posti < sala.spazio:
-                Sala.prenota_posti(num_posti)
-                print("Registrazione effettuata")
+                sala.prenota_posti(num_posti)
+                return f"Registrazione effettuata per il film {film.titolo_film}"
             else:
                 raise ValueError("Non ci sono abbastanza posti")
         else:
-            raise ValueError (f"Il film {titolo_film} non è disponibile")
+            raise ValueError (f"Il film {film.titolo_film} non è disponibile")
         
+'''
+# Creazione di alcuni film
+film1 = Film("Interstellar", 180)
+film2 = Film("Inception", 150)
+
+# Creazione di alcune sale
+sala1 = Sala()
+sala2 = Sala()
+sala3 = Sala()
+
+# Creazione del cinema
+cinema = Cinema()
+
+# Aggiunta delle sale al cinema
+cinema.aggiungi_sala(sala1)
+cinema.aggiungi_sala(sala2)
+cinema.aggiungi_sala(sala3)
+
+# Verifica dei posti disponibili in una sala
+print(sala1.posti_disponibili())
+
+# Prenotazione di alcuni posti in una sala
+try:
+    sala1.prenota_posti(20)
+    print(sala1.posti_disponibili())
+except ValueError as e:
+    print(e)
+
+# Prenotazione di un film
+try:
+    cinema.prenota_film(film1, 25)
+except ValueError as e:
+    print(e)
+
+# Aggiunta di un film disponibile
+cinema.film.append(film1)
+
+# Prenotazione di un film disponibile
+try:
+    print(cinema.prenota_film(film1, 25))
+except ValueError as e:
+    print(e)
+'''
