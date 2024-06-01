@@ -49,35 +49,69 @@ Classe:
     Restituisce un elenco dei registi e dei rispettivi film che contengono la parola cercata o un messaggio di errore se nessun film contiene la parola cercata nel titolo.
 '''
 
-class Libro:
-    def __init__(self) -> None:
-        pass
-
+class Book:
     
+    def __init__(self, title: str, author: str):
+        self.title = title
+        self.author = author
+        self.available = True
 
-class Biblioteca:
 
-    catalogo: dict = {}
-    def __init__(self, libro: Libro) -> None:
-        pass
+class Library:
+    
+    def __init__(self):
+        self.catalog = []
 
-    def aggiungi_libro(self):
-        pass
+    def add_book(self, book: Book):
+        
+        if book not in self.catalog:
+            self.catalog.append(book)
+            return f"Your book {book.title} has been added successfully"
+        
+        else:
+            raise ValueError(f"This book {book.title}, already exist")
 
-    def presta_libro(self):
-        pass
+    def lend_book(self, book: Book):
 
-    def restituisci_libro(self):
-        pass
+        if book.available == True and book in self.catalog:
+            self.catalog.remove(book)
+            book.available = False
+            return f"You borrowed the book {book.title}"
+        
+        else:
+            raise ValueError(f"This book {book.title} does not exist or has already been borrowed")
 
-    def mostra_libri_disponibili(self):
-        pass
+    def return_book(self, book: Book):
+        
+        if book.available == False and book not in self.catalog:
+            self.catalog.append(book)
+            book.available = True
+            return f"You have successfully returned the book {book.title}"
+
+        else:
+            raise ValueError(f"Something goes wrong")
+        
+    def show_available_books(self):
+        
+        book_titles = [book.title for book in self.catalog]
+        return f"These are the books in the library: {', '.join(book_titles)}"
+
+'''
+library = Library()
+book1 = Book("Harry Potter", "J.K. Rowling")
+book2 = Book("The Great Gatsby", "F. Scott Fitzgerald")
+
+print(library.add_book(book1))  # Aggiungi il libro 1 alla libreria
+print(library.add_book(book2))  # Aggiungi il libro 2 alla libreria
+print(library.show_available_books())
+print(library.lend_book(book1))  # Prendi in prestito il libro 1
+print(library.return_book(book1))  # Restituisci il libro 1
+print(library.show_available_books())
+'''
 
 
 class MovieCatalog:
-
     
-
     def __init__(self) -> None:
         self.catalogo: dict = {}
 
@@ -119,6 +153,7 @@ class MovieCatalog:
             raise ValueError(f"'{title}' does not exist in the catalog")
         
 
+'''
 catalog = MovieCatalog()
 catalog.add_movie('Quentin Tarantino', ['Pulp Fiction', 'Kill Bill'])
 catalog.add_movie('Christopher Nolan', 'Inception')
@@ -126,3 +161,4 @@ print(catalog)
 print(catalog.list_directors())
 print(catalog.get_movies_by_director('Christopher Nolan'))
 print(catalog.search_movies_by_title('Inception'))
+'''
