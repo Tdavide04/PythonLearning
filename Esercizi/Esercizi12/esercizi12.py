@@ -91,34 +91,38 @@ class MovieCatalog:
             self.catalogo[director_name].append(movies)
 
     def remove_movie(self, director_name, movie_name): #Rimuove un film specifico dall'elenco dei film di un regista. Se tutti i film sono rimossi, il regista può essere opzionalmente rimosso dal catalogo.
-        if director_name in self.catalogo:
+        if director_name in self.catalogo and movie_name in self.catalogo[director_name]:
             self.catalogo[director_name].remove(movie_name)
+            if not self.catalogo[director_name]:
+                del self.catalogo[director_name]
         else:
             raise ValueError(f"The movie {movie_name} is not in the catalog")
 
     def list_directors(self): #Elenca tutti i registi presenti nel catalogo.
-        for key in self.catalogo:
-            print(f"Directors in this catalog are: {key}")
+        return list(self.catalogo.keys())
 
     def get_movies_by_director(self, director_name): #Restituisce tutti i film di un regista specifico.
         if director_name in self.catalogo:
-            print(f"Director Name: {director_name}, Movies: {self.catalogo[director_name]}")
+            return(f"Director Name: {director_name}, Movies: {self.catalogo[director_name]}")
         else:
             raise ValueError(f"{director_name} is not in the catalog")
 
     def search_movies_by_title(self, title):
-        diz = {}
-        for key, values in self.catalogo.items():
-            if title in values:
-                diz[key] = title     
-            else:
-                raise ValueError(f"{title} does not exist")   
-        print(diz)
+        found_movies = {}
+        for director, movies in self.catalogo.items():
+            if title in movies:
+                found_movies[director] = title
+        
+        if found_movies:
+            return found_movies
+        else:
+            raise ValueError(f"'{title}' does not exist in the catalog")
+        
 
-film1 = MovieCatalog()
-film1.add_movie("cacca", "pefforza")
-film1.add_movie("cacca", "davero")
-film1.add_movie("piscio", "letsgosky")
-film1.get_movies_by_director("cacca")
-film1.add_movie("maru", "pefforza")
-film1.search_movies_by_title("pefforza")
+catalog = MovieCatalog()
+catalog.add_movie('Quentin Tarantino', ['Pulp Fiction', 'Kill Bill'])
+catalog.add_movie('Christopher Nolan', 'Inception')
+print(catalog)
+print(catalog.list_directors())
+print(catalog.get_movies_by_director('Christopher Nolan'))
+print(catalog.search_movies_by_title('Inception'))
