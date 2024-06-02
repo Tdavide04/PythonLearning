@@ -134,3 +134,63 @@ try:
 except ValueError as e:
     print(e)
 '''
+
+class Prodotto:
+    
+    def __init__(self, nome: str, quantità: int):
+        self.nome = nome
+        self.quantità = quantità
+        
+class Magazzino:
+    
+    def __init__(self) -> None:
+        self.magazzino = {}
+    
+    def __str__(self):
+        return f"Prodotto(nome={self.nome}, quantità={self.quantità})"
+
+    def aggiungi_prodotto(self, prodotto: Prodotto):       
+        if prodotto.nome in self.magazzino:
+            self.magazzino[prodotto.nome].quantità += prodotto.quantità
+        else:
+            self.magazzino[prodotto.nome] = prodotto
+        
+    def cerca_prodotto(self, nome):
+        return self.magazzino.get(nome, None)
+
+    def verifica_disponibilità(self, nome):
+        prodotto = self.cerca_prodotto(nome)
+        if prodotto:
+            if prodotto.quantità > 0:
+                return f"{prodotto.nome} è disponibile con {prodotto.quantità} unità."
+            else:
+                return f"{prodotto.nome} non è disponibile."
+        else:
+            return f"{nome} non esiste in magazzino."
+    
+'''
+# Test case
+if __name__ == "__main__":
+    # Creazione del magazzino
+    magazzino = Magazzino()
+
+    # Creazione di prodotti
+    prodotto1 = Prodotto("Mela", 100)
+    prodotto2 = Prodotto("Banana", 150)
+    prodotto3 = Prodotto("Arancia", 0)
+
+    # Aggiunta dei prodotti al magazzino
+    magazzino.aggiungi_prodotto(prodotto1)
+    magazzino.aggiungi_prodotto(prodotto2)
+    magazzino.aggiungi_prodotto(prodotto3)
+
+    # Ricerca di un prodotto
+    prodotto_ricercato = magazzino.cerca_prodotto("Mela")
+    print(prodotto_ricercato)  # Output: Prodotto(nome=Mela, quantità=100)
+
+    # Verifica disponibilità dei prodotti
+    print(magazzino.verifica_disponibilità("Mela"))    # Output: Mela è disponibile con 100 unità.
+    print(magazzino.verifica_disponibilità("Banana"))  # Output: Banana è disponibile con 150 unità.
+    print(magazzino.verifica_disponibilità("Arancia")) # Output: Arancia non è disponibile.
+    print(magazzino.verifica_disponibilità("Pera"))    # Output: Pera non esiste in magazzino.
+'''
