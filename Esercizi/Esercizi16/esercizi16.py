@@ -179,3 +179,142 @@ class Contatore:
     def mostra(self): #Stampa a schermo il valore corrente del conteggio.
         print(f"Conteggio attuale: {self.conteggio}")
         
+'''
+Sviluppa un sistema per la gestione delle ricette in Python che permetta agli utenti di creare, modificare, e cercare ricette basate sugli ingredienti. 
+Il sistema dovrà essere capace di gestire una collezione di ricette e i loro ingredienti.
+Classe:
+- RecipeManager:
+    Gestisce tutte le operazioni legate alle ricette.
+    Metodi:
+    - create_recipe(name, ingredients): Crea una nuova ricetta con il nome specificato e una lista di ingredienti. 
+    Restituisce un dizionario con la ricetta appena creata o un messaggio di errore se la ricetta esiste già.
+    - add_ingredient(recipe_name, ingredient): Aggiunge un ingrediente alla ricetta specificata. 
+    Restituisce la ricetta aggiornata o un messaggio di errore se l'ingrediente esiste già o la ricetta non esiste.
+    - remove_ingredient(recipe_name, ingredient): Rimuove un ingrediente dalla ricetta specificata. 
+    Restituisce la ricetta aggiornata o un messaggio di errore se l'ingrediente non è presente o la ricetta non esiste.
+    - update_ingredient(recipe_name, old_ingredient, new_ingredient): Sostituisce un ingrediente con un altro nella ricetta specificata. 
+    Restituisce la ricetta aggiornata o un messaggio di errore se l'ingrediente non è presente o la ricetta non esiste.
+    - list_recipes(): Elenca tutte le ricette esistenti.
+    - list_ingredients(recipe_name): Mostra gli ingredienti di una specifica ricetta. Restituisce un elenco di ingredienti o un messaggio di errore se la ricetta non esiste.
+    - search_recipe_by_ingredient(ingredient): Trova e restituisce tutte le ricette che contengono un determinato ingrediente. 
+    Restituisce un elenco di ricette o un messaggio di errore se nessuna ricetta contiene l'ingrediente.
+    
+Example: 
+manager = RecipeManager()
+print(manager.create_recipe("Pizza Margherita", ["Farina", "Acqua", "Lievito", "Pomodoro", "Mozzarella"]))
+print(manager.add_ingredient("Pizza Margherita", "Basilico"))
+print(manager.update_ingredient("Pizza Margherita", "Mozzarella", "Mozzarella di Bufala"))
+print(manager.remove_ingredient("Pizza Margherita", "Acqua"))
+print(manager.list_ingredients("Pizza Margherita"))
+Result:
+{'Pizza Margherita': ['Farina', 'Acqua', 'Lievito', 'Pomodoro', 'Mozzarella']}
+{'Pizza Margherita': ['Farina', 'Acqua', 'Lievito', 'Pomodoro', 'Mozzarella', 'Basilico']}
+{'Pizza Margherita': ['Farina', 'Acqua', 'Lievito', 'Pomodoro', 'Mozzarella di Bufala', 'Basilico']}
+{'Pizza Margherita': ['Farina', 'Lievito', 'Pomodoro', 'Mozzarella di Bufala', 'Basilico']}
+['Farina', 'Lievito', 'Pomodoro', 'Mozzarella di Bufala', 'Basilico']
+'''
+
+class RecipeManager:
+    
+    def __init__(self) -> None:
+        self.recipe:dict = {}
+    
+    def create_recipe(self, name: str, ingredients: list[str]): 
+        '''
+        Crea una nuova ricetta con il nome specificato e una lista di ingredienti. 
+        Restituisce un dizionario con la ricetta appena creata o un messaggio di errore se la ricetta esiste già.
+        '''
+        
+        if name not in self.recipe:
+            self.recipe[name] = ingredients
+        else:
+            raise ValueError(f"The Recipe {name}: {ingredients} already exist")
+        return self.recipe
+            
+    def add_ingredient(self, recipe_name, ingredient): 
+        '''
+        Aggiunge un ingrediente alla ricetta specificata. 
+        Restituisce la ricetta aggiornata o un messaggio di errore se l'ingrediente esiste già o la ricetta non esiste.
+        '''
+        if recipe_name in self.recipe:
+            if ingredient not in self.recipe[recipe_name]:
+                self.recipe[recipe_name].append(ingredient)
+            else: 
+                raise ValueError(f"The ingredient: {ingredient} already exist")
+        else:
+            raise ValueError(f"This recipe: {recipe_name} does not exit")
+        return self.recipe
+    
+    def remove_ingredient(self, recipe_name, ingredient): 
+        '''
+        Rimuove un ingrediente dalla ricetta specificata. 
+        Restituisce la ricetta aggiornata o un messaggio di errore se l'ingrediente non è presente o la ricetta non esiste.
+        '''
+        if recipe_name in self.recipe:
+            if ingredient in self.recipe[recipe_name]:
+                self.recipe[recipe_name].remove(ingredient)
+            else: 
+                raise ValueError(f"The ingredient: {ingredient} does not exist")
+        else:
+            raise ValueError(f"This recipe: {recipe_name} does not exit")
+        return self.recipe
+    
+    def update_ingredient(self, recipe_name, old_ingredient, new_ingredient): 
+        '''
+        Sostituisce un ingrediente con un altro nella ricetta specificata. 
+        Restituisce la ricetta aggiornata o un messaggio di errore se l'ingrediente non è presente o la ricetta non esiste.
+        '''
+        if recipe_name in self.recipe:    
+            if old_ingredient in self.recipe[recipe_name]:
+                if new_ingredient not in self.recipe[recipe_name]:
+                    index = self.recipe[recipe_name].index(old_ingredient)
+                    self.recipe[recipe_name][index] = new_ingredient
+                else: 
+                    raise ValueError(f"The ingredient: {new_ingredient} already exist in this recipe")
+            else:
+                raise ValueError(f"The ingredient: {old_ingredient} does not exist")
+        else:
+            raise ValueError(f"This recipe: {recipe_name} does not exit")
+        return self.recipe
+    
+    def list_recipes(self): #Elenca tutte le ricette esistenti.
+        
+        return list(self.recipe.keys())
+    
+    def list_ingredients(self, recipe_name): 
+        '''
+        Mostra gli ingredienti di una specifica ricetta. Restituisce un elenco di ingredienti o un messaggio di errore se la ricetta non esiste.
+        '''
+        if recipe_name in self.recipe:
+            return self.recipe[recipe_name]
+        else:
+            raise ValueError(f"This recipe: {recipe_name} does not exist")
+    
+    def search_recipe_by_ingredient(self, ingredient):
+        '''
+        Trova e restituisce tutte le ricette che contengono un determinato ingrediente. 
+        Restituisce un elenco di ricette o un messaggio di errore se nessuna ricetta contiene l'ingrediente.
+        '''
+        found_recipes = {}
+        for recipe_name, ingredients in self.recipe.items():
+            if ingredient in ingredients:
+                found_recipes[recipe_name] = ingredients
+        
+        if found_recipes:
+            return found_recipes
+        else:
+            raise ValueError(f"'{ingredient}' does not exist in any recipe")
+        
+'''        
+manager = RecipeManager()
+print(manager.create_recipe("Pizza Margherita", ["Farina", "Acqua", "Lievito", "Pomodoro", "Mozzarella"]))
+print(manager.add_ingredient("Pizza Margherita", "Basilico"))
+print(manager.update_ingredient("Pizza Margherita", "Mozzarella", "Mozzarella di Bufala"))
+print(manager.remove_ingredient("Pizza Margherita", "Acqua"))
+print(manager.list_ingredients("Pizza Margherita"))
+print(manager.create_recipe("Torta di mele", ["Farina", "Uova", "Mele"]))
+print(manager.add_ingredient("Torta di mele", "Zucchero"))
+print(manager.list_recipes()) # ['Torta di mele']
+print(manager.list_ingredients("Torta di mele"))
+print(manager.search_recipe_by_ingredient("Uova"))
+'''
