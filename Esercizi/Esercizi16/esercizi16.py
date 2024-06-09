@@ -128,7 +128,8 @@ film2.recensione()
 #Esercitazione Classi ed Ereditarietà
 
 '''
-Vogliamo gestire un contatore che può essere incrementato, decrementato, resettato e visualizzato. La classe offre un modo semplice per tenere traccia di un conteggio che non può diventare negativo.
+Vogliamo gestire un contatore che può essere incrementato, decrementato, resettato e visualizzato. La classe offre un modo semplice per tenere traccia di un conteggio 
+che non può diventare negativo.
 
 Classe Contatore
 Attributi:
@@ -149,3 +150,32 @@ c.mostra()
 Reuslt:
 Conteggio attuale: 1
 '''
+
+class Contatore:
+    
+    def __init__(self): # Inizializza l'attributo conteggio a 0.
+        self.conteggio = 0
+    
+    def setZero(self): #Imposta il conteggio a 0.
+        self.conteggio = 0
+        return self.conteggio
+    
+    def add1(self): #Incrementa il conteggio di 1.
+        self.conteggio += 1
+        return self.conteggio
+    
+    def sub1(self): #Decrementa il conteggio di 1, ma non permette che il conteggio diventi negativo. Se il conteggio è già 0, stampa un messaggio di errore.
+        if self.conteggio <= 0:
+            self.conteggio = 0
+            print("Non è possibile eseguire la sottrazione")
+        if self.conteggio > 0:
+            self.conteggio -= 1
+        
+        return self.conteggio
+    
+    def get(self): #Restituisce il valore corrente del conteggio.
+        return self.conteggio
+    
+    def mostra(self): #Stampa a schermo il valore corrente del conteggio.
+        print(f"Conteggio attuale: {self.conteggio}")
+        
