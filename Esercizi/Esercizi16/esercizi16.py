@@ -468,11 +468,11 @@ class Specie:
         self.tasso_crescita = tasso_crescita
 
     def cresci(self): #Metodo per aggiornare la popolazione per l'anno successivo.
-        self.popolazione *= (1 + self.tasso_crescita/100)
+        self.popolazione *= int(1 + self.tasso_crescita/100)
         return self.popolazione
 
     def anni_per_superare(self, altra_specie: 'Specie') -> int: #Metodo per calcolare in quanti anni la popolazione di questa specie supererà quella di un'altra specie.
-        anni: int = 1
+        anni: int = 0
         while self.popolazione <= altra_specie.popolazione:
             self.cresci()
             altra_specie.cresci()
@@ -482,7 +482,7 @@ class Specie:
         return anni
             
     def getDensita(self, area_kmq: float) -> int: #Metodo per calcolare in quanti anni la popolazione raggiungerà una densità di 1 individuo per km².
-        anni: int = -1
+        anni: int = 0
         while self.popolazione / area_kmq < 1:
             self.cresci()
             anni += 1
