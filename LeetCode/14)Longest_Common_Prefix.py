@@ -27,5 +27,20 @@ Constraints:
 
 class Solution:
     def longestCommonPrefix(self, strs: list[str]) -> str:
-        pass
-        
+        strs_lower = []
+        lista=[]
+        i=0
+
+        for e in strs:
+            strs_lower.append(e.lower())
+        for e in strs:  
+            while i<=len(max(strs)):
+                if 
+
+
+        for e in strs_lower:
+            pass
+
+strs = ["Ciao", "cane", "Cibo"]
+sos = Solution()
+print(sos.longestCommonPrefix(strs))
