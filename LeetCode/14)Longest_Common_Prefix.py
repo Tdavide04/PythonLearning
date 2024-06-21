@@ -27,20 +27,25 @@ Constraints:
 
 class Solution:
     def longestCommonPrefix(self, strs: list[str]) -> str:
-        strs_lower = []
-        lista=[]
-        i=0
-
+        if strs==[]:
+            return ""
+        strs_lowered = []
         for e in strs:
-            strs_lower.append(e.lower())
-        for e in strs:  
-            while i<=len(max(strs)):
-                if 
+            strs_lowered.append(e.lower())
+        first_str = strs_lowered[0]
+        max_prefix = 0
+        f = [e for e in strs_lowered]
+        f.pop(0)
+        for letter in range(len(first_str)):
+            for stringa in f:
+                if letter >= len(stringa) or stringa[letter] != first_str[letter]:
+                    return first_str[:max_prefix]
+            
+            max_prefix += 1
+
+        return first_str[:max_prefix]
 
 
-        for e in strs_lower:
-            pass
-
-strs = ["Ciao", "cane", "Cibo"]
+strs = ["Ciao", "ckkkkkkdyi", "Cibo"]
 sos = Solution()
 print(sos.longestCommonPrefix(strs))
