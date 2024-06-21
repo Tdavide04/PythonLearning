@@ -43,23 +43,30 @@ Data di scadenza: 01/25
 Numero della carta: 6543210987654321
 '''
 class Pagamento:
+    def __init__(self) -> None:
+        self.__importo = 0.0
 
     def getImporto(self):
         return self.__importo
 
     def setImporto(self, importo: float):
-            self.__importo = importo
+        self.__importo = importo
     
     def dettagliPagamento(self):
         print(f"Importo del pagamento: €{self.getImporto():.2f}")
 
 class PagamentoContanti(Pagamento):
+    def __init__(self, importo) -> None:
+        super().__init__()
+        self.setImporto(importo)
+        self.grimorio_banconote = {}
+        self.grimorio_monete = {}
 
     def inPezziDa(self):
         self.grimorio_banconote = {500:0, 200:0, 100:0, 50:0, 20:0, 10:0, 5:0}
         self.grimorio_monete = {2:0, 1:0, 0.5:0, 0.2:0, 0.1:0, 0.05:0, 0.01:0}
         a = self.getImporto()
-        while a > 0:
+        while a != 0:
             if a >= 500:
                 a -= 500
                 self.grimorio_banconote[500] += 1
@@ -147,6 +154,7 @@ if __name__ == "__main__":
     persona1 = PagamentoCartaDiCredito("Maru", "Rossi", "01/43", 547290274739)
     persona1.setImporto(1500.00)
     persona1.dettagliPagamento()
-    persona2 = PagamentoContanti()
+    persona2 = PagamentoContanti(2)
     persona2.setImporto(3512.87)
+    persona2.inPezziDa()
     persona2.dettagliPagamento()
