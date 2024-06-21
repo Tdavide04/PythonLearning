@@ -56,10 +56,63 @@ class Pagamento:
 class PagamentoContanti(Pagamento):
 
     def inPezziDa(self):
-        a = self.get()
-        if a >= 500:
-            a -= 500
-        
+        self.grimorio_banconote = {500:0, 200:0, 100:0, 50:0, 20:0, 10:0, 5:0}
+        self.grimorio_monete = {2:0, 1:0, 0.5:0, 0.2:0, 0.1:0, 0.05:0, 0.01:0}
+        a = self.getImporto()
+        while a > 0:
+            if a >= 500:
+                a -= 500
+                self.grimorio_banconote[500] += 1
+            elif 200 <= a < 500:
+                a -= 200
+                self.grimorio_banconote[200] += 1
+            elif 100 <= a < 200:
+                a -= 100
+                self.grimorio_banconote[100] += 1
+            elif 50 <= a < 100:
+                a -= 50
+                self.grimorio_banconote[50] += 1
+            elif 20 <= a < 50:
+                a -= 20
+                self.grimorio_banconote[20] += 1
+            elif 10 <= a < 20:
+                a -= 10
+                self.grimorio_banconote[10] += 1
+            elif 5 <= a < 10:
+                a -= 5
+                self.grimorio_banconote[5] += 1
+            elif 2 <= a < 5:
+                a -= 2
+                self.grimorio_monete[2] += 1
+            elif 1 <= a < 2:
+                a -= 1
+                self.grimorio_monete[1] += 1
+            elif 0.5 <= a < 1:
+                a -= 0.5
+                self.grimorio_monete[0.5] += 1
+            elif 0.2 <= a < 0.5:
+                a -= 0.2
+                self.grimorio_monete[0.2] +=1        
+            elif 0.1 <= a < 0.2:
+                a -= 0.1
+                self.grimorio_monete[0.1] += 1
+            elif 0.05 <= a < 0.1:
+                a -= 0.05
+                self.grimorio_monete[0.05] += 1
+            elif 0.01 <= a < 0.05:
+                a -= 0.01
+                self.grimorio_monete[0.01] += 1
+
+
+
+    def dettagliPagamento(self):
+        print(f"Importo del pagamento: €{self.getImporto():.2f} \n")
+        for k,v in sorted(self.grimorio_banconote.items()):
+            if v > 1:
+                print(f"{v} banconote da {k} euro \n")
+            else:
+                print(f"1 bancona da {k} euro \n")
+
 
 class PagamentoCartaDiCredito(Pagamento):
 
@@ -94,3 +147,6 @@ if __name__ == "__main__":
     persona1 = PagamentoCartaDiCredito("Maru", "Rossi", "01/43", 547290274739)
     persona1.setImporto(1500.00)
     persona1.dettagliPagamento()
+    persona2 = PagamentoContanti()
+    persona2.setImporto(3512.87)
+    persona2.dettagliPagamento()
