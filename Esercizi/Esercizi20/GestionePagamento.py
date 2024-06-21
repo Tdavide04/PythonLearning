@@ -55,19 +55,16 @@ class Pagamento:
 
 class PagamentoContanti(Pagamento):
 
-    def __init__(self) -> None:
-        super().__init__()
-
     def inPezziDa(self):
         a = self.get()
         if a >= 500:
             a -= 500
+        
 
 class PagamentoCartaDiCredito(Pagamento):
 
     def __init__(self, name: str, cognome: str, data: str, numero_carta: int) -> None:
-        super().__init__()
-
+        
         if type(name) != str:
             print("Il nome inserito non è una stringa")
             self.name = None
@@ -93,6 +90,7 @@ class PagamentoCartaDiCredito(Pagamento):
               f"Data di scadenza: {self.data} \n"
               f"Numero della carta: {self.numero_carta}")
 
-persona1 = PagamentoCartaDiCredito("Maru", "Rossi", "01/43", 547290274739)
-persona1.setImporto(1500.00)
-persona1.dettagliPagamento()
+if __name__ == "__main__":
+    persona1 = PagamentoCartaDiCredito("Maru", "Rossi", "01/43", 547290274739)
+    persona1.setImporto(1500.00)
+    persona1.dettagliPagamento()
