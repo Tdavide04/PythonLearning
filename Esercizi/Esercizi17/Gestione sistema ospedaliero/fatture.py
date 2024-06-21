@@ -40,7 +40,7 @@ class Fattura:
         self.patients[newPatient.getPazientidCode()] = newPatient.getPersonaLastName()
         self.getSalary()
         self.getFatture()
-        print(f"Alla lista del Dottor cognome è stato aggiunto il paziente {newPatient}")
+        print(f"Alla lista del Dottor {self.doctor.getPersonaLastName()} è stato aggiunto il paziente {newPatient.getPazientidCode()}")
         
     def removePatient(self, idCode: str):
         '''
