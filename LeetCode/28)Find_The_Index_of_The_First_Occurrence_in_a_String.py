@@ -26,4 +26,23 @@ Constraints:
 
 class Solution:
     def strStr(self, haystack: str, needle: str) -> int:
-        pass
+        if len(needle) == 0:
+            return 0
+        elif len(needle) > len(haystack):
+            return -1
+        for i in range(len(haystack) - len(needle) + 1):
+            if haystack[i:i + len(needle)] == needle:
+                return i
+        return -1
+
+if __name__ == "__main__":
+    haystack = "leetcode"
+    needle = "leeto"
+    sos = Solution()
+    print(sos.strStr(haystack, needle))
+
+'''
+if haystack[i:i + len(needle)] == needle
+
+this line of code checks if the target is in the range i (i:i indicates the precise range otherwise it goes out of range) + the length of the searched word
+'''
