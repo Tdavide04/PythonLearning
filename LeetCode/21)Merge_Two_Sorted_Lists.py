@@ -31,14 +31,33 @@ Constraints:
 
 '''
 # Definition for singly-linked list.
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
     
 class Solution:
-    def mergeTwoLists(self, list1: ListNode, list2: ListNode) -> list:
-        self.list1 = list1
-        self.list2 = list2
+    def mergeTwoLists(self, list1, list2) -> list:
+        result = []
+        i = j = 0
 
-        
+        while i < len(list1) and j < len(list2):
+            if list1[i] < list2[j]:
+                result.append(list1[i])
+                i += 1
+            else:
+                result.append(list2[j])
+                j += 1
+
+        result.extend(list1[i:])
+        result.extend(list2[j:])
+
+        return result
+
+
+
+if __name__ == "__main__":
+    list1 = [1,2,4]
+    list2 = [1,3,4]
+    sos = Solution()
+    print(sos.mergeTwoLists(list1, list2))
