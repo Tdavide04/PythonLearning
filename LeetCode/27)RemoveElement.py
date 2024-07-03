@@ -53,12 +53,14 @@ Constraints:
 
 class Solution:
     def removeElement(self, nums: list[int], val: int) -> int:
-        pass
+        while val in nums:
+            nums.remove(val)
+        return len(nums)
 
 
 if __name__ == "__main__":
 
     sos = Solution()
-    nums = [3,2,2,3]
+    nums = [3,3]
     val = 3
-    sos.removeElement(nums, val)
+    print(sos.removeElement(nums, val))
