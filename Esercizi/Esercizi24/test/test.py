@@ -24,7 +24,7 @@ class TestEmail(unittest.TestCase):
     def test_getText(self):
         email = Email()
         email.setText("Hello")
-        self.assertEqual(email.getText(), "Hello")
+        self.assertEqual(email.getText(), "Da: , A: \nTitolo: \nMessagio: Hello")
 
     def test_writeToFile(self):
         email = Email()
@@ -33,7 +33,26 @@ class TestEmail(unittest.TestCase):
         r = open("document.txt", "r")
         f = r.read()
         r.close()
-        self.assertEqual(f"Da: , A: \nTitolo: \nMessagio: {email.getText()}", f)
+        self.assertEqual(f, "Hellooo my friend")
+
+    def test_isInText(self):
+        email = Email()
+        email.setText("I Love Python")
+        email.isInText("Love")
+
+class TestFile(unittest.TestCase):
+    def test_getText(self):
+        file = File()
+        email = Email()
+        email.setText("Something is going wrong")
+        email.writeToFile()
+        file.leggiTestoDaFile()
+        self.assertEqual(file.getText(), "Percorso: /home/user/VscodeprojectDavide/PythonLearning/Esercizi/Esercizi24/document.txt \nContenuto: Something is going wrong")
+
+class TestFile(unittest.TestCase):
+    file = File()
+    file.setText("I dont know what to say")
+    file.isInText("dont")
 
 if __name__ == "__main__":
     unittest.main()

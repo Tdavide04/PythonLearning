@@ -59,10 +59,7 @@ class File(Document):
         return f"{testo}"
 
     def getText(self):
-        file = open("/home/user/VscodeprojectDavide/PythonLearning/Esercizi/Esercizi24/document.txt", "r")
-        testo = file.read()
-        file.close()
-        return f"Percorso: {self.nomePercorso} \nContenuto: {testo}"
+        return f"Percorso: {self.nomePercorso} \nContenuto: {self.leggiTestoDaFile()}"
     
 if __name__ == "__main__":
 
