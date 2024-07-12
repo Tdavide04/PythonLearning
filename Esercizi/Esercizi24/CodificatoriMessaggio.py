@@ -23,6 +23,9 @@ class CifratoreAScorrimento(CodificatoreMessaggio, DecodificatoreMessaggio):
         alfabeto = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
         testo_codificato = []
 
+        while self.chiave > 26:
+            self.chiave -= 26
+
         for i in testoInChairo:
             for j in alfabeto:
                 if i == j:
@@ -34,6 +37,7 @@ class CifratoreAScorrimento(CodificatoreMessaggio, DecodificatoreMessaggio):
                         indice = indice - len(alfabeto)
                         j = alfabeto[indice]
                         testo_codificato.append(j)    
+        testo_codificato = "".join(testo_codificato)
         return testo_codificato
 
     def decodifica(self, testoCodifica):
@@ -51,5 +55,5 @@ class CifratoreACombinazione(CodificatoreMessaggio, DecodificatoreMessaggio):
 
 if __name__ == "__main__":
 
-    doc = CifratoreAScorrimento(4)
+    doc = CifratoreAScorrimento(48303287)
     print(doc.codifica("Ciaozzz"))
