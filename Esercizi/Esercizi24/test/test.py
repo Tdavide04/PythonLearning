@@ -1,5 +1,5 @@
 import unittest
-from esercizi24 import Document, File, Email
+from TestiDigitali import Document, File, Email
 
 class TestDocument(unittest.TestCase):
     def test_initial_text(self):
