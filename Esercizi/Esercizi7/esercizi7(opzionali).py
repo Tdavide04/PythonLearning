@@ -160,6 +160,10 @@ print(func10([1,2,3,4,5,6,7,8,9,10,11,12,15,18]))
  
 # 11. Scrivi una funzione che converte una temperatura da gradi Celsius a Fahrenheit e viceversa a seconda del parametro. Utilizza il concetto di parametri opzionali.
  
+def func11(temperatura: float) -> float:
+    pass
+
+
 # 12. Scrivi una funzione che somma tutti i numeri interi di una lista che sono maggiori di un dato valore intero definito threshold.
  
 # 13. Scrivi una funzione che, data una lista, ritorni un dictionary che mappa ogni elemento alla sua frequenza nella lista.
