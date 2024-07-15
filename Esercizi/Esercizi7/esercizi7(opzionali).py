@@ -41,7 +41,7 @@ print(func3([1,2,3,4,5,6,7], 8))
 
 def func4(number):
     
-    if (number / 4).is_integer():                         #is_integer() è una funzione che deriva dalla float
+    if (number / 4).is_integer():                         #is_integer() è una funzione che deriva dalla classe float
         if (number / 6).is_integer():
             return f"il numero {number} non è magico"
         else:
@@ -52,17 +52,111 @@ print(func4(36))
  
 # 5. Scrivi una funzione che accetti una lista di numeri e ritorni la somma dei numeri che sono divisibili sia per 2 che per 3.
 
+def func5(lista) -> int:
 
+    sumlist = []
+    for e in lista:
+        if (e / 2).is_integer():
+            if (e / 3).is_integer():
+                sumlist.append(e)
+    return sum(sumlist)
+
+print(func5([1,2,3,4,5,6,7,8,9,10,11,12,15,18]))
  
-# 6. Scrivi una funzione che accetti un dizionario di prodotti con i prezzi e restituisca un nuovo dizionario con solo i prodotti che hanno un prezzo superiore a 20, scontati del 10%.
- 
+# 6. Scrivi una funzione che accetti un dizionario di prodotti con i prezzi e restituisca un nuovo dizionario con solo i prodotti che hanno un prezzo superiore a 20, 
+# scontati del 10%.
+
+def func6(diz):
+    diz2 = {}
+    for key, val in diz.items():
+        if val >= 20:
+            new_val = val - ((val / 100) * 10)
+            diz2[new_val] = key
+    return diz2
+
+prodotti = {
+    "Pomodoro": 21.20,
+    "Melone": 20.50,
+    "Arancia": 0.80,
+    "Banana": 0.40,
+    "Uva": 15.50
+}
+
+print(func6(prodotti))
 # 7. Scrivi una funzione che prenda in input una lista di dizionari che rappresentano voti di studenti e aggrega i voti per studente in un nuovo dizionario.
  
-# 8. Scrivi una funzione che elimini dalla lista dati certi elementi specificati in un dizionario. Il dizionario contiene elementi da rimuovere come chiavi e il numero di volte che devono essere rimossi come valori.
+def func7(voti):
+
+    aggregati = {}
+    for voto in voti:
+        for studente, nota in voto.items():
+            if studente in aggregati:
+                aggregati[studente].append(nota)
+            else:
+                aggregati[studente] = [nota]
+    return aggregati
+
+voti = [
+    {"Mario": 8, "Gianni": 7},
+    {"Mario": 9, "Lorenzo": 6},
+    {"Gianni": 8, "Luca": 9}
+]
+
+aggregati = func7(voti)
+print(aggregati)
+
+# 8. Scrivi una funzione che elimini dalla lista dati certi elementi specificati in un dizionario. 
+# Il dizionario contiene elementi da rimuovere come chiavi e il numero di volte che devono essere rimossi come valori.
  
-# 9. Scrivi una funzione che converta una lista di tuple (chiave, valore) in un dizionario. Se la chiave è già presente, aggiungi il valore alla lista di valori già associata alla chiave.
+def func8(lista: list, diz: dict):
+    
+    for key, val in diz.items():
+        while val > 0 and key in lista:
+            lista.remove(key)
+            val -= 1
+    return lista
+
+lista = ["ciao", "hello", "ciao", "hola", "hello", "pefforza", "ciao", "ciao"]
+diz = {"ciao" : 2, "hola" : 1}
+
+print(func8(lista, diz))
+
+# 9. Scrivi una funzione che converta una lista di tuple (chiave, valore) in un dizionario. 
+# Se la chiave è già presente, aggiungi il valore alla lista di valori già associata alla chiave.
  
+def func9(lista: list[set]) -> dict:
+
+    diz = {}
+    for key, value in lista:
+        if key in diz:
+            diz[key].append(value)
+        else:
+            diz[key] = [value]
+    return diz
+
+my_list = [
+    ("a", 1),
+    ("b", 2),
+    ("c", 3),
+    ("d", 4),
+    ("a", 5)
+]
+
+print(func9(my_list))
+
 # 10. Scrivi una funzione che prende una lista di numeri e ritorna un dizionario che classifica i numeri in liste separate per numeri pari e dispari.
+
+def func10(lista):
+
+    diz = {"pari":[], "dispari":[]}
+    for e in lista:
+        if e % 2 == 0:
+            diz["pari"].append(e)
+        else:
+            diz["dispari"].append(e)
+    return diz
+
+print(func10([1,2,3,4,5,6,7,8,9,10,11,12,15,18]))
  
 # 11. Scrivi una funzione che converte una temperatura da gradi Celsius a Fahrenheit e viceversa a seconda del parametro. Utilizza il concetto di parametri opzionali.
  
