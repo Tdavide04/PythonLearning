@@ -89,23 +89,17 @@ print(func6(prodotti))
  
 def func7(voti):
 
-    aggregati = {}
+    diz={}
     for voto in voti:
-        for studente, nota in voto.items():
-            if studente in aggregati:
-                aggregati[studente].append(nota)
-            else:
-                aggregati[studente] = [nota]
-    return aggregati
+        studente = voto['nome']
+        nota = voto['voto']
+        if studente in diz:
+            diz[studente].append(nota)
+        else:
+            diz[studente]=[nota]
+    return diz
 
-voti = [
-    {"Mario": 8, "Gianni": 7},
-    {"Mario": 9, "Lorenzo": 6},
-    {"Gianni": 8, "Luca": 9}
-]
-
-aggregati = func7(voti)
-print(aggregati)
+print(func7([{'nome': 'Alice', 'voto': 90}, {'nome': 'Bob', 'voto': 75}, {'nome': 'Alice', 'voto': 85}]))
 
 # 8. Scrivi una funzione che elimini dalla lista dati certi elementi specificati in un dizionario. 
 # Il dizionario contiene elementi da rimuovere come chiavi e il numero di volte che devono essere rimossi come valori.
