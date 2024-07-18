@@ -336,11 +336,11 @@ def create_contact(name: str, email: str=None, telefono: int=None) -> dict:
 
 def update_contact(dictionary: dict, name: str, email: str =None, telefono: int=None) -> dict:
 
-    for key, val in dictionary.items():
-        pass
-
-
-    diz = {"profile" : name, "email" : email, "telefono": telefono}
+    dictionary["profile"] = name
+    if email is not None:
+        dictionary["email"] = email
+    if telefono is not None:
+        dictionary["telefono"] = telefono
     return dictionary
 
 # ESEMPIO: update_contact(dict, "Mario Rossi", telefono=123456789)
