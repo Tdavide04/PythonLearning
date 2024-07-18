@@ -71,7 +71,7 @@ def func6(diz):
     for key, val in diz.items():
         if val >= 20:
             new_val = val - ((val / 100) * 10)
-            diz2[new_val] = key
+            diz2[key] = new_val
     return diz2
 
 prodotti = {
@@ -79,7 +79,9 @@ prodotti = {
     "Melone": 20.50,
     "Arancia": 0.80,
     "Banana": 0.40,
-    "Uva": 15.50
+    "Uva": 15.50,
+    'Lampada': 35.0, 
+    'Libro': 19.0
 }
 
 print(func6(prodotti))
@@ -317,14 +319,32 @@ def func24(stringa: str):
 
 # 25. Scrivi una funzione che conta quante volte un elemento appare isolato in una lista di numeri interi. Un elemento è considerato isolato se non è affiancato da elementi uguali.
  
-# 26. Scrivi una funzione chiamata create_contact() che accetta il nome e cognome, e-mail (facoltativo) e numero di telefono (facoltativo). La funzione dovrebbe restituire un dizionario con i dettagli del contatto.
+# 26. Scrivi una funzione chiamata create_contact() che accetta il nome e cognome, e-mail (facoltativo) e numero di telefono (facoltativo). 
+# La funzione dovrebbe restituire un dizionario con i dettagli del contatto.
+
+def create_contact(name: str, email: str=None, telefono: int=None) -> dict:
+
+    diz = {"profile" : name, "email" : email, "telefono": telefono}
+    return diz
 
 # ESEMPIO: create_contact("Mario Rossi", email="mario.rossi@gmail.com", telefono=69876543)
 
 # OUTPUT: {'profile': 'Mario Rossi', 'email': 'mario.rossi@gmail.com', 'telefono': 788787}
 
-# Scrivi una funzione chiamata update_contact() che accetta il dizionario creato, il nome e cognome del contatto da aggiornare, e il dettaglio facoltativo da aggiornare. Questa funzione dovrebbe aggiornare il dizionario del contatto.
+# Scrivi una funzione chiamata update_contact() che accetta il dizionario creato, il nome e cognome del contatto da aggiornare, 
+# e il dettaglio facoltativo da aggiornare. Questa funzione dovrebbe aggiornare il dizionario del contatto.
+
+def update_contact(dictionary: dict, name: str, email: str =None, telefono: int=None) -> dict:
+
+    for key, val in dictionary.items():
+        pass
+
+
+    diz = {"profile" : name, "email" : email, "telefono": telefono}
+    return dictionary
 
 # ESEMPIO: update_contact(dict, "Mario Rossi", telefono=123456789)
 
 # OUTPUT: {'profile': 'Mario Rossi', 'email': 'mario.rossi@gmail.com', 'telefono': 123456789}
+
+
