@@ -245,10 +245,15 @@ print(func18(lista=["ciao", 2, 4, 5, 2, 4, "ciao", "come va?"]))
 
 def func19(lista: list, k: int):
     
-    # if k > len(lista):
-    #     k -= len(lista)
-    for e in lista:
-        lista.index(e) - k
+    if k > len(lista): 
+        k -= len(lista)
+    lista1 = []
+    while k != 0:
+        lista1.append(lista[0])
+        lista.remove(lista[0])
+        k -= 1
+    for e in lista1:
+        lista.append(e)
     return lista
 
 print(func19(lista=[1,2,5,6,2,3], k= 2))
