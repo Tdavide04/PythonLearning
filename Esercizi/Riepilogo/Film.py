@@ -55,22 +55,24 @@ class VideoRentalStore:
             return "Customer already registerd"
         
     def rent_movie(self, customer_id: str, movie_id: str):
-        if customer_id not in self.customers:
-            return "Customer not found"
-        if movie_id not in self.movies:
-            return "Movie not found"
+
+        if customer_id not in self.customers or movie_id not in self.movies:
+            print(f"Cliente o film non trovato.")
+        movie = self.movies[movie_id]
+
+        if self.movies[movie_id].is_rented:
+            print(f"Il film {movie.title} è già noleggiato.")
         else:
-            movie = self.movies[movie_id]
             self.customers[customer_id].rent_movie(movie)
             self.movies[movie_id].rent()
 
     def return_movie(self, customer_id: str, movie_id: str):
-        if customer_id not in self.customers:
-            return "Customer not found"
-        if movie_id not in self.movies:
-            return "Movie not found"
+        movie = self.movies[movie_id]
+        if customer_id not in self.customers or movie_id not in self.movies:
+            return "Cliente o film non trovato."
+        if self.movies[movie_id].is_rented == False:
+            print(f"Il film {movie.title} non è stato noleggiato da questo cliente.")
         else:
-            movie = self.movies[movie_id]
             self.customers[customer_id].return_movie(movie)
             self.movies[movie_id].return_movie()
     
