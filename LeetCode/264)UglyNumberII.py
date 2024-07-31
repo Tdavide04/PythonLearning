@@ -29,7 +29,7 @@ class Solution:
     def nthUglyNumber(self, n: int) -> int:
         # Array per memorizzare i numeri brutti
         ugly_numbers = [0] * n
-        ugly_numbers[0] = 1  # Il primo numero è sempre 1
+        ugly_numbers[0] = 1  # Il primo numero brutto è sempre 1
         
         # Indici per i multipli di 2, 3, e 5
         i2 = i3 = i5 = 0
@@ -40,7 +40,7 @@ class Solution:
         next_multiple_of_5 = 5
         
         for i in range(1, n):
-            # Seleziona il prossimo numero brutto più piccolo, poichè essi vengono modificati durante l'esecuzione
+            # Seleziona il prossimo numero brutto più piccolo
             next_ugly = min(next_multiple_of_2, next_multiple_of_3, next_multiple_of_5)
             ugly_numbers[i] = next_ugly
             
@@ -56,10 +56,36 @@ class Solution:
                 next_multiple_of_5 = ugly_numbers[i5] * 5
         
         return ugly_numbers[-1]
-
             
 
 if __name__ == "__main__":
 
     sos = Solution()
     print(sos.nthUglyNumber(144))
+    
+    
+'''
+primo prototipo del codice. funziona anche piuttosto bene ma supera i 
+limiti temporali di LeetCode e si basa sul brute force
+        k = []
+        
+        for e in range(1, 50000):
+            count = 0
+            j = e
+            while e:   
+                if e == 1:
+                    k.append(e)
+                    break
+                if e % 2 == 0:
+                    e /= 2
+                elif e % 3 == 0:
+                    e /= 3
+                elif e % 5 == 0:
+                    e /= 5
+                if e == 1:
+                    k.append(j)
+                    break
+                count += 1
+                if count == 15:
+                    break
+        return k[n-1]'''
