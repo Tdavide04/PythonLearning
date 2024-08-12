@@ -31,10 +31,24 @@ s consists of English letters, digits, symbols and spaces.
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        pass
+        lista: list = []
+        max_num = 0
+        i = 0
+        
+        while i < len(s):
+            
+            if s[i] not in lista:
+                lista.append(s[i])
+            else:
+                if len(lista) > max_num:
+                    max_num = len(lista)
+                lista = [s[i]]
+            i += 1
+        return max_num
+        
     
     
-if __name__ == "__mani__":
+if __name__ == "__main__":
     
     sos = Solution()
     print(sos.lengthOfLongestSubstring("pwwkew"))
