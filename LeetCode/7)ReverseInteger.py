@@ -27,39 +27,28 @@ Constraints:
 class Solution:
     def reverse(self, x: int) -> int:
         
-        # Convert the integer x to a list of characters (strings).
-        x = list(str(x))
-        lista: list = []
         
-        # Check if the first character is a negative sign.
-        if x[0] == "-":
+        x = list(str(x)) # Convert the integer x to a list of characters (strings).
+        lista: list = []
+        if x[0] == "-": # Check if the first character is a negative sign.
             lista.append("-") # If it is, add the negative sign to the result list (lista).
             x.pop(0) # Remove the negative sign from the original list x.
-                
-        # Loop through the remaining characters in x in reverse order.
-        for e in x[::-1]:
-            # Append each character to the result list (lista).
-            lista.append(e)
-        
-        # Join the list into a single string and convert it back to an integer.
-        reversed_num = int(("".join(lista)))
+        for e in x[::-1]: # Loop through the remaining characters in x in reverse order.
+            lista.append(e) # Append each character to the result list (lista).
+        reversed_num = int(("".join(lista))) # Join the list into a single string and convert it back to an integer.
         
         # Define the 32-bit signed integer range limits.
         INT_MIN = -2**31
         INT_MAX = 2**31 - 1
-        
         # Check if the reversed number is less than the minimum allowed value.
         if reversed_num < INT_MIN:
             return 0
-        
         # Check if the reversed number is greater than the maximum allowed value.
         if reversed_num > INT_MAX:
             return 0  
-        
         # If the reversed number is within the 32-bit integer range, return it.
         return reversed_num
 
-    
 
 if __name__ == "__main__":
     
