@@ -42,22 +42,19 @@ Constraints:
 
 class Solution:
     def findValueOfPartition(self, nums: list[int]) -> int:
-        nums1: list = []
-        nums2: list = []
-        if len(nums) == 1:
-            return nums[0]
-        while nums != []:
-            nums1.append(nums[0])
-            nums.pop(0)
-            if nums != []:
-                nums2.append(nums[0])
-                nums.pop(0)
-        
-        result = abs(max(nums1) - min(nums2))
-        return result    
+        nums.sort()
+        # Initialize min_partition to the maximum value in the list
+        # This ensures that any smaller difference found will replace it
+        min_partition = 100 
+        for i in range(len(nums) - 1): # Iterate through the list, comparing each pair of adjacent elements
+            x = nums[i] - nums[i+1] # Calculate the difference between the current element and the next one
+            if abs(x) < min_partition:  # If the absolute value of the difference is smaller than the current min_partition,
+                min_partition = abs(x) # update min_partition to this smaller value
+            
+        return min_partition
     
     
 if __name__ == "__main__":
     
     sos = Solution()
-    print(sos.findValueOfPartition([100,1,10]))
+    print(sos.findValueOfPartition([84,11,100,100,75]))
