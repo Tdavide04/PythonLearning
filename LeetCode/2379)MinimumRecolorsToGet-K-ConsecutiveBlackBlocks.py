@@ -37,28 +37,23 @@ blocks[i] is either 'W' or 'B'.
 
 class Solution:
     def minimumRecolors(self, blocks: str, k: int) -> int:
-        blocks: list = list(blocks)
-        count = 0
-        i = 0
-        change = 0
-        while i <= len(blocks):
-            for e in blocks:
-                if e == "B":
+        count = 0 # Initialize a counter for the number of 'W' in the current window
+        min_change = len(blocks)
+        for i in range(len(blocks)):
+            # Define the left and right boundaries of the current window
+            left_point = i
+            left_point = i
+            right_point = i + k
+            if right_point > len(blocks): # If the right boundary exceeds the string length, break the loop
+                break
+            for e in blocks[left_point:right_point]: # Iterate through the characters in the current window
+                if e == "W": # Increment the count if the character is 'W'
                     count += 1
-                    i += 1
-                    if count == k:
-                        return change
-                else:
-                    count = 0
-                    i += 1
-            if count != k:
-                for e in range(len(blocks)):
-                    if blocks[e] == "W":
-                        blocks[e] = "B"
-                        change += 1
-                        break
-                i = 0
-                count = 0
+            if count < min_change: # If the current window requires fewer changes than the previously recorded minimum, update it
+                min_change = count
+            count = 0 # Reset the count for the next iteration
+        return min_change
+                    
         
     
     
@@ -66,3 +61,11 @@ if __name__ == "__main__":
     
     sos = Solution()
     print(sos.minimumRecolors(blocks = "WBBWWWWBBWWBBBBWWBBWWBBBWWBBBWWWBWBWW", k = 15))
+    
+    
+# Personal notes:    
+# Creo una finestra lunga k e scorro la lista
+# Creo una variabile min_change uguale a len(stringa)
+# Analizzo la somma e di bianchi e neri, il numero dei bianchi è uguale a min_change
+# Piano piano che vado avanti min_change cambierà nel caso ci siano meno W rispetto a prima 
+# Dopo aver finito tutta la lista return min_change
