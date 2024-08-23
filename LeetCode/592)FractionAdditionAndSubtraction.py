@@ -29,19 +29,22 @@ The numerator and denominator of the final result are guaranteed to be valid and
 '''
 
 class Solution:
-    def gcd(self, a:int, b: int) -> int:
-        while b:
-            a = b
-            b = a % b
-        return a
+    # def gcd(self, a:int, b: int) -> int:
+    #     while b:
+    #         a = b
+    #         b = a % b
+    #     return a
 
-    def lcm(self, a:int, b: int) -> int:
-        return abs(a*b) // self.gcd(a,b)
+    # def lcm(self, a:int, b: int) -> int:
+    #     return abs(a*b) // self.gcd(a,b)
         
     def fractionAddition(self, expression: str) -> str:
         if expression[0] != '-':
             expression = '+' + expression
-    
+        terms: list = []
+        
+        return terms
+
     
 if __name__ == "__main__":
     
