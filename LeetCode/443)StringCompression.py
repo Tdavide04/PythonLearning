@@ -38,7 +38,34 @@ chars[i] is a lowercase English letter, uppercase English letter, digit, or symb
 
 class Solution:
     def compress(self, chars: list[str]) -> int:
-        pass
+    # Initialize pointers and variables
+        write = 0  # Pointer for writing the compressed result
+        read = 0   # Pointer for reading the original list
+        length = len(chars)  # Length of the input list
+        
+        # Iterate through the list until the read pointer reaches the end
+        while read < length:
+            char = chars[read]  # Current character to be compressed
+            count = 0  # Counter for occurrences of the current character
+            
+            # Count the number of consecutive occurrences of the current character
+            while read < length and chars[read] == char:
+                read += 1  # Move the read pointer to the next character
+                count += 1  # Increment the count of the current character
+            
+            # Write the current character to the write pointer
+            chars[write] = char
+            write += 1  # Move the write pointer to the next position
+            
+            # If the count of the current character is greater than 1,
+            # write the count as individual characters
+            if count > 1:
+                for digit in str(count):  # Convert the count to a string and iterate over each digit
+                    chars[write] = digit  # Write each digit to the write pointer
+                    write += 1  # Move the write pointer to the next position
+        
+        # Return the length of the compressed list
+        return write
     
     
 if __name__ == "__main__":
