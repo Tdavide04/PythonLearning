@@ -50,7 +50,7 @@ class Solution:
     def chalkReplacer(self, chalk: list[int], k: int) -> int:
         i = 0
         summ = sum(chalk)
-        while summ > k:
+        while summ < k:
                 k -= summ
         while True:
             if i > len(chalk) - 1:
@@ -65,3 +65,10 @@ if __name__ == "__main__":
 
     sos = Solution()
     print(sos.chalkReplacer(chalk = [3,4,1,2], k = 25))
+    print(sos.chalkReplacer(chalk = [5,1,5], k = 22))
+    print(sos.chalkReplacer(chalk = [100000, 1, 100000, 1, 100000, 1, 100000, 1, 100000, 1], k = 500000))
+    print(sos.chalkReplacer(chalk = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], k = 1000000000))
+    print(sos.chalkReplacer(chalk = [7, 7, 3, 9, 2], k = 14))
+    print(sos.chalkReplacer(chalk = [1], k = 1000000000))
+    print(sos.chalkReplacer(chalk = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], k = 10))
+    print(sos.chalkReplacer(chalk = [1,2,3,4,5,6,7,8,9], k = 45))
