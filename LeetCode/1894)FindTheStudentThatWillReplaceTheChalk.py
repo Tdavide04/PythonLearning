@@ -51,7 +51,7 @@ class Solution:
         i = 0
         summ = sum(chalk)
         while summ < k:
-                k -= summ
+                k %= summ
         while True:
             if i > len(chalk) - 1:
                 i -= len(chalk)
