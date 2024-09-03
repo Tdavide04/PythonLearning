@@ -41,17 +41,20 @@ Constraints:
 class Solution:
     def maximumSubarraySum(self, nums: list[int], k: int) -> int:
         window: list[int] = nums[:k]
+        curr_sum = sum(window)
         max_sum = 0
         if len(window) == len(set(window)):
-            max_sum = sum(window)
+            max_sum = curr_sum
         for right in range(k, len(nums)):
             window.append(nums[right])
             window.pop(0)
+            curr_sum += nums[right]
+            curr_sum -= nums[right - k]
             if len(window) == len(set(window)):
-                max_sum = max(sum(window), max_sum)
+                max_sum = max(curr_sum, max_sum)
         return max_sum
 
 if __name__ == "__main__":
 
     sos = Solution()
-    print(sos.maximumSubarraySum(nums = [1,1,1,7,8,9], k = 3))
+    print(sos.maximumSubarraySum(nums = [1,5,4,2,9,9,9], k = 3))
