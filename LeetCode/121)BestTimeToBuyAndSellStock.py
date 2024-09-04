@@ -28,18 +28,16 @@ Constraints:
 
 class Solution:
     def maxProfit(self, prices: list[int]) -> int:
-        for e in range(len(prices)):
-            min_num = min(prices)
-            if min_num == prices[-1] and len(prices) > 1:
-                min_num = min(prices[:-1])
-            index_num = prices.index(min_num)
-            max_num = max(prices[index_num::])
-            max_profit = max_num - min_num
-        return max_profit
-    
+        max_result = 0 
+        best = float("inf")
+        for right in range(len(prices)):
+            if prices[right] < best:
+                best = prices[right]
+            max_result = max(max_result, prices[right] - best)
+        return max_result
 
 if __name__ == "__main__":
     
     sos = Solution()
-    print(sos.maxProfit([2,4,1]))
+    print(sos.maxProfit(prices = [7,1,5,3,6,4]))
     
