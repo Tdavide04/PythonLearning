@@ -75,7 +75,7 @@ class Solution:
         max_direction = 0
         for cmd in commands:
             if cmd == -2:
-                direction_index = (direction_index - 1) % 4
+                direction_index = (direction_index - 1) % 4 # used to stay in the "directions" range
             elif cmd == -1:
                 direction_index = (direction_index + 1) % 4
             else:
