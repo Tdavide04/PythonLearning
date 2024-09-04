@@ -48,17 +48,26 @@ Constraints:
 
 class Solution:
     def chalkReplacer(self, chalk: list[int], k: int) -> int:
+        # Initialize index to start from the first student
         i = 0
+        # Calculate the total sum of chalk needed by all students
         summ = sum(chalk)
+        # Reduce k modulo the total sum of chalk to handle large k values efficiently
         while summ < k:
-                k %= summ
+            k %= summ
+        # Loop to determine which student will run out of chalk
         while True:
+            # If the index exceeds the number of students, reset it to the first student
             if i > len(chalk) - 1:
                 i -= len(chalk)
+            # Subtract the current student's chalk usage from k
             k -= chalk[i]
+            # If k becomes negative, the current student is the one who will run out of chalk
             if k < 0:
                 return i 
+            # Move to the next student
             i += 1
+
 
 
 if __name__ == "__main__":

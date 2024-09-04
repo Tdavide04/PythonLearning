@@ -48,18 +48,24 @@ Constraints:
 
 class Solution:
     def getLucky(self, s: str, k: int) -> int:
+        # Convert each character in the string s to its corresponding position in the alphabet
+        # 'a' -> 1, 'b' -> 2, ..., 'z' -> 26
+        # This is done using the ord() function and list comprehension
         number = [str(ord(char) - ord("a") + 1) for char in s.lower() if char.isalpha()]
+        # Combine all the number strings into one large number string
         large_num = "".join(number)
+        # Perform the transformation process k times
         while k != 0:
+            # Initialize a sum variable to store the sum of the digits
             summ = 0
+            # Iterate over each digit in the large number string and sum them up
             for num in large_num:
                 summ += int(num)
+            # Update large_num with the new sum as a string
             large_num = str(summ)
+            # Decrement the transformation count
             k -= 1
         return int(large_num)
-
-
-        return large_num
 
 if __name__ == "__main__":
 
