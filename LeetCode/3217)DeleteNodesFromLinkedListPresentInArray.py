@@ -52,8 +52,16 @@ class ListNode:
 
 class Solution:
     def modifiedList(self, nums: list[int], head: ListNode) -> ListNode:
-        pass
-
+        nums = set(nums)
+        pippo = ListNode(0)
+        pippo.next = head
+        current_node = pippo
+        while current_node.next:
+            if current_node.next.val in nums:
+                current_node.next = current_node.next.next
+            else:
+                current_node = current_node.next
+        return pippo.next
 
 
 # Converte una lista Python in una linked list
@@ -79,4 +87,4 @@ def linked_list_to_list(head):
 if __name__ == "__main__":
 
     sos = Solution()
-    print(linked_list_to_list(sos.reverseList(list_to_linked_list([1, 2, 3, 4, 5]))))
+    print(linked_list_to_list(sos.modifiedList([1,2,3], list_to_linked_list([1,2,3,4,5,6]))))
