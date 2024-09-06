@@ -75,3 +75,4 @@ if __name__ == "__main__":
     head = list_to_linked_list([1, 2, 3, 4, 6])
     reversed_head = sos.reverseList(head)
     print(linked_list_to_list(reversed_head))
+    
