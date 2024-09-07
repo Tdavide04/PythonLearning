@@ -33,19 +33,28 @@ class ListNode:
         
 class Solution:
     def middleNode(self, head: ListNode) -> ListNode:
+        # Initialize an empty list to store the values from the linked list
         array: list = []
         
+        # Traverse through the linked list and append each node's value to the array
         while head:
-            array.append(head.val)
-            head = head.next
+            array.append(head.val)  # Append the value of the current node to the list
+            head = head.next  # Move to the next node in the linked list
             
+        # Calculate the middle index of the array (integer division by 2)
         middle_index: int = len(array) // 2
-        result = ListNode(array[middle_index])
-        current = result
-        for val in array[middle_index + 1:]:
-            current.next = ListNode(val)
-            current = current.next
+        
+        #Create a new linked list starting with the node that has the middle value
+        result = ListNode(array[middle_index])  # Create the first node of the result list with the middle value
+        current = result  # Initialize a pointer to keep track of the last node in the new list
+        
+        # Build the rest of the new linked list from the values after the middle node
+        for val in array[middle_index + 1:]:  # Iterate over the remaining values in the array
+            current.next = ListNode(val)  # Create a new node and link it to the current node
+            current = current.next  # Move the pointer to the new node
+        
         return result
+
         
 # Converte una lista Python in una linked list
 def list_to_linked_list(lst):
