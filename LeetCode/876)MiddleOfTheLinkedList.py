@@ -33,10 +33,20 @@ class ListNode:
         
 class Solution:
     def middleNode(self, head: ListNode) -> ListNode:
-        pass
-    
-    
-
+        array: list = []
+        
+        while head:
+            array.append(head.val)
+            head = head.next
+            
+        middle_index: int = len(array) // 2
+        result = ListNode(array[middle_index])
+        current = result
+        for val in array[middle_index + 1:]:
+            current.next = ListNode(val)
+            current = current.next
+        return result
+        
 # Converte una lista Python in una linked list
 def list_to_linked_list(lst):
     if not lst:
@@ -55,10 +65,10 @@ def linked_list_to_list(head):
     while current:
         result.append(current.val)
         current = current.next
-    return result
-
+    return result  
+    
 if __name__ == "__main__":
     
     sos = Solution()
     
-    print(linked_list_to_list(sos.middleNode(list_to_linked_list(head = [1,2,3,4,5]))))
+    print(linked_list_to_list(sos.middleNode(list_to_linked_list([4, 2, 3, 4, 5]))))   
