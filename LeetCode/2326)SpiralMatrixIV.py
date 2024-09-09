@@ -40,11 +40,42 @@ class ListNode:
         self.next = next
 class Solution:
     def spiralMatrix(self, m: int, n: int, head: ListNode) -> list[list[int]]:
-        pass
-    
-def printMatrix(matrix):
-    for row in matrix:
-        print(row)
+        # Directions: right, down, left, up
+        # (0,1): move right; (1,0): move down; (0,-1): move left; (-1,0): move up
+        direction: list = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        # Create an empty m x n matrix initialized with -1
+        result: list[list[int]] = [[-1] * n for _ in range(m)]
+        # Initialize starting position at the top-left corner of the matrix
+        x, y = 0, 0
+        # Variable to keep track of the current direction (0=right, 1=down, 2=left, 3=up)
+        direction_index: int = 0
+        # Total number of cells to fill
+        total_cells: int = m * n
+        # Counter to track how many cells have been filled so far
+        filled_cells: int = 0
+        # Iterate until all cells are filled
+        while filled_cells < total_cells:
+            # If the linked list is not exhausted, assign the current node value to the matrix
+            if head:
+                result[x][y] = head.val  # Insert the value from the linked list node
+                head = head.next  # Move to the next node in the linked list
+            else:
+                result[x][y] = -1  # If the linked list is finished, fill with -1
+            # Increment the count of filled cells
+            filled_cells += 1
+            # Calculate the next position to move to based on the current direction
+            new_x = x + direction[direction_index][0]
+            new_y = y + direction[direction_index][1]
+            # If the next position is out of bounds or already filled, change direction
+            if not (0 <= new_x < m and 0 <= new_y < n and result[new_x][new_y] == -1):
+                # Update direction index to the next direction (right -> down -> left -> up)
+                direction_index = (direction_index + 1) % 4
+                # Recalculate the next position with the updated direction
+                new_x = x + direction[direction_index][0]
+                new_y = y + direction[direction_index][1]
+            # Update the current position to the next valid position
+            x, y = new_x, new_y
+        return result
 
 if __name__ == "__main__":
 
@@ -57,40 +88,34 @@ if __name__ == "__main__":
     n = 3
     head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5, ListNode(6, ListNode(7, ListNode(8, ListNode(9)))))))))
     sos = Solution()
-    print("Test 1: Matrice quadrata")
-    printMatrix(sos.spiralMatrix(m, n, head))
+    print(sos.spiralMatrix(m, n, head))
 
     # Test 2: Matrice rettangolare orizzontale
     m = 2
     n = 4
     head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5, ListNode(6, ListNode(7, ListNode(8))))))))
-    print("Test 2: Matrice rettangolare orizzontale")
-    printMatrix(sos.spiralMatrix(m, n, head))
+    print(sos.spiralMatrix(m, n, head))
 
     # Test 3: Lista più corta della matrice
     m = 3
     n = 3
     head = ListNode(1, ListNode(2, ListNode(3, ListNode(4))))
-    print("Test 3: Lista più corta della matrice")
-    printMatrix(sos.spiralMatrix(m, n, head))
+    print(sos.spiralMatrix(m, n, head))
 
     # Test 4: Lista più lunga della matrice
     m = 2
     n = 2
     head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5, ListNode(6))))))
-    print("Test 4: Lista più lunga della matrice")
-    printMatrix(sos.spiralMatrix(m, n, head))
+    print(sos.spiralMatrix(m, n, head))
 
     # Test 5: Matrice 1x1
     m = 1
     n = 1
     head = ListNode(1)
-    print("Test 5: Matrice 1x1")
-    printMatrix(sos.spiralMatrix(m, n, head))
+    print(sos.spiralMatrix(m, n, head))
 
     # Test 6: Matrice vuota
     m = 0
     n = 0
     head = None
-    print("Test 6: Matrice vuota")
-    printMatrix(sos.spiralMatrix(m, n, head))
+    print(sos.spiralMatrix(m, n, head))
