@@ -32,3 +32,8 @@ class Solution:
                 num.pop()
             else:
                 return "".join(num)
+            
+if __name__ == "__main__":
+
+    sos = Solution()
+    print(sos.removeTrailingZeros())
