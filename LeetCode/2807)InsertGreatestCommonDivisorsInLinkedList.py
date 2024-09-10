@@ -41,4 +41,18 @@ class ListNode:
         self.next = next
 class Solution:
     def insertGreatestCommonDivisors(self, head: ListNode) -> ListNode:
-        pass
+        def gcd(a, b):
+            while b:
+                a, b = b, a % b
+            return a
+        
+        current = head
+        length: int = 0
+        while current:
+            length += 1
+            current = current.next
+        if length <= 1:
+            return head
+        
+        current = head
+        
