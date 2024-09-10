@@ -6,6 +6,6 @@ iPkt: int = 0
 def process_pkt(pkt):
     global iPkt
     iPkt += 1
-    print(f"Ho ricevuto un pacchetto {iPkt} lungo {pkt[IP].len}")
+    print(f"Ho ricevuto un pacchetto {iPkt} lungo {pkt[IP].len, pkt[IP].src, pkt[IP].dst}")
 
 sniff(iface="eth0", filter="tcp", prn= process_pkt)
