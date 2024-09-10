@@ -41,6 +41,46 @@ class ListNode:
         self.next = next
 class Solution:
     def insertGreatestCommonDivisors(self, head: ListNode) -> ListNode:
+        # Helper function to calculate the greatest common divisor (GCD) of two numbers
+        def gcd(a, b):
+            while b:  # Continue until b becomes 0
+                a, b = b, a % b  # Apply the Euclidean algorithm for GCD
+            return a
+        
+        # Traverse the linked list and store the values in a list
+        current = head
+        list_node: list[int] = []  # List to store values from the linked list
+        while current:
+            list_node.append(current.val)  # Add the value of the current node
+            current = current.next  # Move to the next node
+
+        # If there's only one node or the list is empty, return the original head
+        if len(list_node) <= 1:
+            return head
+        
+        # Create a new linked list starting with a dummy node
+        new_head: ListNode = ListNode(0)
+        new_current = new_head  # Pointer to traverse the new linked list
+        
+        # Iterate through the list of values and insert GCD nodes between them
+        for i in range(len(list_node) - 1):
+            # Insert the current value as a node in the new linked list
+            new_current.next = ListNode(list_node[i])
+            new_current = new_current.next  # Move to the next node
+            
+            # Insert a node with the GCD of the current and next value
+            new_current.next = ListNode(gcd(list_node[i], list_node[i+1]))
+            new_current = new_current.next  # Move to the next node
+        
+        # After the loop, insert the last node's value from the original list
+        new_current.next = ListNode(list_node[-1])
+        
+        # Return the new linked list, skipping the dummy node
+        return new_head.next
+
+    
+class Solution:
+    def insertGreatestCommonDivisors(self, head: ListNode) -> ListNode:
         # Helper function to calculate the Greatest Common Divisor (GCD)
         def gcd(a, b):
             while b:
@@ -72,29 +112,3 @@ class Solution:
         
         # Return the head of the new linked list (skipping the dummy node)
         return new_head.next
-
-    
-
-def list_to_linked_list(arr):
-    if not arr:  # Se la lista è vuota
-        return None
-    
-    head = ListNode(arr[0])  
-    current = head  
-    for val in arr[1:]:
-        current.next = ListNode(val)
-        current = current.next  
-    return head  
-def linked_list_to_list(head):
-    arr = [] 
-    current = head 
-    while current:
-        arr.append(current.val) 
-        current = current.next  
-    return arr 
-
-
-if __name__ == "__main__":
-
-    sos = Solution()
-    print(sos.insertGreatestCommonDivisors(linked_list_to_list(list_to_linked_list([18,6,10,3]))))
