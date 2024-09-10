@@ -1,8 +1,8 @@
-FROM python:3.10-alpine
+FROM python:3.8-slim-buster
 ADD server.py .
 ADD requirements.txt .
-RUN pip install -r requirements.txt
-RUN mkdir ./templates
-ADD ./templates/index.html ./templates
-ADD ./templates/index2.html ./templates
-CMD ("python","./server.py")
+RUN pip install --no-cache-dir -r requirements.txt --log /tmp/pip-log.txt --verbose
+RUN mkdir -p ./templates
+ADD ./templates/index.html ./templates/index.html
+ADD ./templates/index2.html ./templates/index2.html
+CMD ["python", "./server.py"]
