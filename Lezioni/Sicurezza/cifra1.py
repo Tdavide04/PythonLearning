@@ -1,11 +1,12 @@
 from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad
 import base64
 
 # Function to pad the message to be multiple of 16 bytes
 def pad(text):
     while len(text) % 16 != 0:
         text += ' '
-        return text
+    return text
 
 # Encryption
 def encrypt(plain_text, key):
@@ -20,6 +21,7 @@ def decrypt(encrypted_text, key):
     return decrypted_text
 
 # Example usage
+'''
 key = "ThisIsASecretKey"
 plain_text = "Hello, World!"
 encrypted_text = encrypt(plain_text, key)
@@ -39,3 +41,19 @@ print("Riga base64: ", riga_b64.decode("utf-8"))
 
 riga_decoded = base64.b64decode(riga_b64)
 print("Riga decoded: ", riga_decoded.decode("utf-8"))
+'''
+
+# prova di decifra brute force
+enc = "OgJuOYJZT0FDb47DBOkNgA=="
+key = "XXXXIsASecretKey"
+
+for p1 in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ":
+    for p2 in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ":
+        for p3 in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ":
+            for p4 in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ":
+                key = p1 + p2 + p3 + p4
+                try:
+                    dec = decrypt(enc, key)
+                    print("La chiave è: ", key, " e la stringa è: ", dec)
+                except:
+                    continue
