@@ -32,12 +32,15 @@ class Solution:
     def deleteDuplicates(self, head: ListNode) -> ListNode:
         values: list[int] = []
         dummy: ListNode = ListNode(0)
+        current_dummy = dummy
         current = head
         while current:
             if current.val not in values:
                 values.append(current.val)
-                dummy.next = current
+                current_dummy.next = current
+                current_dummy = current_dummy.next
             current = current.next
+        current_dummy.next = None
         return dummy.next
 
 
