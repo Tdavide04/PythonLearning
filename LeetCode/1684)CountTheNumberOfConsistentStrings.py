@@ -36,9 +36,7 @@ Constraints:
 
 class Solution:
     def countConsistentStrings(self, allowed: str, words: list[str]) -> int:
-        
         result: int = 0  # This will store the count of consistent strings
-        
         # Iterate through each word in the list of words
         for word in words:
             # Check each character in the current word
@@ -50,10 +48,25 @@ class Solution:
             
             result += 1  # Increment result after finishing the word check
         return result  # Return the total count of consistent strings
+    
+
+class Solution:
+    def countConsistentStrings(self, allowed: str, words: list[str]) -> int:
+        result: int = 0
+        i: int = 0
+        for word in words:
+            while i < len(allowed):
+                if allowed[i] in word:
+                    word = word.replace(allowed[i], "")
+                i += 1
+            i = 0
+            if word == "":
+                result += 1
+        return result
 
 
 
 if __name__ == "__main__":
 
     sos = Solution()
-    print(sos.countConsistentStrings(allowed = "ab", words = ["ad","bd","aaab","baa","badab"]))
+    print(sos.countConsistentStrings(allowed = "ab", words = ["aaab","baa","badab"]))
