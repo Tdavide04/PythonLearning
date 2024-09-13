@@ -4,7 +4,6 @@ from scapy.layers.tls.record import TLS
 from scapy.layers.http import HTTPRequest, HTTPResponse
 from datetime import datetime
 import csv
-import os
 
 
 def get_tls_sni(pkt):
