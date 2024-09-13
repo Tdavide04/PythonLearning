@@ -22,7 +22,7 @@ with open("packet.csv", "a") as file:
             host = pkt[HTTPRequest].Host
         else:
             host = "Unknown"
-            writer.writerow([data, ip_src, ip_dst, tcp_src, tcp_dst, host])
+        writer.writerow([data, ip_src, ip_dst, tcp_src, tcp_dst, host])
         print(f"Pacchetto {iPkt}. Specifiche: data-ora: {data}, ip_src: {ip_src}, ip_dst: {ip_dst}, tcp_src: {tcp_src}, tcp_dst: {tcp_dst}, host: {host}")
 
     sniff(iface="eth0", filter="tcp", prn= process_pkt)
