@@ -19,7 +19,7 @@ def process_pkt(pkt):
         host = pkt[HTTPRequest].Host
     else:
         host = "Unknown"
-    with open("packet.csv", "a") as file:
+    with open("packet.csv", "a", newline="") as file:
         writer = csv.writer(file)
         writer.writerow(["Data", "IP Sorgente", "IP Destinatario", "TCP Sorgente", "TCP Destinatario", "Host"])
         writer.writerow([data, ip_src, ip_dst, tcp_src, tcp_dst, host])
