@@ -2,6 +2,7 @@ from scapy.all import *
 from scapy.layers.inet import IP, TCP
 from scapy.layers.http import HTTPRequest, HTTPResponse
 from datetime import datetime
+import csv
 
 
 
@@ -18,9 +19,10 @@ def process_pkt(pkt):
         host = pkt[HTTPRequest].Host
     else:
         host = "Unknown"
-    
     with open("packet.csv", "a") as file:
-        file.write(f"Numero: {iPkt}, Data: {data}, Ip_src: {ip_src}, Ip_dst: {ip_dst}, Tcp_src: {tcp_src}, Tcp_dst: {tcp_dst}, Host: {host}\n")
+        writer = csv.writer(file)
+        writer.writerow(["Data", "IP Sorgente", "IP Destinatario", "TCP Sorgente", "TCP Destinatario", "Host"])
+        writer.writerow([data, ip_src, ip_dst, tcp_src, tcp_dst, host])
     print(f"Pacchetto {iPkt}. Specifiche: data-ora: {data}, ip_src: {ip_src}, ip_dst: {ip_dst}, tcp_src: {tcp_src}, tcp_dst: {tcp_dst}, host: {host}")
 
 sniff(iface="eth0", filter="tcp", prn= process_pkt)
