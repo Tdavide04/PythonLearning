@@ -26,9 +26,44 @@ Constraints:
 s contains only lowercase English letters.
 '''
 
+
 class Solution:
     def findTheLongestSubstring(self, s: str) -> int:
-        pass
+        # Initialize an array to store the first occurrence of each bitmask state
+        # We use -2 to signify that a bitmask state has not been encountered yet
+        # and -1 to handle the base case where the bitmask is 0 (all vowels are even counts from the start)
+        mapy = [-2] * 32
+        mapy[0] = -1  # The bitmask 0 is initially seen at index -1
+
+        max_len = 0  # To store the length of the longest valid substring
+        mask = 0     # To keep track of the current bitmask state
+
+        # Iterate through each character in the string with its index
+        for i, char in enumerate(s):
+            # Update the bitmask based on the current vowel
+            if char == 'a':
+                mask ^= 1   # Toggle the 0th bit for 'a'
+            elif char == 'e':
+                mask ^= 2   # Toggle the 1st bit for 'e'
+            elif char == 'i':
+                mask ^= 4   # Toggle the 2nd bit for 'i'
+            elif char == 'o':
+                mask ^= 8   # Toggle the 3rd bit for 'o'
+            elif char == 'u':
+                mask ^= 16  # Toggle the 4th bit for 'u'
+
+            # Check if the current bitmask state has been seen before
+            prev = mapy[mask]
+            if prev == -2:
+                # If this bitmask state is encountered for the first time, store its index
+                mapy[mask] = i
+            else:
+                # If the bitmask state has been seen before, calculate the length of the valid substring
+                # between the previous occurrence and the current index
+                max_len = max(max_len, i - prev)
+
+        return max_len  # Return the length of the longest substring where each vowel appears an even number of times
+
     
     
 if __name__ == "__main__":
