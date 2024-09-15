@@ -40,7 +40,37 @@ class Solution:
         # If `a` is negative, it already represents the final result.
         return a & mask if b > 0 else a
 
-    
+'''
+Personal Note:
+Bitwise Addition Logic:
+To sum two numbers, a and b:
+Use a ^ b to add a and b without carry.
+Use (a & b) << 1 to compute the carry and shift it left by 1 (since the carry must be added to the next higher bit).
+Repeat this process until there's no carry left.
+Example in Python:
+Let's say we want to add a = 5 and b = 3.
+
+a = 5 (binary: 101)
+b = 3 (binary: 011)
+Step 1: Compute the XOR of a and b to get the sum without the carry:
+
+a ^ b = 101 ^ 011 = 110 (binary), which is 6.
+Step 2: Compute the AND of a and b to get the carry:
+
+a & b = 101 & 011 = 001 (binary), which is 1.
+Shift the carry left by 1: carry << 1 = 001 << 1 = 010 (binary), which is 2.
+Step 3: Repeat the process with the new a = 6 and b = 2.
+
+a ^ b = 110 ^ 010 = 100 (binary), which is 4.
+a & b = 110 & 010 = 010 (binary), which is 2.
+Shift the carry: carry << 1 = 010 << 1 = 100, which is 4.
+Step 4: Repeat the process with the new a = 4 and b = 4.
+
+a ^ b = 100 ^ 100 = 000 (binary), which is 0.
+a & b = 100 & 100 = 100 (binary), which is 4.
+Shift the carry: carry << 1 = 100 << 1 = 1000, which is 8.
+Step 5: Continue until no carry remains.
+'''    
     
 if __name__ == "__main__":
     
