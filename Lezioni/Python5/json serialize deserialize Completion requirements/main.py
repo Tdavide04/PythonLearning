@@ -13,7 +13,7 @@ def Deserialize(file_path)->dict oppure null
 
 import json
 
-def Serialize(data_dict, file_path = "file.json") -> bool:
+def Serialize(data_dict, file_path = "Lezioni/Python5/json serialize deserialize Completion requirements/file.json") -> bool:
     try:
         with open(file_path, "w") as file:
             json.dump(data_dict, file)
@@ -21,7 +21,7 @@ def Serialize(data_dict, file_path = "file.json") -> bool:
     except Exception:
         return False
 
-def Deserialize(file_path = "file.json") -> dict|None:
+def Deserialize(file_path = "Lezioni/Python5/json serialize deserialize Completion requirements/file.json") -> dict|None:
     try:
         with open(file_path, "r") as file:
             data_dict = json.load(file)
