@@ -13,14 +13,16 @@ def parser(file):
 
     totalQuestion: int = 0
     totalMathQuestion: int = 0
-    AnswerMedia: int = 0
 
     for key, values in data["quiz"].items():
-        for key2, values2 in values.items():
+        for _, _ in values.items():
             totalQuestion += 1
             if key == "maths":
                 totalMathQuestion += 1
+                
+    answerMedia = totalQuestion / max(1, totalMathQuestion)
 
-    return totalQuestion, totalMathQuestion
+
+    return totalQuestion, totalMathQuestion, answerMedia
 
 print(parser("Lezioni/Python5/parser of a dictionary/file.json"))
