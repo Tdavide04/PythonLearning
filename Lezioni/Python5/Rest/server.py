@@ -4,7 +4,7 @@ api = Flask(__name__)
 file_path = "Lezioni/Python5/Rest/file.json"
 
 
-@api.route("/add_cittadino", methods=["POST"])
+@api.route("/cittadino", methods=["POST"])
 def gestisciAddCittadino():
     content_type = request.headers.get("Content-Type")
     print("Ricevuta chimata" + content_type)
@@ -17,6 +17,7 @@ def gestisciAddCittadino():
     else:
         return "Content-Type not supported!"
     
+@api.route("/add_cittadino", methods=["POST"])
 def addDatiCittadino(nome, cognome, dataN, codF):
     new_cittadino = {codF:{
         "nome": nome,
@@ -38,6 +39,7 @@ def addDatiCittadino(nome, cognome, dataN, codF):
     else:
         return "Error, cittadino already registered"
 
+@api.route("/read_cittadino", methods=["POST"])
 def readDatiCittadino(codF) -> dict:
     try: 
         with open(file_path) as file:
