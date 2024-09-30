@@ -21,7 +21,6 @@ def gestisciAddCittadino():
 def addDatiCittadino(nome, cognome, dataN, codF):
     new_cittadino = {codF:{
         "nome": nome,
-
         "cognome": cognome,
         "dataNascita": dataN,
         "codFiscale": codF,
