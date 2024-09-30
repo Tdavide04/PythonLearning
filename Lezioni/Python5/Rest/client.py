@@ -12,13 +12,13 @@ def GetDatiCittadino():
     return datiCittadino
 
 def GetCodiceFiscaleCittadino():
-    codFiscale = input("Quale codice fiscale vuoi?")
+    codFiscale = input("Quale codice fiscale vuoi? ")
     datiCittadino = {"codFiscale":codFiscale}
     return datiCittadino
 
 
 
-cOper = input("Cosa vuoi fare?")
+cOper = input("Cosa vuoi fare? ")
 if cOper =="C":
     api_url = base_url + "/add_cittadino"
     jsonDataRequest = GetDatiCittadino()
