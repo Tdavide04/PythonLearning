@@ -23,7 +23,14 @@ def ReadDatiCittadino():
     codF = input("Qual'è il codice fiscale?")
     codF = {"codice fiscale": codF}
     return codF
-    
+
+def UpdateDatiCittadino():
+    nome = input("Qual'è il nome?")
+    cognome = input("Qual'è il cognome")
+    dataN = input("Qual'è la data di nascita?")
+    codF = input("Qual'è il codice fiscale?")
+    datiCittadino = {"nome":nome, "cognome": cognome, "data nascita":dataN, "codice fiscale":codF}
+    return datiCittadino
 
 
 
@@ -65,6 +72,21 @@ while(True):
             print(data1)
         except:
             print("Problemi di comunicazione con il server, riprovapiù tardi")
+    
+    if sOper == "3":
+        print("Richiesto dati aggiornati")
+        api_url = base_url + "/update_cittadino"
+        jsonDataRequest = UpdateDatiCittadino()
+        try:
+            response = requests.post(api_url,json=jsonDataRequest)
+        
+            #print(response.json())
+            print(response.status_code)
+            print(response.headers["Content-Type"])
+            data1 = response.json()
+            print(data1)
+        except:
+            print("Problemi di comunicazione con il server, riprova più tardi")        
 
     if sOper=="5":
         print("Buona giornata!")
