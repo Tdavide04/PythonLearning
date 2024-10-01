@@ -21,6 +21,9 @@ def CreateDatiCittadino():
 
 def ReadDatiCittadino():
     codF = input("Qual'è il codice fiscale?")
+    codF = {"codice fiscale: ": codF}
+    return codF
+    
 
 
 
@@ -46,7 +49,7 @@ while(True):
             data1 = response.json()
             print(data1)
         except:
-            print("Problemi di comunicazione con il server, riprovapiù tardi")
+            print("Problemi di comunicazione con il server, riprova più tardi")
 
     if sOper == "2":
         print("Richiesto codice fiscale")

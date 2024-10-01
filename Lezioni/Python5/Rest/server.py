@@ -14,7 +14,7 @@ api = Flask(__name__)
 
 
 @api.route('/add_cittadino', methods=['POST'])
-def GestisciAddCittadino():
+def GestisciCreateCittadino():
     content_type = request.headers.get('Content-Type')
     print("Ricevuta chiamata " + content_type)
     if (content_type == 'application/json'):
@@ -33,5 +33,21 @@ def GestisciAddCittadino():
     else:
         return 'Content-Type not supported!',401
 
+@api.route('/read_cittadino', methods=['GET'])
+def GestisciReadCittadino():
+    content_type = request.headers.get('Content-Type')
+    print("Ricevuta chiamata " + content_type)
+    if (content_type == 'application/json'):
+        jsonReq = request.json
+        sCodiceFiscale = jsonReq["codice fiscale"]
+        anagrafe = JsonDeserialize(sAnagrafe)
+        if sCodiceFiscale in anagrafe:
+            dati = anagrafe[sCodiceFiscale]
+            JsonSerialize(anagrafe,sAnagrafe)
+            jsonResp = {"Esito":"000", "Msg":"ok", "dati": dati}
+            return json.dumps(jsonResp),200
+        else:
+            jsonResp = {"Esito":"001", "Msg":"Cittadino gia presente"}
+            return json.dumps(jsonResp),200
 
 api.run(host="127.0.0.1", port=8080)
