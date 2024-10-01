@@ -21,7 +21,7 @@ def CreateDatiCittadino():
 
 def ReadDatiCittadino():
     codF = input("Qual'è il codice fiscale?")
-    codF = {"codice fiscale: ": codF}
+    codF = {"codice fiscale": codF}
     return codF
     
 

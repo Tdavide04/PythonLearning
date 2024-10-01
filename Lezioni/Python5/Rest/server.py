@@ -1,7 +1,7 @@
 from flask import Flask, json, request
 from myjson import JsonSerialize,JsonDeserialize
 
-sAnagrafe = "./anagrafe.json"
+sAnagrafe = "./file.json"
 api = Flask(__name__)
 
 #mettere una lista di liste dove ogni lista è un cittadino
