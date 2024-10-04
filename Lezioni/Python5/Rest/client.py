@@ -1,13 +1,14 @@
 import requests, json
 import sys
+from myjson import start
 
 base_url = "https://127.0.0.1:8080"
 
 def CreateDatiCittadino():
-    nome = input("Qual'è il nome?")
-    cognome = input("Qual'è il cognome")
-    dataN = input("Qual'è la data di nascita?")
-    codF = input("Qual'è il codice fiscale?")
+    nome = input("Qual'è il nome? ")
+    cognome = input("Qual'è il cognome? ")
+    dataN = input("Qual'è la data di nascita? ")
+    codF = input("Qual'è il codice fiscale? ")
     """
     {
         "nome": "Mario",
@@ -20,26 +21,31 @@ def CreateDatiCittadino():
     return datiCittadino
 
 def ReadDatiCittadino():
-    codF = input("Qual'è il codice fiscale?")
+    codF = input("Qual'è il codice fiscale? ")
     codF = {"codice fiscale": codF}
     return codF
 
 def UpdateDatiCittadino():
-    nome = input("Qual'è il nome?")
-    cognome = input("Qual'è il cognome")
-    dataN = input("Qual'è la data di nascita?")
-    codF = input("Qual'è il codice fiscale?")
+    nome = input("Qual'è il nome? ")
+    cognome = input("Qual'è il cognome ")
+    dataN = input("Qual'è la data di nascita? ")
+    codF = input("Qual'è il codice fiscale? ")
     datiCittadino = {"nome":nome, "cognome": cognome, "data nascita":dataN, "codice fiscale":codF}
     return datiCittadino
 
-print("Operazioni disponibili:")
-print("1. Inserisci cittadino (es. atto di nascita)")
-print("2. Richiedi cittadino (es. cert. residenza)")
-print("3. Modifica cittadino (es. cambio residenza)")
-print("4. Elimina cittadino (es. trasferim altro comune)")
-print("5. Esci")
+print("Benvenuto")
+username = input("username: ")
+password = input("password: ")
+login_data = {"username" : username, "password" : password}
+api_url = base_url + "/login"
+response = requests.post(api_url, json=login_data)
+
+
+
+start()
 sOper = input("Cosa vuoi fare?")
-while(True):
+
+while True:
     if sOper == "1":
         print("Richiesto atto di nascita")
         api_url = base_url + "/add_cittadino"
@@ -99,11 +105,6 @@ while(True):
     if sOper=="5":
         print("Buona giornata!")
         sys.exit()
-        
-    print("Operazioni disponibili:")
-    print("1. Inserisci cittadino (es. atto di nascita)")
-    print("2. Richiedi cittadino (es. cert. residenza)")
-    print("3. Modifica cittadino (es. cambio residenza)")
-    print("4. Elimina cittadino (es. trasferim altro comune)")
-    print("5. Esci")
+
+    start()
     sOper = input("Cosa vuoi fare?")    

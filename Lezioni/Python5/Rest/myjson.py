@@ -23,8 +23,6 @@ def print_list(lData,sRoot):
         if type(element) is list:
             print_list(element,sRoot)
 
-
-
 def print_dictionary(dData, sRoot):
     for keys, values in dData.items():
         if sRoot != "":
@@ -44,5 +42,11 @@ def print_dictionary(dData, sRoot):
             else:
                 print_list(dData[keys],keys)
     
-
+def start():
+    print("Operazioni disponibili:")
+    print("1. Inserisci cittadino (es. atto di nascita)")
+    print("2. Richiedi cittadino (es. cert. residenza)")
+    print("3. Modifica cittadino (es. cambio residenza)")
+    print("4. Elimina cittadino (es. trasferim altro comune)")
+    print("5. Esci") 
 
