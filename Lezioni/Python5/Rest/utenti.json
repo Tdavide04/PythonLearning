@@ -1,0 +1,14 @@
+{
+    "001" : {
+        "username" : "Walter",
+        "password" : "Zagarolo",
+        "id" : "001",
+        "admin": true
+    },
+    "002" : {
+        "username" : "Silvio",
+        "password" : "Zagarolo",
+        "id" : "002",
+        "admin": false
+    }
+}
