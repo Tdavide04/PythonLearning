@@ -34,9 +34,9 @@ def UpdateDatiCittadino():
     return datiCittadino
 
 print("Benvenuto")
-username = input("username: ")
+id = input("id: ")
 password = input("password: ")
-login_data = {"username" : username, "password" : password}
+login_data = {"id" : id, "password" : password}
 api_url = base_url + "/login"
 response = requests.post(api_url, json=login_data)
 

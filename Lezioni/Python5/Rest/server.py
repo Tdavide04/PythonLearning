@@ -81,4 +81,23 @@ def GestisciDeleteCittadino():
         if sCodiceFiscale in anagrafe:
             pass
 
+@api.route("/login", methods = ["POST"])
+def login():
+    content_type = request.headers.get('Content-Type')
+    print("Ricevuta chiamata " + content_type)
+    if (content_type == 'application/json'):
+        try:
+            data = request.json
+            id = data.get("id")
+            password = data.get("password")
+            path = JsonDeserialize("./utenti.json")
+            if id in path:
+                user = path[id]
+                if password == user["password"]:
+                    admin = user["admin"]
+                    jsonResp = {"Esito":"000", "Msg":"Buon lavoro", "Admin": admin, }
+        except:
+            return
+
+
 api.run(host="127.0.0.1", port=8080, debug=True, ssl_context = "adhoc")
