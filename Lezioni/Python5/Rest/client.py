@@ -1,7 +1,7 @@
 import requests, json
 import sys
 
-base_url = "http://127.0.0.1:8080"
+base_url = "https://127.0.0.1:8080"
 
 def CreateDatiCittadino():
     nome = input("Qual'è il nome?")
@@ -32,9 +32,6 @@ def UpdateDatiCittadino():
     datiCittadino = {"nome":nome, "cognome": cognome, "data nascita":dataN, "codice fiscale":codF}
     return datiCittadino
 
-
-
-
 print("Operazioni disponibili:")
 print("1. Inserisci cittadino (es. atto di nascita)")
 print("2. Richiedi cittadino (es. cert. residenza)")
@@ -48,9 +45,8 @@ while(True):
         api_url = base_url + "/add_cittadino"
         jsonDataRequest = CreateDatiCittadino()
         try:
-            response = requests.post(api_url,json=jsonDataRequest)
-        
-            #print(response.json())
+            response = requests.post(api_url,json=jsonDataRequest, verify=False)
+            print(response.json())
             print(response.status_code)
             print(response.headers["Content-Type"])
             data1 = response.json()
@@ -63,9 +59,8 @@ while(True):
         api_url = base_url + "/read_cittadino"
         jsonDataRequest = ReadDatiCittadino()
         try:
-            response = requests.get(api_url,json=jsonDataRequest)
-        
-            #print(response.json())
+            response = requests.get(api_url,json=jsonDataRequest, verify=False)
+            print(response.json())
             print(response.status_code)
             print(response.headers["Content-Type"])
             data1 = response.json()
@@ -78,9 +73,8 @@ while(True):
         api_url = base_url + "/update_cittadino"
         jsonDataRequest = UpdateDatiCittadino()
         try:
-            response = requests.post(api_url,json=jsonDataRequest)
-        
-            #print(response.json())
+            response = requests.post(api_url,json=jsonDataRequest, verify=False)
+            print(response.json())
             print(response.status_code)
             print(response.headers["Content-Type"])
             data1 = response.json()
@@ -88,9 +82,24 @@ while(True):
         except:
             print("Problemi di comunicazione con il server, riprova più tardi")        
 
+    if sOper == "4":
+        print("Richiesto atto di nascita")
+        api_url = base_url + "/delete_cittadino"
+        jsonDataRequest = ReadDatiCittadino()
+        try:
+            response = requests.delete(api_url,json=jsonDataRequest, verify=False)
+            print(response.json())
+            print(response.status_code)
+            print(response.headers["Content-Type"])
+            data1 = response.json()
+            print(data1)
+        except:
+            print("Problemi di comunicazione con il server, riprova più tardi")     
+
     if sOper=="5":
         print("Buona giornata!")
         sys.exit()
+        
     print("Operazioni disponibili:")
     print("1. Inserisci cittadino (es. atto di nascita)")
     print("2. Richiedi cittadino (es. cert. residenza)")

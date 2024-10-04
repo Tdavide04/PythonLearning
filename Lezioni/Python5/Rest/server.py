@@ -69,5 +69,16 @@ def GestisciUpdateCittadino():
             return json.dumps(jsonResp),200
     else:
         return 'Content-Type not supported!',401
+    
+@api.route("/delete_cittadino", methods = ["DELETE"])
+def GestisciDeleteCittadino():
+    content_type = request.headers.get('Content-Type')
+    print("Ricevuta chiamata " + content_type)
+    if (content_type == 'application/json'):
+        jsonReq = request.json
+        sCodiceFiscale = jsonReq["codice fiscale"]
+        anagrafe = JsonDeserialize(sAnagrafe)
+        if sCodiceFiscale in anagrafe:
+            pass
 
-api.run(host="127.0.0.1", port=8080)
+api.run(host="127.0.0.1", port=8080, debug=True, ssl_context = "adhoc")
