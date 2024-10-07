@@ -38,9 +38,11 @@ class Solution:
     def arrayRankTransform(self, arr: list[int]) -> list[int]:
         order_arr: list = sorted(arr)
         diz: dict = {}
-        for i, num in enumerate(order_arr):
+        rank = 1
+        for num in order_arr:
             if num not in diz:
-                diz[num] = i+1
+                diz[num] = rank
+                rank += 1
         result: list = []
         for num in arr:
             result.append(diz[num])
