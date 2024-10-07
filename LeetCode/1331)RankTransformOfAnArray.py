@@ -36,11 +36,14 @@ Constraints:
 
 class Solution:
     def arrayRankTransform(self, arr: list[int]) -> list[int]:
-        result: list = [0]*len(arr)
-        order_arr: list = arr.sort()
-        for i in range(len(arr)):
-            if result[i] == 0:
-                arr.index[order_arr[i]]
+        order_arr: list = sorted(arr)
+        diz: dict = {}
+        for i, num in enumerate(order_arr):
+            if num not in diz:
+                diz[num] = i+1
+        result: list = []
+        for num in arr:
+            result.append(diz[num])
         return result
 
 if __name__ == "__main__":
