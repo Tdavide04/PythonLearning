@@ -1,5 +1,6 @@
 from flask import Flask, json, request
 from myjson import JsonSerialize,JsonDeserialize
+from DBMS_Postgres import *
 
 sAnagrafe = "./file.json"
 api = Flask(__name__)
