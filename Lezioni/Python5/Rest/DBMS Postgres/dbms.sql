@@ -6,7 +6,7 @@ create table Cittadini (
     primary key (codFiscale)
 );
 
-create table User (
+create table Utenti (
     username varchar not null
     password varchar not null
     id serial not null
