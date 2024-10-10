@@ -4,15 +4,6 @@ from myjson import JsonSerialize,JsonDeserialize
 sAnagrafe = "./file.json"
 api = Flask(__name__)
 
-#mettere una lista di liste dove ogni lista è un cittadino
-
-#la chiave è il codice fiscale
-#add cittadino
-#read cittadino
-#update cittadino
-#delete cittadino
-
-
 @api.route('/add_cittadino', methods=['POST'])
 def GestisciCreateCittadino():
     content_type = request.headers.get('Content-Type')
@@ -95,7 +86,14 @@ def login():
                 user = path[id]
                 if password == user["password"]:
                     admin = user["admin"]
-                    jsonResp = {"Esito":"000", "Msg":"Buon lavoro", "Admin": admin, }
+                    jsonResp = {"Esito":"000", "Msg":"Buon lavoro", "Admin": admin, "id" : id, "Password" : password }
+                    return json.dumps(jsonResp), 200
+                else:
+                    jsonResp = {"Esito": "001", "Msg": "Dati non validi"}
+                    return json.dumps(jsonResp), 200
+            else:
+                jsonResp = {"Esito": "001", "Msg": "User non trovato"}
+                return json.dumps(jsonResp), 200
         except:
             return
 

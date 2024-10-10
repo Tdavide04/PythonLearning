@@ -3,12 +3,12 @@
         "username" : "Walter",
         "password" : "Zagarolo",
         "id" : "001",
-        "admin": true
+        "admin": "true"
     },
     "002" : {
         "username" : "Silvio",
         "password" : "Zagarolo",
         "id" : "002",
-        "admin": false
+        "admin": "false"
     }
 }
