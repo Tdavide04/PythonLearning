@@ -41,9 +41,9 @@ try:
     response = requests.post(api_url, json=login_data, verify=False)
     data = response.json()
     if data["Esito"] == "000":
-        id_utente = data["Id"]
-        pwd_utente = data["Password"]
-        adim = data["Admin"]
+        id_utente = data["id"]
+        pwd_utente = data["password"]
+        adim = data["admin"]
         print(data)
     else:
         print("User non trovato")

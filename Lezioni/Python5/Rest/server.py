@@ -79,14 +79,14 @@ def login():
     if (content_type == 'application/json'):
         try:
             data = request.json
-            id = data.get("id")
-            password = data.get("password")
+            id = data["id"]
+            password = data["password"]
             path = JsonDeserialize("./utenti.json")
             if id in path:
                 user = path[id]
                 if password == user["password"]:
                     admin = user["admin"]
-                    jsonResp = {"Esito":"000", "Msg":"Buon lavoro", "Admin": admin, "id" : id, "Password" : password }
+                    jsonResp = {"Esito":"000", "Msg":"Buon lavoro", "admin": admin, "id" : id, "password" : password }
                     return json.dumps(jsonResp), 200
                 else:
                     jsonResp = {"Esito": "001", "Msg": "Dati non validi"}
