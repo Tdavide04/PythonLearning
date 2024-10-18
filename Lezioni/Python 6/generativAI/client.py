@@ -3,6 +3,7 @@ import requests, json, sys
 
 base_url = "https://127.0.0.1:8080"
 sGoogleApiKey = "AIzaSyCEmVkEpyVHfEoKHE4bRIl6t-P4iOW5rto"
+api_url = base_url + sGoogleApiKey
 
 
 print("Benvenuti al Comune - sede locale")
@@ -24,6 +25,11 @@ while iFlag==0:
     if iOper == 1:
         sDomanda = input("Inserisci domanda: ")
         jsonDataRequest = {"contests": [{"parts":[{"text":sDomanda}]}]}
+        response = requests.post(api_url, json=jsonDataRequest, verify=True)
+        if response.status_code == 200:
+            print(response.json())
+
+
 
     # Richiesta dati cittadino
     elif iOper == 2:
