@@ -28,12 +28,16 @@ while iFlag==0:
         response = requests.post(api_url, json=jsonDataRequest, verify=True)
         if response.status_code == 200:
             print(response.json())
-
+            lListaRisposte = response.json()["candidates"]
+            for dRisposta in lListaRisposte:
+                sTestoRisposta = dRisposta["content"]["parts"][0]["text"]
+                print(sTestoRisposta)
 
 
     # Richiesta dati cittadino
     elif iOper == 2:
-        print("Richiesta dati cittadino")
+        sImage = input("Inserisci file img da analizzare: ")
+        sDomanda = input("Inserisci la domanda: ")
 
     elif iOper == 3:
         print("Buona giornata!")
