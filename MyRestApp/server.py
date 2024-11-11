@@ -18,7 +18,7 @@ def login():
         jsonReq = request.json
         id = jsonReq.get("operator_id")
         password = jsonReq.get("operator_password")
-        login_query = (f"select id.password from operator where id = {id} and password = {password}")
+        login_query = (f"select id,password from operator where id = {id} and password = {password}")
         if db.read_in_db(connection, login_query) != -1:
             access = True
             operator = {"id" : id, "password" : password}
