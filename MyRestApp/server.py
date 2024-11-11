@@ -33,3 +33,5 @@ def login():
     
     finally:
         db.close(connection)
+
+api.run(host="127.0.0.1", port=8080, ssl_context="adhoc")
