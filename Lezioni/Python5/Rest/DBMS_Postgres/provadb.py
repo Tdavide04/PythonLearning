@@ -22,4 +22,5 @@ for ii in range(0,iNumRows):
 	myrow = db.read_next_row(cur)
 	print(myrow)
 	
+	#ciao
 
