@@ -5,14 +5,14 @@ base_url = "https://127.0.0.1:8080"
 print("Benvenuto")
 id = input("id: ")
 password = input("password: ")
-login_data = {"id" : id, "password" : password}
+login_data = {"operator_id" : id, "operatore_password" : password}
 api_url = base_url + "/login"
 try:
     response = requests.post(api_url, json=login_data, verify=False)
     data = response.json()
-    if data["Esito"] == "200":
-        operator_id = data["id"]
-        operator_password = data["password"]
+    if data.get("Esito") == "200":
+        operator_id = data.get("id")
+        operator_password = data.get("password")
         print(data)
     else:
         print("Operator non trovato")

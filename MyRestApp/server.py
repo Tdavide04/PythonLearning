@@ -7,7 +7,6 @@ import os, sys
 api = Flask(__name__)
 
 @api.route("/login", methods=["POST"])
-
 def login():
     connection = db.connect()
     if connection is None:
@@ -29,7 +28,7 @@ def login():
             return jsonify({"Esito" : "404", "Msg" : "Dati non corretti"}), 404
 
     except Exception as e:
-        print(f"Rorre dettagliato: {str(e)}")
+        print(f"Errore dettagliato: {str(e)}")
         return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
     
     finally:
