@@ -22,13 +22,11 @@ except:
     print("Problemi di comunicazione con il server, riprova più tardi")
     sys.exit()
 
-
-
 def CreateDatiCittadino():
     nome = input("Qual'è il nome? ")
     cognome = input("Qual'è il cognome? ")
-    dataN = input("Qual'è la data di nascita? ")
-    codF = input("Qual'è il codice fiscale? ")
+    dataNascita = input("Qual'è la data di nascita? ")
+    codiceFiscale = input("Qual'è il codice fiscale? ")
     """
     {
         "nome": "Mario",
@@ -37,19 +35,19 @@ def CreateDatiCittadino():
         "codice fiscale": "dfrcde23t44h501u"
     }
     """
-    datiCittadino = {"nome":nome, "cognome": cognome, "data nascita":dataN, "codice fiscale":codF}
+    datiCittadino = {"nome":nome, "cognome": cognome, "data nascita":dataNascita, "codice fiscale":codiceFiscale}
     return datiCittadino
 
 def ReadDatiCittadino():
-    codF = input("Qual'è il codice fiscale? ")
-    codF = {"codice fiscale": codF}
-    return codF
+    codiceFiscale = input("Qual'è il codice fiscale? ")
+    codiceFiscale = {"codice fiscale": codiceFiscale}
+    return codiceFiscale
 
 def UpdateDatiCittadino():
     nome = input("Qual'è il nome? ")
     cognome = input("Qual'è il cognome ")
-    dataN = input("Qual'è la data di nascita? ")
-    codF = input("Qual'è il codice fiscale? ")
-    datiCittadino = {"nome":nome, "cognome": cognome, "data nascita":dataN, "codice fiscale":codF}
+    dataNascita = input("Qual'è la data di nascita? ")
+    codiceFiscale = input("Qual'è il codice fiscale? ")
+    datiCittadino = {"nome":nome, "cognome": cognome, "data nascita":dataNascita, "codice fiscale":codiceFiscale}
     return datiCittadino
 
