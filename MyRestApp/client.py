@@ -127,6 +127,35 @@ if operator_access == True and operator_admin == True:
 
         comando = input("Scegli un'opzione: ")
 
+elif operator_access == True and operator_admin == False:
+
+    while True:
+        print("Operazioni disponibili:")
+        print("1. Visiona cittadino")
+        print("2. Esci") 
+
+        comando = input("Scegli un'opzione: ")
+
+        if comando == "1":
+                api_url = base_url + "/read_cittadino"
+                datiCittadino = ReadDatiCittadino()
+                try:
+                    response = requests.get(api_url, json=datiCittadino, verify= False)
+                    if response.status_code == 200:
+                        datiCittadino = response.json()
+                        print(datiCittadino["Dati cittadino"])
+                    else:
+                        print("Qualcosa è andato storto")
+                except:
+                    print("Problemi di comunicazione con il server, riprova più tardi")
+        
+        if comando == "2":
+                print("Buona giornata!")
+                sys.exit()
+
+        print("Operazioni disponibili:")
+        print("1. Visiona cittadino")
+        print("2. Esci") 
 
 else:
     print("Accesso negato") 
