@@ -48,7 +48,7 @@ def ReadDatiCittadino():
 
 def UpdateDatiCittadino():
     nome = input("Qual'è il nome? ")
-    cognome = input("Qual'è il cognome ")
+    cognome = input("Qual'è il cognome? ")
     dataNascita = input("Qual'è la data di nascita? ")
     codiceFiscale = input("Qual'è il codice fiscale? ")
     datiCittadino = {"nome":nome, "cognome": cognome, "data nascita":dataNascita, "codice fiscale":codiceFiscale}
@@ -102,7 +102,16 @@ if operator_access == True and operator_admin == True:
                 print("Problemi di comunicazione con il server, riprova più tardi")
 
         if comando == "4":
-            pass
+            api_url = base_url + "/delete_cittadino"
+            datiCittadino = ReadDatiCittadino()
+            try:
+                response = requests.delete(api_url, json=datiCittadino, verify= False)
+                if response.status_code == 200:
+                    print("La cancellazione è andata a buon fine")
+                else:
+                    print("Qualcosa è andato storto")
+            except:
+                print("Problemi di comunicazione con il server, riprova più tardi")
 
 
         if comando == "5":

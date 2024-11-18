@@ -102,7 +102,7 @@ def UpdateCittadino():
         dataNascita = dati.get("data nascita")
         codiceFiscale = dati.get("codice fiscale")
         query = (f"UPDATE cittadini SET nome = '{nome}', cognome = '{cognome}', datanascita = '{dataNascita}' WHERE codfiscale = '{codiceFiscale}'")
-        if db.write_in_db(connection, query) == 0:
+        if db.write_in_db(connection, query) != -1:
             print("Query eseguita con successo")
             return jsonify({"Esito" : "200", "Msg" : "Query eseguita"}), 200
         else:
@@ -124,7 +124,14 @@ def DeleteCittadino():
 
     try:
         dati = request.json
-
+        codiceFiscale = dati.get("codice fiscale")
+        query = (f"DELETE FROM cittadini WHERE codfiscale = '{codiceFiscale}'")
+        if db.write_in_db(connection, query) == 0:
+            print("Query eseguita con successo")
+            return jsonify({"Esito" : "200", "Msg" : "Query eseguita"}), 200
+        else:
+            print("Query fallita")
+            return jsonify({"Esito" : "404", "Msg" : "Dati incorretti"}), 404
     except Exception as e:
         print(f"Errore dettagliato: {str(e)}")
         return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
