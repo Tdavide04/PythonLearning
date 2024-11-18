@@ -13,6 +13,8 @@ try:
     if data.get("Esito") == "200":
         operator_id = data.get("id")
         operator_password = data.get("password")
+        operator_access = data.get("access")
+        operator_admin = data.get("admin")
         print(data)
     else:
         print("Operator non trovato")
@@ -51,3 +53,22 @@ def UpdateDatiCittadino():
     datiCittadino = {"nome":nome, "cognome": cognome, "data nascita":dataNascita, "codice fiscale":codiceFiscale}
     return datiCittadino
 
+if operator_admin == True and operator_access == True:
+    print("Operazioni disponibili:")
+    print("1. Inserisci cittadino")
+    print("2. Richiedi cittadino")
+    print("3. Modifica cittadino")
+    print("4. Elimina cittadino")
+    print("5. Esci") 
+
+    comando = input("Scegli un'opzione: ")
+    while True:
+        if comando == "1":
+            print("Richiesto: nome, cognome, data di nascita, codice fiscale")
+            api_url = base_url + "/create_cittadino"
+            datiCittadino = CreateDatiCittadino()
+            try:
+                response = requests.post(api_url, json=datiCittadino, verify= False)
+            except:
+                print("Problemi di comunicazione con il server, riprova più tardi")
+                

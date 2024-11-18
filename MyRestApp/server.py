@@ -24,7 +24,7 @@ def login():
             if db.read_in_db(connection, login_query) != -1:
                 admin = True
             access = True
-            operator = {"id" : id, "password" : password}
+            operator = {"id" : id, "password" : password, "admin" : admin, "access" : access}
             print(f"Benvenuto operatore {id}")
             return jsonify({"Esito" : "200", "Msg" : "Dati corretti", "operator" : operator}), 200
         else:
@@ -38,9 +38,27 @@ def login():
     finally:
         db.close(connection)
 
-@api.route("/")
-def AddCittadino():
-    pass
+@api.route("/create_cittadino", method = ["POST"])
+def CreateCittadino():
+    connection = db.connect()
+    if connection is None:
+        print("Connessione al DB fallita")
+        sys.exit()
+    try:
+        dati = request.json
+        nome = dati.get("nome")
+        cognome = dati.get("cognome")
+        dataNascita = dati.get("dataNascita")
+        codiceFiscale = dati.get("codiceFiscale")
+        query = (f"INSERT INTO cittadini (nome, cognome, datanascita, codfiscale) VALUES ({nome}, {cognome}, {dataNascita}, {codiceFiscale});")
+        if db.write_in_db(connection, query) != -1:
+            pass
+    except Exception as e:
+        print(f"Errore dettagliato: {str(e)}")
+        return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
+    
+    finally:
+        db.close(connection)
 
 
 api.run(host="127.0.0.1", port=8080, ssl_context="adhoc")
