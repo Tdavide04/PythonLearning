@@ -83,8 +83,9 @@ def read_in_db(cur,sql_select):
         conn = None
         return -1
 
-def read_next_row(cur):
+def read_next_row(cur, sql_select): #ho inserito la query perche sennò è impossibile recuperare i dati
     try:
+        cur.execute(sql_select)
         row = cur.fetchone()
         return [0,row]
     except:

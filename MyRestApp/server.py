@@ -38,7 +38,7 @@ def login():
     finally:
         db.close(connection)
 
-@api.route("/create_cittadino", method = ["POST"])
+@api.route("/create_cittadino", methods = ["POST"])
 def CreateCittadino():
     connection = db.connect()
     if connection is None:
@@ -48,11 +48,15 @@ def CreateCittadino():
         dati = request.json
         nome = dati.get("nome")
         cognome = dati.get("cognome")
-        dataNascita = dati.get("dataNascita")
-        codiceFiscale = dati.get("codiceFiscale")
-        query = (f"INSERT INTO cittadini (nome, cognome, datanascita, codfiscale) VALUES ({nome}, {cognome}, {dataNascita}, {codiceFiscale});")
+        dataNascita = dati.get("data nascita")
+        codiceFiscale = dati.get("codice fiscale")
+        query = (f"INSERT INTO cittadini (nome, cognome, datanascita, codfiscale) VALUES ('{nome}', '{cognome}', '{dataNascita}', '{codiceFiscale}');")
         if db.write_in_db(connection, query) != -1:
-            pass
+            print("Query eseguita con successo")
+            return jsonify({"Esito" : "200", "Msg" : "Query eseguita"}), 200
+        else:
+            print("Query fallita")
+            return jsonify({"Esito" : "404", "Msg" : "Dati incorretti"}), 404
     except Exception as e:
         print(f"Errore dettagliato: {str(e)}")
         return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
@@ -60,5 +64,29 @@ def CreateCittadino():
     finally:
         db.close(connection)
 
+@api.route("/read_cittadino", methods = ["POST"])
+def ReadCittadino():
+    connection = db.connect()
+    if connection is None:
+        print("Connessione al DB fallita")
+        sys.exit()
+    try:
+        dati = request.json 
+        codiceFiscale = dati.get("codice fiscale")
+        query = (f"SELECT * FROM cittadini WHERE codfiscale = '{codiceFiscale}'")
+        db_connection = db.read_next_row(connection, query)
+        if db_connection[0] == 0 and db_connection[1] != None:
+            print("Query eseguita con successo")
+            dati_query = db_connection[1]
+            return jsonify({"Esito" : "200", "Msg" : "Query eseguita", "Dati cittadino" : dati_query}), 200
+        else:
+            print("Query fallita")
+            return jsonify({"Esito" : "404", "Msg" : "Dati incorretti"}), 404
+    except Exception as e:
+        print(f"Errore dettagliato: {str(e)}")
+        return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
+    
+    finally:
+        db.close(connection)
 
-api.run(host="127.0.0.1", port=8080, ssl_context="adhoc")
+api.run(host="127.0.0.1", port=8080, ssl_context="adhoc", debug=True)
