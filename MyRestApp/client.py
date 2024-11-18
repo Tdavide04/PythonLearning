@@ -80,7 +80,7 @@ if operator_access == True and operator_admin == True:
             api_url = base_url + "/read_cittadino"
             datiCittadino = ReadDatiCittadino()
             try:
-                response = requests.post(api_url, json=datiCittadino, verify= False)
+                response = requests.get(api_url, json=datiCittadino, verify= False)
                 if response.status_code == 200:
                     datiCittadino = response.json()
                     print(datiCittadino["Dati cittadino"])
@@ -88,6 +88,21 @@ if operator_access == True and operator_admin == True:
                     print("Qualcosa è andato storto")
             except:
                 print("Problemi di comunicazione con il server, riprova più tardi")
+
+        if comando == "3":
+            api_url = base_url + "/update_cittadino"
+            datiCittadino = UpdateDatiCittadino()
+            try:
+                response = requests.put(api_url, json=datiCittadino, verify= False)
+                if response.status_code == 200:
+                    print("Dati cittadino modificati con successo")
+                else:
+                    print("Qualcosa è andato storto")
+            except:
+                print("Problemi di comunicazione con il server, riprova più tardi")
+
+        if comando == "4":
+            pass
 
 
         if comando == "5":

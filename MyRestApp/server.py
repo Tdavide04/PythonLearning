@@ -64,7 +64,7 @@ def CreateCittadino():
     finally:
         db.close(connection)
 
-@api.route("/read_cittadino", methods = ["POST"])
+@api.route("/read_cittadino", methods = ["GET"])
 def ReadCittadino():
     connection = db.connect()
     if connection is None:
@@ -82,6 +82,49 @@ def ReadCittadino():
         else:
             print("Query fallita")
             return jsonify({"Esito" : "404", "Msg" : "Dati incorretti"}), 404
+    except Exception as e:
+        print(f"Errore dettagliato: {str(e)}")
+        return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
+    
+    finally:
+        db.close(connection)
+
+@api.route("/update_cittadino", methods = ["PUT"])
+def UpdateCittadino():
+    connection = db.connect()
+    if connection is None:
+        print("Connessione al DB fallita")
+    sys.exit()
+    try:
+        dati = request.json
+        nome = dati.get("nome")
+        cognome = dati.get("cognome")
+        dataNascita = dati.get("data nascita")
+        codiceFiscale = dati.get("codice fiscale")
+        query = (f"UPDATE cittadini SET nome = '{nome}', cognome = '{cognome}', datanascita = '{dataNascita}' WHERE codfiscale = '{codiceFiscale}'")
+        if db.write_in_db(connection, query) == 0:
+            print("Query eseguita con successo")
+            return jsonify({"Esito" : "200", "Msg" : "Query eseguita"}), 200
+        else:
+            print("Query fallita")
+            return jsonify({"Esito" : "404", "Msg" : "Dati incorretti"}), 404
+    except Exception as e:
+        print(f"Errore dettagliato: {str(e)}")
+        return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
+    
+    finally:
+        db.close(connection)
+
+@api.route("/delete_cittadino", methods = ["DELETE"])
+def DeleteCittadino():
+    connection = db.connect()
+    if connection is None:
+        print("Connessione al DB fallita")
+        sys.exit()
+
+    try:
+        dati = request.json
+
     except Exception as e:
         print(f"Errore dettagliato: {str(e)}")
         return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
