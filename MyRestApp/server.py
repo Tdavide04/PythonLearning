@@ -94,14 +94,14 @@ def UpdateCittadino():
     connection = db.connect()
     if connection is None:
         print("Connessione al DB fallita")
-    sys.exit()
+        sys.exit()
     try:
         dati = request.json
         nome = dati.get("nome")
         cognome = dati.get("cognome")
         dataNascita = dati.get("data nascita")
         codiceFiscale = dati.get("codice fiscale")
-        query = (f"UPDATE cittadini SET nome = '{nome}', cognome = '{cognome}', datanascita = '{dataNascita}' WHERE codfiscale = '{codiceFiscale}'")
+        query = (f"UPDATE cittadini SET nome = '{nome}', cognome = '{cognome}', datanascita = '{dataNascita}' WHERE codfiscale = '{codiceFiscale}';")
         if db.write_in_db(connection, query) != -1:
             print("Query eseguita con successo")
             return jsonify({"Esito" : "200", "Msg" : "Query eseguita"}), 200
