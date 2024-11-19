@@ -7,7 +7,6 @@ from kivy.uix.image import Image
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
-from random import choice
 
 class ImageButton(ButtonBehavior, Image):
     pass
@@ -35,14 +34,32 @@ class HomeScreen(Screen):
         grid_layout = GridLayout(cols=1, size_hint_y=None)
         grid_layout.bind(minimum_height=grid_layout.setter('height'))
 
-        # Aggiungi le celle colorate
-        for _ in range(100):  # Aggiungi un numero di celle (100 per esempio)
-            color = [choice([1, 0, 0, 1]),  # Red
-                     choice([0, 1, 0, 1]),  # Green
-                     choice([0, 0, 1, 1]),  # Blue
-                     1]  # Alpha (trasparenza)
-            btn = Button(size_hint_y=None, height=40, background_color=color)
-            grid_layout.add_widget(btn)
+        # Elenco delle immagini
+        images = [
+            "./images/Bulbasaur.png",  # Immagine 1
+            "./images/Ivysaur.png",  # Immagine 2
+            "./images/Venusaur.png",  # Immagine 3
+            "./images/Squirtle.png",  # Immagine 4
+            "./images/Wartortle.png",  # Immagine 5
+            "./images/Blastoise.png"   # Immagine 6
+        ]
+
+        for img_path in images:
+            # Crea il bottone per ogni immagine
+            button = Button(size_hint_y=None, height=60, width=Window.width)
+
+            # Crea l'immagine per il bottone
+            image = Image(
+                source=img_path,  # Percorso dell'immagine
+                size_hint=(None, 1),  # Impostare width=40 per la larghezza
+                width=40  # Larghezza dell'immagine
+            )
+
+            # Aggiungi l'immagine al bottone
+            button.add_widget(image)
+
+            # Aggiungi il bottone al GridLayout
+            grid_layout.add_widget(button)
 
         # Aggiungi il GridLayout allo ScrollView
         scroll_view.add_widget(grid_layout)
