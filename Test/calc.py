@@ -19,3 +19,6 @@ class Calculations:
         if self.b == 0:
             raise ValueError("Cannot divide by zero")
         return self.a / self.b
+    
+calc = Calculations("10", 5)
+print(calc.get_product())
