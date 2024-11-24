@@ -3,7 +3,7 @@ import re
 import os.path
 
 # This script will download all files from the URLs/URLs.txt and put them in Downloads directory
-downloadDir = "downloads/pokemon"
+downloadDir = "downloads"
 
 while True:
     response = input("Redownload All files ?(Y,N): ")
