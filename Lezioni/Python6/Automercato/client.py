@@ -49,6 +49,18 @@ if accesso.upper() == "Y":
                         print("Errore di creazione del prodotto")
                 except:
                     print("Problemi di comunicazione con il server, riprova più tardi")
+
+            if comando == "5":
+                print("Buona giornata!")
+                sys.exit()
+
+            print("Operazione disponibili:")
+            print("1. Crea prodotto")
+            print("2. Visiona prodotto")
+            print("3. Modifica prodotto")
+            print("4. Elimina prodotto")
+
+            comando = input("Scegli l'operazione: ")
             
 elif accesso.upper() == "N":
     pass
