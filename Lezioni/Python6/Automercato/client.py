@@ -50,6 +50,42 @@ if accesso.upper() == "Y":
                 except:
                     print("Problemi di comunicazione con il server, riprova più tardi")
 
+            if comando == "2":
+                api_url = base_url + "/read_product"
+                product_data = ReadProduct()
+                try:
+                    response = requests.post(api_url, json=product_data, verify=False)
+                    if response.status_code == 200:
+                        print("Prodotto creato con successo")
+                    else:
+                        print("Errore di creazione del prodotto")
+                except:
+                    print("Problemi di comunicazione con il server, riprova più tardi")
+
+            if comando == "3":
+                api_url = base_url + "/update_product"
+                product_data = UpdateProduct()
+                try:
+                    response = requests.post(api_url, json=product_data, verify=False)
+                    if response.status_code == 200:
+                        print("Prodotto creato con successo")
+                    else:
+                        print("Errore di creazione del prodotto")
+                except:
+                    print("Problemi di comunicazione con il server, riprova più tardi")
+
+            if comando == "4":
+                api_url = base_url + "/delete_product"
+                product_data = ReadProduct()
+                try:
+                    response = requests.post(api_url, json=product_data, verify=False)
+                    if response.status_code == 200:
+                        print("Prodotto creato con successo")
+                    else:
+                        print("Errore di creazione del prodotto")
+                except:
+                    print("Problemi di comunicazione con il server, riprova più tardi")
+
             if comando == "5":
                 print("Buona giornata!")
                 sys.exit()

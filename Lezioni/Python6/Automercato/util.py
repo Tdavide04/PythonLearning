@@ -15,5 +15,14 @@ def CreateProduct():
     modello = input("Modello: ")
     prezzo = input("Prezzo: ")
     disponibilita = input("Disponibilita: ")
-    dati = {"tipo":tipo, "marca":marca, "modello":modello, "prezzo":prezzo, "disponibilita":disponibilita}
+    targa = input("Targa: ")
+    dati = {"tipo":tipo, "marca":marca, "modello":modello, "prezzo":prezzo, "disponibilita":disponibilita, "targa":targa}
     return dati
+
+def ReadProduct():
+    targa = input("Inserisci la marca del prodotto: ")
+    dati = {"targa":targa}
+    return dati
+
+def UpdateProduct():
+    pass
