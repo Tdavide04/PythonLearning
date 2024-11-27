@@ -10,7 +10,8 @@ def login():
     connection = db.connect()
     if connection is None:
         print("Connessione al DB fallita")
-        sys.exit()
+        return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
+    
         
     try:
         jsonReq = request.json
