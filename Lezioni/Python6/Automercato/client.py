@@ -20,7 +20,7 @@ if accesso.upper() == "Y":
             operator_password = operator.get("password")
             operator_access = operator.get("access")
             operator_admin = operator.get("admin")
-            print(data)
+            print(f"Benvenuto operatore {operator_id}")
         else:
             print("Operator non trovato")
             sys.exit()
@@ -54,14 +54,18 @@ if accesso.upper() == "Y":
             if comando == "2":
                 api_url = base_url + "/read_product"
                 product_data = ReadProduct()
+                product_data["id"] = id
+                product_data["admin"] = operator_admin
                 try:
                     response = requests.get(api_url, json=product_data, verify=False)
                     data = response.json()
                     if response.status_code == 200:
-                        print("Veicoli trovato con successo!")
+                        print("Veicoli trovati con successo!")
                         rows = data.get("veicoli", [])
+                        i = 1
                         for row in rows:
-                            print(row)
+                            print(f"Veicolo{i}: {row}")
+                            i+= 1
                     elif response.status_code == 404:
                         error = data.get("Msg")
                         print(error)
@@ -101,6 +105,8 @@ if accesso.upper() == "Y":
             print("2. Visiona prodotto")
             print("3. Modifica prodotto")
             print("4. Elimina prodotto")
+            print("5. Chiudi la sessione")
+
 
             comando = input("Scegli l'operazione: ")
             
@@ -111,10 +117,12 @@ elif accesso.upper() == "N":
         response = requests.get(api_url, json=product_data, verify=False)
         data = response.json()
         if response.status_code == 200:
-            print("Veicoli trovato con successo!")
+            print("Veicoli trovati con successo!")
             rows = data.get("veicoli", [])
+            i = 1
             for row in rows:
-                print(row)
+                print(f"Veicolo{i}: {row}")
+                i+= 1
         elif response.status_code == 404:
             error = data.get("Msg")
             print(error)

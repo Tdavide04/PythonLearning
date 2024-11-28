@@ -77,31 +77,51 @@ def ReadProduct():
     try:
         dati = request.json
         marca = dati.get("marca")
-        if "modello" in dati:
-            modello = dati.get("modello")
-            query = (f"""SELECT m.marca, m.modello, m.prezzo, fi.nome, fi.indirizzo
-                    FROM motociclette m
-                    JOIN filiali fi ON m.filiale_id = fi.id
-                    WHERE m.marca = '{marca} and m.modello = '{modello}''
-
-                    UNION
-
-                    SELECT a.marca, a.modello, a.prezzo, fi.nome, fi.indirizzo
-                    FROM automobili a
-                    JOIN filiali fi ON a.filiale_id = fi.id
-                    WHERE a.marca = '{marca}' and a.modello = '{modello}';""")
+        if "id" in dati:
+            if dati.get("admin") == True:
+                if "modello" in dati:
+                    modello = dati.get("modello")
+                    query = (f"""SELECT m.id, m.marca, m.modello, m.prezzo, fi.nome, fi.indirizzo
+                            FROM motociclette m
+                            JOIN filiali fi ON m.filiale_id = fi.id
+                            WHERE m.marca = '{marca} and m.modello = '{modello}''
+                            UNION
+                            SELECT a.id, a.marca, a.modello, a.prezzo, fi.nome, fi.indirizzo
+                            FROM automobili a
+                            JOIN filiali fi ON a.filiale_id = fi.id
+                            WHERE a.marca = '{marca}' and a.modello = '{modello}';""")
+                else:
+                    query = (f"""SELECT m.id, m.marca, m.modello, m.prezzo, fi.nome, fi.indirizzo
+                            FROM motociclette m
+                            JOIN filiali fi ON m.filiale_id = fi.id
+                            WHERE m.marca = '{marca}'
+                            UNION
+                            SELECT a.id, a.marca, a.modello, a.prezzo, fi.nome, fi.indirizzo
+                            FROM automobili a
+                            JOIN filiali fi ON a.filiale_id = fi.id
+                            WHERE a.marca = '{marca}';""")
         else:
-            query = (f"""SELECT m.marca, m.modello, m.prezzo, fi.nome, fi.indirizzo
-                    FROM motociclette m
-                    JOIN filiali fi ON m.filiale_id = fi.id
-                    WHERE m.marca = '{marca}'
-
-                    UNION
-
-                    SELECT a.marca, a.modello, a.prezzo, fi.nome, fi.indirizzo
-                    FROM automobili a
-                    JOIN filiali fi ON a.filiale_id = fi.id
-                    WHERE a.marca = '{marca}';""")
+            if "modello" in dati:
+                modello = dati.get("modello")
+                query = (f"""SELECT m.marca, m.modello, m.prezzo, fi.nome, fi.indirizzo
+                        FROM motociclette m
+                        JOIN filiali fi ON m.filiale_id = fi.id
+                        WHERE m.marca = '{marca} and m.modello = '{modello}''
+                        UNION
+                        SELECT a.marca, a.modello, a.prezzo, fi.nome, fi.indirizzo
+                        FROM automobili a
+                        JOIN filiali fi ON a.filiale_id = fi.id
+                        WHERE a.marca = '{marca}' and a.modello = '{modello}';""")
+            else:
+                query = (f"""SELECT m.marca, m.modello, m.prezzo, fi.nome, fi.indirizzo
+                        FROM motociclette m
+                        JOIN filiali fi ON m.filiale_id = fi.id
+                        WHERE m.marca = '{marca}'
+                        UNION
+                        SELECT a.marca, a.modello, a.prezzo, fi.nome, fi.indirizzo
+                        FROM automobili a
+                        JOIN filiali fi ON a.filiale_id = fi.id
+                        WHERE a.marca = '{marca}';""")
         
         rows = db.read_all_row(connection, query)
         if rows and len(rows) > 0:

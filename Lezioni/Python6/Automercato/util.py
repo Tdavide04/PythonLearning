@@ -15,8 +15,7 @@ def CreateProduct():
     modello = input("Modello: ")
     prezzo = input("Prezzo: ")
     disponibilita = input("Disponibilita: ")
-    targa = input("Targa: ")
-    dati = {"tipo":tipo, "marca":marca, "modello":modello, "prezzo":prezzo, "disponibilita":disponibilita, "targa":targa}
+    dati = {"tipo":tipo, "marca":marca, "modello":modello, "prezzo":prezzo, "disponibilita":disponibilita}
     return dati
 
 def ReadProduct():
