@@ -20,8 +20,18 @@ def CreateProduct():
     return dati
 
 def ReadProduct():
-    targa = input("Inserisci la marca del prodotto: ")
-    dati = {"targa":targa}
+    dati = input("Inserisci la marca e opzionalmente il modello separati da una virgola: ").strip()
+    if not dati:
+        print("Input non valido. Devi inserire almeno la marca.")
+        return None
+    
+    lista = [item.strip() for item in dati.split(",")]  # Elimina tutti gli spazi extra
+    marca = lista[0].title 
+    if len(lista) > 1 and lista[1].title: # Controlla se il modello è stato inserito
+        modello = lista[1]
+        dati = {"marca": marca, "modello": modello}
+    else:
+        dati = {"marca": marca}  
     return dati
 
 def UpdateProduct():

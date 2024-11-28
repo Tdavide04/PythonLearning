@@ -4,7 +4,7 @@ from util import *
 base_url = "https://127.0.0.1:8080"
 
 print("Benvenuto nella pagina dell'automercato")
-accesso = input("Vuoi fare l'accesso? [Y/N]")
+accesso = input("Vuoi fare l'accesso? [Y/N] \n")
 
 if accesso.upper() == "Y":
     id = input("id: ")
@@ -35,6 +35,7 @@ if accesso.upper() == "Y":
         print("2. Visiona prodotto")
         print("3. Modifica prodotto")
         print("4. Elimina prodotto")
+        print("5. Chiudi la sessione")
 
         comando = input("Scegli l'operazione: ")
         while True:
@@ -54,11 +55,16 @@ if accesso.upper() == "Y":
                 api_url = base_url + "/read_product"
                 product_data = ReadProduct()
                 try:
-                    response = requests.post(api_url, json=product_data, verify=False)
+                    response = requests.get(api_url, json=product_data, verify=False)
+                    data = response.json()
                     if response.status_code == 200:
-                        print("Prodotto creato con successo")
-                    else:
-                        print("Errore di creazione del prodotto")
+                        print("Veicoli trovato con successo!")
+                        rows = data.get("veicoli", [])
+                        for row in rows:
+                            print(row)
+                    elif response.status_code == 404:
+                        error = data.get("Msg")
+                        print(error)
                 except:
                     print("Problemi di comunicazione con il server, riprova più tardi")
 
@@ -99,4 +105,18 @@ if accesso.upper() == "Y":
             comando = input("Scegli l'operazione: ")
             
 elif accesso.upper() == "N":
-    pass
+    api_url = base_url + "/read_product"
+    product_data = ReadProduct()
+    try:
+        response = requests.get(api_url, json=product_data, verify=False)
+        data = response.json()
+        if response.status_code == 200:
+            print("Veicoli trovato con successo!")
+            rows = data.get("veicoli", [])
+            for row in rows:
+                print(row)
+        elif response.status_code == 404:
+            error = data.get("Msg")
+            print(error)
+    except:
+        print("Problemi di comunicazione con il server, riprova più tardi")

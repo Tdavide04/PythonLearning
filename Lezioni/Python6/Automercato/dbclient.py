@@ -92,6 +92,27 @@ def read_next_row(cur, sql_select): #ho inserito la query perche sennò è impos
         cur = None
         conn = None
         return [1,None]
+    
+def read_all_row(cur, sql_select):
+    """
+    Esegue una query SELECT e restituisce tutte le righe.
+
+    Args:
+        cur: Cursore del database.
+        sql_select (str): Query SQL SELECT da eseguire.
+
+    Returns:
+        list: Lista delle righe risultanti dalla query.
+        None: Se la query non ha prodotto risultati.
+        -1: In caso di errore.
+    """
+    try:
+        cur.execute(sql_select)
+        rows = cur.fetchall()
+        return rows if rows else None
+    except Exception as e:
+        print(f"Errore nella query SQL: {e}")
+        return -1
 
 def close(cur):
     global conn

@@ -68,9 +68,58 @@ def CreateProduct():
     finally:
         db.close(connection)
 
-@api.route("/read_product")
+@api.route("/read_product", methods = ["GET"])
 def ReadProduct():
-    pass
+    connection = db.connect()
+    if connection is None:
+        print("Connessione al DB fallita")
+        sys.exit()
+    try:
+        dati = request.json
+        marca = dati.get("marca")
+        if "modello" in dati:
+            modello = dati.get("modello")
+            query = (f"""SELECT m.marca, m.modello, m.prezzo, fi.nome, fi.indirizzo
+                    FROM motociclette m
+                    JOIN filiali fi ON m.filiale_id = fi.id
+                    WHERE m.marca = '{marca} and m.modello = '{modello}''
+
+                    UNION
+
+                    SELECT a.marca, a.modello, a.prezzo, fi.nome, fi.indirizzo
+                    FROM automobili a
+                    JOIN filiali fi ON a.filiale_id = fi.id
+                    WHERE a.marca = '{marca}' and a.modello = '{modello}';""")
+        else:
+            query = (f"""SELECT m.marca, m.modello, m.prezzo, fi.nome, fi.indirizzo
+                    FROM motociclette m
+                    JOIN filiali fi ON m.filiale_id = fi.id
+                    WHERE m.marca = '{marca}'
+
+                    UNION
+
+                    SELECT a.marca, a.modello, a.prezzo, fi.nome, fi.indirizzo
+                    FROM automobili a
+                    JOIN filiali fi ON a.filiale_id = fi.id
+                    WHERE a.marca = '{marca}';""")
+        
+        rows = db.read_all_row(connection, query)
+        if rows and len(rows) > 0:
+            print("Veicoli trovato con successo!")
+            return jsonify({"Esito" : "200", "Msg" : "Veicoli trovato con successo!", "veicoli":rows}), 200
+        else:
+            if "modello" in dati:
+                print(f"Non è disponbile nessun veicolo con le seguenti caratteristiche: marca: {marca}, modello: {modello}")
+                return jsonify({"Esito" : "404", "Msg" : f"Non è disponbile nessun veicolo con le seguenti caratteristiche: marca: {marca}, modello: {modello}"}), 404
+            else:
+                print(f"Non è disponbile nessun veicolo con le seguenti caratteristiche: marca: {marca}")
+                return jsonify({"Esito" : "404", "Msg" : f"Non è disponbile nessun veicolo con le seguenti caratteristiche: marca: {marca}"}), 404
+            
+    except Exception as e:
+        print(f"Errore dettagliato: {str(e)}")
+        return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
+    finally:
+        db.close(connection)
 
     
 api.run(host="127.0.0.1", port=8080, ssl_context="adhoc", debug=True)
