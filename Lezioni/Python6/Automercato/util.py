@@ -26,9 +26,9 @@ def ReadProduct():
         return None
     
     lista = [item.strip() for item in dati.split(",")]  # Elimina tutti gli spazi extra
-    marca = lista[0].title 
-    if len(lista) > 1 and lista[1].title: # Controlla se il modello è stato inserito
-        modello = lista[1]
+    marca = lista[0].capitalize()
+    if len(lista) > 1 and lista[1]: # Controlla se il modello è stato inserito
+        modello = lista[1].capitalize()
         dati = {"marca": marca, "modello": modello}
     else:
         dati = {"marca": marca}  
