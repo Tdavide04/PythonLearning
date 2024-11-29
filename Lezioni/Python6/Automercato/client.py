@@ -113,20 +113,41 @@ if accesso.upper() == "Y":
             comando = input("Scegli l'operazione: ")
             
 elif accesso.upper() == "N":
-    api_url = base_url + "/read_product"
-    product_data = ReadProduct()
-    try:
-        response = requests.get(api_url, json=product_data, verify=False)
-        data = response.json()
-        if response.status_code == 200:
-            print("Veicoli trovati con successo!")
-            rows = data.get("veicoli", [])
-            i = 1
-            for row in rows:
-                print(f"Veicolo{i}: {row}")
-                i+= 1
-        elif response.status_code == 404:
-            error = data.get("Msg")
-            print(error)
-    except:
-        print("Problemi di comunicazione con il server, riprova più tardi")
+
+    print("Operazione disponibili:")
+    print("1. Visiona prodotto")
+    print("2. Esci dal sistema")
+    comando = input("Scegli l'operazione: ")
+
+    while True:
+        if comando == "1":
+            api_url = base_url + "/read_product"
+            product_data = ReadProduct()
+            try:
+                response = requests.get(api_url, json=product_data, verify=False)
+                data = response.json()
+                if response.status_code == 200:
+                    print("Veicoli trovati con successo!")
+                    rows = data.get("veicoli", [])
+                    i = 1
+                    for row in rows:
+                        print(f"Veicolo{i}: {row}")
+                        i+= 1
+                elif response.status_code == 404:
+                    error = data.get("Msg")
+                    print(error)
+            except:
+                print("Problemi di comunicazione con il server, riprova più tardi")
+        
+        if comando == "2":
+            print("Arrivederci!")
+            sys.exit()
+        
+        else:
+            print("Comando non valido")
+
+        print("Operazione disponibili:")
+        print("1. Visiona prodotto")
+        print("2. Esci dal sistema")
+        comando = input("Scegli l'operazione: ")    
+

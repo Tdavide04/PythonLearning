@@ -49,10 +49,11 @@ def CreateProduct():
         modello = dati.get("modello")
         prezzo = dati.get("prezzo")
         disponibilita = dati.get("disponibilita")
+        filiale_id = dati.get("filiale_id") 
         if tipo == "automobile":
-            query = (f"INSERT INTO automobili (marca, modello, prezzo, disponibilita) VALUES ('{marca}', '{modello}', '{prezzo}', '{disponibilita}')")
+            query = (f"INSERT INTO automobili (marca, modello, prezzo, disponibilita, filiale_id) VALUES ('{marca}', '{modello}', '{prezzo}', '{disponibilita}', '{filiale_id}')")
         else:
-            query = (f"INSERT INTO motociclette (marca, modello, prezzo, disponibilita) VALUES ('{marca}', '{modello}', '{prezzo}', '{disponibilita}')")
+            query = (f"INSERT INTO motociclette (marca, modello, prezzo, disponibilita, filiale_id) VALUES ('{marca}', '{modello}', '{prezzo}', '{disponibilita}', '{filiale_id}')")
 
         if db.write_in_db(connection, query) != -1:
             print("Query eseguita con successo")
@@ -153,15 +154,16 @@ def UpdateProduct():
         modello = dati.get("modello")
         nuovo_prezzo = dati.get("prezzo")
         disponibilita = dati.get("disponibilita")
+        nuova_filiale = dati.get("filiale_id")
         if tipo == "automobile":
-            query = f"""UPDATE automobili SET prezzo = '{nuovo_prezzo}', disponibilita = '{disponibilita}'
+            query = f"""UPDATE automobili SET prezzo = '{nuovo_prezzo}', disponibilita = '{disponibilita}', filiale_id = '{nuova_filiale}' 
                         WHERE "id" = {id} AND marca = '{marca}' AND modello = '{modello}';"""
         else:
-            query = f"""UPDATE motociclette SET prezzo = '{nuovo_prezzo}', disponibilita = '{disponibilita}'
+            query = f"""UPDATE motociclette SET prezzo = '{nuovo_prezzo}', disponibilita = '{disponibilita}', filiale_id = '{nuova_filiale}'
                         WHERE "id" = {id} AND marca = '{marca}' AND modello = '{modello}';"""
         if db.write_in_db(connection, query) != -1:
             print("Query eseguita con successo")
-            return jsonify({"Esito" : "200", "Msg" : f"Veicolo modificato con le seguenti informazioni:\nid: {id}, marca: {marca}, modello: {modello}, prezzo: {nuovo_prezzo}, disponibilita: {disponibilita}"}), 200
+            return jsonify({"Esito" : "200", "Msg" : f"Veicolo modificato con le seguenti informazioni:\nid: {id}, marca: {marca}, modello: {modello}, prezzo: {nuovo_prezzo}, disponibilita: {disponibilita}, filiale_id: {nuova_filiale}"}), 200
         else:
             print("Query fallita")
             return jsonify({"Esito" : "404", "Msg" : "Query fallita, controlla se l'id esiste"}), 404

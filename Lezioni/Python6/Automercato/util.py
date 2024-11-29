@@ -15,7 +15,8 @@ def CreateProduct():
     modello = input("Modello: ")
     prezzo = input("Prezzo: ")
     disponibilita = input("Disponibilita: ")
-    dati = {"tipo":tipo, "marca":marca, "modello":modello, "prezzo":prezzo, "disponibilita":disponibilita}
+    filiale_id = input("filiale_id: ")
+    dati = {"tipo":tipo, "marca":marca, "modello":modello, "prezzo":prezzo, "disponibilita":disponibilita, "filiale_id":filiale_id}
     return dati
 
 def ReadProduct():
@@ -52,7 +53,8 @@ def UpdateProduct():
     modello = input("Modello: ")
     prezzo = input("Nuovo prezzo: ")
     disponibilita = input("Nuova disponibilita: ")
-    dati = {"id":id, "tipo":tipo, "marca":marca, "modello":modello, "prezzo":prezzo, "disponibilita":disponibilita}
+    filiale_id = input("filiale_id: ")
+    dati = {"id":id, "tipo":tipo, "marca":marca, "modello":modello, "prezzo":prezzo, "disponibilita":disponibilita, "filiale_id":filiale_id}
     return dati
 
 def DeleteProduct():
