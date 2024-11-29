@@ -77,10 +77,11 @@ if accesso.upper() == "Y":
                 product_data = UpdateProduct()
                 try:
                     response = requests.post(api_url, json=product_data, verify=False)
+                    data = response.json()
                     if response.status_code == 200:
-                        print("Prodotto creato con successo")
+                        print(data.get("Msg"))
                     else:
-                        print("Errore di creazione del prodotto")
+                        print(data.get("Msg"))
                 except:
                     print("Problemi di comunicazione con il server, riprova più tardi")
 
@@ -89,10 +90,11 @@ if accesso.upper() == "Y":
                 product_data = DeleteProduct()
                 try:
                     response = requests.post(api_url, json=product_data, verify=False)
+                    data = response.json()
                     if response.status_code == 200:
-                        print("Prodotto creato con successo")
+                        print(data.get("Msg"))
                     else:
-                        print("Errore di creazione del prodotto")
+                        print(data.get("Msg"))
                 except:
                     print("Problemi di comunicazione con il server, riprova più tardi")
 
