@@ -76,7 +76,7 @@ if accesso.upper() == "Y":
                 api_url = base_url + "/update_product"
                 product_data = UpdateProduct()
                 try:
-                    response = requests.post(api_url, json=product_data, verify=False)
+                    response = requests.put(api_url, json=product_data, verify=False)
                     data = response.json()
                     if response.status_code == 200:
                         print(data.get("Msg"))
@@ -89,7 +89,7 @@ if accesso.upper() == "Y":
                 api_url = base_url + "/delete_product"
                 product_data = DeleteProduct()
                 try:
-                    response = requests.post(api_url, json=product_data, verify=False)
+                    response = requests.delete(api_url, json=product_data, verify=False)
                     data = response.json()
                     if response.status_code == 200:
                         print(data.get("Msg"))
@@ -118,7 +118,6 @@ elif accesso.upper() == "N":
     print("1. Visiona prodotto")
     print("2. Esci dal sistema")
     comando = input("Scegli l'operazione: ")
-
     while True:
         if comando == "1":
             api_url = base_url + "/read_product"
