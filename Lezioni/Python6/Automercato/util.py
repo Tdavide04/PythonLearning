@@ -50,7 +50,27 @@ def UpdateProduct():
     id = input("id: ")
     marca = input("Marca: ")
     modello = input("Modello: ")
-    prezzo = input("Prezzo: ")
-    disponibilita = input("Disponibilita: ")
+    prezzo = input("Nuovo prezzo: ")
+    disponibilita = input("Nuova disponibilita: ")
     dati = {"id":id, "tipo":tipo, "marca":marca, "modello":modello, "prezzo":prezzo, "disponibilita":disponibilita}
+    return dati
+
+def DeleteProduct():
+    print("Cosa stai modificando?")
+    print("1. Automobile")
+    print("2. Motocicletta")
+
+    comando = input()
+    
+    if comando == "1":
+        tipo = "automobile"
+    elif comando == "2":
+        tipo = "motocicletta"
+    else:
+        print("Scelta non valida, riprova.") 
+
+    id = input("id: ")
+    marca = input("Marca: ")
+    modello = input("Modello: ")
+    dati = {"id":id, "tipo":tipo, "marca":marca, "modello":modello}
     return dati

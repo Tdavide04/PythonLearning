@@ -86,7 +86,7 @@ if accesso.upper() == "Y":
 
             if comando == "4":
                 api_url = base_url + "/delete_product"
-                product_data = ReadProduct()
+                product_data = DeleteProduct()
                 try:
                     response = requests.post(api_url, json=product_data, verify=False)
                     if response.status_code == 200:

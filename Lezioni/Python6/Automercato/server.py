@@ -157,7 +157,7 @@ def UpdateProduct():
             query = f"""UPDATE automobili SET prezzo = '{nuovo_prezzo}', disponibilita = '{disponibilita}'
                         WHERE "id" = {id} AND marca = '{marca}' AND modello = '{modello}';"""
         else:
-            query = f"""UPDATE automobili SET prezzo = '{nuovo_prezzo}', disponibilita = '{disponibilita}'
+            query = f"""UPDATE motociclette SET prezzo = '{nuovo_prezzo}', disponibilita = '{disponibilita}'
                         WHERE "id" = {id} AND marca = '{marca}' AND modello = '{modello}';"""
         if db.write_in_db(connection, query) != -1:
             print("Query eseguita con successo")
@@ -172,6 +172,26 @@ def UpdateProduct():
 
 @api.route("/delete_product", methods=["DELETE"])
 def DeleteProduct():
-    pass
+    connection = db.connect()
+    if connection is None:
+        print("Connessione al DB fallita")
+        sys.exit()
+    try:
+        dati = request.json
+        id = dati.get("id")
+        marca = dati.get("marca")
+        modello = dati.get("modello")
+        tipo = dati.get("tipo")
+        if tipo == "automobile":
+            query = f"""DELETE FROM automobili 
+                        WHERE 
+                            marca = '{marca}' AND modello = '{modello}' AND "id" = {id};"""
+        else:
+            query = f"""DELETE FROM motociclette 
+                        WHERE 
+                            marca = '{marca}' AND modello = '{modello}' AND "id" = {id};"""
+    
+    except:
+        pass
     
 api.run(host="127.0.0.1", port=8080, ssl_context="adhoc", debug=True)
