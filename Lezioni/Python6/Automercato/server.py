@@ -191,7 +191,15 @@ def DeleteProduct():
                         WHERE 
                             marca = '{marca}' AND modello = '{modello}' AND "id" = {id};"""
     
+        if db.write_in_db(connection, query) != -1:
+            print("Query eseguita con successo")
+            return jsonify({"Esito" : "200", "Msg" : f"Veicolo id: {id}, marca: {marca}, modello: {modello} eliminato con successo"}), 200
+        else:
+            print("Query fallita")
+            return jsonify({"Esito" : "404", "Msg" : "Query fallita, controlla se l'id esiste"}), 404
     except:
-        pass
+        return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
+    finally:
+        db.close(connection)
     
 api.run(host="127.0.0.1", port=8080, ssl_context="adhoc", debug=True)
