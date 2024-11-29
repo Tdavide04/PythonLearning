@@ -11,8 +11,8 @@ def CreateProduct():
     else:
         print("Scelta non valida, riprova.") 
 
-    marca = input("Marca: ")
-    modello = input("Modello: ")
+    marca = input("Marca: ").capitalize()
+    modello = input("Modello: ").capitalize()
     prezzo = input("Prezzo: ")
     disponibilita = input("Disponibilita: ")
     filiale_id = input("filiale_id: ")
