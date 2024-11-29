@@ -11,8 +11,6 @@ def login():
     if connection is None:
         print("Connessione al DB fallita")
         return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
-    
-        
     try:
         jsonReq = request.json
         id = jsonReq.get("operator_id")
@@ -141,5 +139,39 @@ def ReadProduct():
     finally:
         db.close(connection)
 
+@api.route("/update_product", methods = ["PUT"])
+def UpdateProduct():
+    connection = db.connect()
+    if connection is None:
+        print("Connessione al DB fallita")
+        sys.exit()
+    try:
+        dati = request.json
+        id = dati.get("id")
+        tipo = dati.get("tipo")
+        marca = dati.get("marca")
+        modello = dati.get("modello")
+        nuovo_prezzo = dati.get("prezzo")
+        disponibilita = dati.get("disponibilita")
+        if tipo == "automobile":
+            query = f"""UPDATE automobili SET prezzo = '{nuovo_prezzo}', disponibilita = '{disponibilita}'
+                        WHERE "id" = {id} AND marca = '{marca}' AND modello = '{modello}';"""
+        else:
+            query = f"""UPDATE automobili SET prezzo = '{nuovo_prezzo}', disponibilita = '{disponibilita}'
+                        WHERE "id" = {id} AND marca = '{marca}' AND modello = '{modello}';"""
+        if db.write_in_db(connection, query) != -1:
+            print("Query eseguita con successo")
+            return jsonify({"Esito" : "200", "Msg" : f"Veicolo modificato con le seguenti informazioni:\nid: {id}, marca: {marca}, modello: {modello}, prezzo: {nuovo_prezzo}, disponibilita: {disponibilita}"}), 200
+        else:
+            print("Query fallita")
+            return jsonify({"Esito" : "404", "Msg" : "Query fallita, controlla se l'id esiste"}), 404
+    except:
+        return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
+    finally:
+        db.close(connection)
+
+@api.route("/delete_product", methods=["DELETE"])
+def DeleteProduct():
+    pass
     
 api.run(host="127.0.0.1", port=8080, ssl_context="adhoc", debug=True)

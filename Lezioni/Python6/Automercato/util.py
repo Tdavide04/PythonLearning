@@ -34,4 +34,23 @@ def ReadProduct():
     return dati
 
 def UpdateProduct():
-    pass
+    print("Cosa stai modificando?")
+    print("1. Automobile")
+    print("2. Motocicletta")
+
+    comando = input()
+    
+    if comando == "1":
+        tipo = "automobile"
+    elif comando == "2":
+        tipo = "motocicletta"
+    else:
+        print("Scelta non valida, riprova.") 
+
+    id = input("id: ")
+    marca = input("Marca: ")
+    modello = input("Modello: ")
+    prezzo = input("Prezzo: ")
+    disponibilita = input("Disponibilita: ")
+    dati = {"id":id, "tipo":tipo, "marca":marca, "modello":modello, "prezzo":prezzo, "disponibilita":disponibilita}
+    return dati
