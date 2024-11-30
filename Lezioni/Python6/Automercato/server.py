@@ -15,17 +15,15 @@ def login():
         jsonReq = request.json
         id = jsonReq.get("operator_id")
         password = jsonReq.get("operator_password")
-        login_query = (f"select id,password from operator where id = '{id}' and password = '{password}'")
-        if db.read_in_db(connection, login_query) != -1:
-            admin = False
-            login_query = (f"select id,password from operator where id = '{id}' and password = '{password}' and admin = 'true'")
-            if db.read_in_db(connection, login_query) != -1:
-                admin = True
+        login_query = (f"SELECT id, password, admin FROM operator WHERE id = '{id}' AND password = '{password}'")
+        result = db.read_in_db(connection, login_query)
+        if result == 1:
+            admin = True
             access = True
             operator = {"id" : id, "password" : password, "admin" : admin, "access" : access}
             print(f"Benvenuto operatore {id}")
             return jsonify({"Esito" : "200", "Msg" : "Dati corretti", "operator" : operator}), 200
-        else:
+        elif result == 0:
             print("Accesso negato, operatore non trovato")
             return jsonify({"Esito" : "404", "Msg" : "Dati non corretti"}), 404
 

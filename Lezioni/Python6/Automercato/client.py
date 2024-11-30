@@ -1,15 +1,13 @@
 import requests, sys
 from util import *
 
-base_url = "https://127.0.0.1:8080"
-
 print("Benvenuto nella pagina dell'automercato")
 accesso = input("Vuoi fare l'accesso? [Y/N] \n")
 
 if accesso.upper() == "Y":
     id = input("id: ")
     password = input("password: ")
-    login_data = {"operator_id" : id, "operatore_password" : password}
+    login_data = {"operator_id" : id, "operator_password" : password}
     api_url = base_url + "/login"
     try:
         response = requests.post(api_url, json=login_data, verify=False)
@@ -22,7 +20,7 @@ if accesso.upper() == "Y":
             operator_admin = operator.get("admin")
             print(f"Benvenuto operatore {operator_id}")
         else:
-            print("Operator non trovato")
+            print("Operatore non trovato")
             sys.exit()
         
     except:

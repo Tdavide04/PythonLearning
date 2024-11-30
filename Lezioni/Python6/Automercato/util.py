@@ -1,4 +1,4 @@
-from client import base_url
+base_url = "https://127.0.0.1:8080"
 import requests, sys
 
 def CreateProduct():
