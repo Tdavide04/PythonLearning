@@ -146,9 +146,6 @@ elif accesso.upper() == "N":
         if comando == "2":
             print("Arrivederci!")
             sys.exit()
-        
-        else:
-            print("Comando non valido")
 
         print("Operazione disponibili:")
         print("1. Visiona prodotto")
