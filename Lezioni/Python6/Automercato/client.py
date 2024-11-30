@@ -117,6 +117,8 @@ if accesso.upper() == "Y":
                         for row in rows:
                             print(f"Vendita{i}: {row}")
                             i+= 1
+                        if Serialize(rows):
+                            print("Bilancio copiato nel file")
                     elif response.status_code == 404:
                         error = data.get("Msg")
                         print(error)

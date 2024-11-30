@@ -1,4 +1,4 @@
-import requests, sys
+import requests, sys, json
 from datetime import datetime
 
 base_url = "https://127.0.0.1:8080"
@@ -181,3 +181,10 @@ def is_valid_date(date_string):
     except ValueError:
         return False
 
+def Serialize(data_dict, file_path = "bilancio.json") -> bool:
+    try:
+        with open(file_path, "w") as file:
+            json.dump(data_dict, file)
+        return True
+    except Exception:
+        return False
