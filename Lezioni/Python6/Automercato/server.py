@@ -222,5 +222,45 @@ def CheckFiliale():
     finally:
         db.close(connection)
     
+@api.route("/balance", methods = ["GET"])
+def Balance():
+    connection = db.connect()
+    if connection is None:
+        print("Connessione al DB fallita")
+        sys.exit()
+    try:
+        dati = request.json
+        data_inizio = dati.get("data_inizio")
+        data_fine = dati.get("data_fine")
+        query = f"""SELECT v.id AS vendita_id, v.data_vendita, v.tipo_oggetto, f.nome AS filiale_nome,
+                CASE 
+                    WHEN v.tipo_oggetto = 'automobile' THEN a.marca || ' ' || a.modello
+                    WHEN v.tipo_oggetto = 'motocicletta' THEN m.marca || ' ' || m.modello
+                    WHEN v.tipo_oggetto = 'accessorio' THEN ac.nome || ' (' || ac.categoria || ')'
+                END AS descrizione_oggetto,
+                CASE 
+                    WHEN v.tipo_oggetto = 'automobile' THEN a.prezzo
+                    WHEN v.tipo_oggetto = 'motocicletta' THEN m.prezzo
+                    WHEN v.tipo_oggetto = 'accessorio' THEN ac.prezzo
+                END AS prezzo
+                FROM vendite v
+                JOIN filiali f ON v.filiale_id = f.id
+                LEFT JOIN automobili a ON v.oggetto_id = a.id AND v.tipo_oggetto = 'automobile'
+                LEFT JOIN motociclette m ON v.oggetto_id = m.id AND v.tipo_oggetto = 'motocicletta'
+                LEFT JOIN accessori ac ON v.oggetto_id = ac.id AND v.tipo_oggetto = 'accessorio'
+                WHERE v.data_vendita BETWEEN '{data_inizio}' AND '{data_fine}'
+                ORDER BY v.data_vendita ASC;
+                """
+        rows = db.read_all_row(connection, query)
+        if rows and len(rows) > 0:
+            print("Query eseguita con successo")
+            return jsonify({"Esito" : "200", "Msg" : "Ecco il bilancio", "vendite":rows}), 200
+        else:
+            print("Query fallita")
+            return jsonify({"Esito" : "404", "Msg" : f"Query fallita, nessuna vendita tra {data_inizio} e {data_fine}"}), 404
+    except:
+        return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
+    finally:
+        db.close(connection)
     
 api.run(host="127.0.0.1", port=8080, ssl_context="adhoc", debug=True)

@@ -39,7 +39,8 @@ if accesso.upper() == "Y":
         print("2. Visiona prodotto")
         print("3. Modifica prodotto")
         print("4. Elimina prodotto")
-        print("5. Chiudi la sessione")
+        print("5. Vedi il bilancio")
+        print("6. Chiudi la sessione")
 
         comando = input("Scegli l'operazione: ").strip()
         while True:
@@ -102,8 +103,28 @@ if accesso.upper() == "Y":
                         print(data.get("Msg"))
                 except:
                     print("Problemi di comunicazione con il server, riprova più tardi")
-
+                    
             if comando == "5":
+                api_url = base_url + "/balance"
+                balance_data = Balance()
+                try:
+                    response = requests.get(api_url, json=balance_data, verify=False)
+                    data = response.json()
+                    if response.status_code == 200:
+                        print("Ecco il bilancio:")
+                        rows = data.get("vendite", [])
+                        i = 1
+                        for row in rows:
+                            print(f"Vendita{i}: {row}")
+                            i+= 1
+                    elif response.status_code == 404:
+                        error = data.get("Msg")
+                        print(error)
+                except:
+                    print("Problemi di comunicazione con il server, riprova più tardi")
+
+
+            if comando == "6":
                 print("Buona giornata!")
                 sys.exit()
 

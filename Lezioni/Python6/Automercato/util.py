@@ -1,5 +1,8 @@
-base_url = "https://127.0.0.1:8080"
 import requests, sys
+from datetime import datetime
+
+base_url = "https://127.0.0.1:8080"
+
 
 def CreateProduct():
     while True:
@@ -150,4 +153,31 @@ def CheckFiliale():
         else:
             print("comando non valido")
             
-            
+def Balance():
+    data_inizio = input("Immetti la data di inizio: (YYYY-MM-DD)") 
+    while not is_valid_date(data_inizio):
+        print("La data deve essere nel formato seguente: YYYY-MM-DD")       
+        data_inizio = input("Immetti la data di inizio: (YYYY-MM-DD)")    
+    data_fine = input("Immetti la data di fine: (YYYY-MM-DD)") 
+    while not is_valid_date(data_fine):
+        print("La data deve essere nel formato seguente: YYYY-MM-DD")       
+        data_fine = input("Immetti la data di fine: (YYYY-MM-DD)")
+    dati = {"data_inizio":data_inizio, "data_fine":data_fine}
+    return dati
+        
+def is_valid_date(date_string):
+    """
+    Verifica se una stringa è in formato 'YYYY-MM-DD'.
+    
+    Args:
+        date_string (str): La stringa da verificare.
+    
+    Returns:
+        bool: True se la stringa è valida, False altrimenti.
+    """
+    try:
+        datetime.strptime(date_string, "%Y-%m-%d")
+        return True
+    except ValueError:
+        return False
+
