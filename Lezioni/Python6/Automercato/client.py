@@ -135,7 +135,8 @@ if accesso.upper() == "Y":
             print("2. Visiona prodotto")
             print("3. Modifica prodotto")
             print("4. Elimina prodotto")
-            print("5. Chiudi la sessione")
+            print("5. Vedi il bilancio")
+            print("6. Chiudi la sessione")
 
 
             comando = input("Scegli l'operazione: ").strip()

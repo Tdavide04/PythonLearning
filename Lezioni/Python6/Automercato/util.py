@@ -154,14 +154,14 @@ def CheckFiliale():
             print("comando non valido")
             
 def Balance():
-    data_inizio = input("Immetti la data di inizio: (YYYY-MM-DD)") 
+    data_inizio = input("Immetti la data di inizio (YYYY-MM-DD): ") 
     while not is_valid_date(data_inizio):
         print("La data deve essere nel formato seguente: YYYY-MM-DD")       
-        data_inizio = input("Immetti la data di inizio: (YYYY-MM-DD)")    
-    data_fine = input("Immetti la data di fine: (YYYY-MM-DD)") 
+        data_inizio = input("Immetti la data di inizio (YYYY-MM-DD): ")    
+    data_fine = input("Immetti la data di fine (YYYY-MM-DD): ") 
     while not is_valid_date(data_fine):
         print("La data deve essere nel formato seguente: YYYY-MM-DD")       
-        data_fine = input("Immetti la data di fine: (YYYY-MM-DD)")
+        data_fine = input("Immetti la data di fine (YYYY-MM-DD): ")
     dati = {"data_inizio":data_inizio, "data_fine":data_fine}
     return dati
         
