@@ -2,21 +2,39 @@ base_url = "https://127.0.0.1:8080"
 import requests, sys
 
 def CreateProduct():
-    print("Cosa stai creando?")
-    print("1. Automobile")
-    print("2. Motocicletta")
-    comando = input()
-    if comando == "1":
-        tipo = "automobile"
-    elif comando == "2":
-        tipo = "motocicletta"
-    else:
-        print("Scelta non valida, riprova.") 
-    marca = input("Marca: ").capitalize()
-    modello = input("Modello: ").capitalize()
-    prezzo = input("Prezzo: ")
-    disponibilita = input("Disponibilita: ")
-    filiale_id = input("filiale_id: ")
+    while True:
+        print("Cosa stai creando?")
+        print("1. Automobile")
+        print("2. Motocicletta")
+        comando = input().strip()
+        if comando == "1":
+            tipo = "automobile"
+            break
+        elif comando == "2":
+            tipo = "motocicletta"
+            break
+        else:
+            print("Scelta non valida, riprova") 
+    marca = input("Marca: ").capitalize().strip()
+    while not marca.isalpha():
+        print("La marca deve essere una stringa valida")
+        marca = input("Marca: ").capitalize().strip()
+    modello = input("Modello: ").capitalize().strip()
+    while not modello.isalpha():
+        print("Il modello deve essere una stringa valida")
+        modello = input("Modello: ").capitalize().strip()
+    prezzo = input("Prezzo: ").strip()
+    while not prezzo.isdigit() or not prezzo.isdecimal():
+        print("Il prezzo deve essere un numero decimale valido")
+        prezzo = input("Prezzo: ").strip()
+    disponibilita = input("Disponibilità (True/False): ").lower().strip()
+    while disponibilita.lower() not in ['true', 'false']:
+        print("La disponibilità deve essere un valore booleano")
+        disponibilita = input("Disponibilità (True/False): ").lower().strip()
+    filiale_id = input("filiale_id: ").strip()
+    while not filiale_id.isdigit():
+        print("L'id della filiale deve essere un numero decimale valido")
+        filiale_id = input("filiale_id: ").strip()
     dati = {"tipo":tipo, "marca":marca, "modello":modello, "prezzo":prezzo, "disponibilita":disponibilita, "filiale_id":filiale_id}
     return dati
 
@@ -35,45 +53,78 @@ def ReadProduct():
     return dati
 
 def UpdateProduct():
-    print("Cosa stai modificando?")
-    print("1. Automobile")
-    print("2. Motocicletta")
-    comando = input()
-    if comando == "1":
-        tipo = "automobile"
-    elif comando == "2":
-        tipo = "motocicletta"
-    else:
-        print("Scelta non valida, riprova.") 
-    id = input("id: ")
-    marca = input("Marca: ")
-    modello = input("Modello: ")
-    prezzo = input("Nuovo prezzo: ")
-    disponibilita = input("Nuova disponibilita: ")
-    filiale_id = input("filiale_id: ")
+    while True:
+        print("Cosa stai modificando?")
+        print("1. Automobile")
+        print("2. Motocicletta")
+        comando = input().strip()
+        if comando == "1":
+            tipo = "automobile"
+            break
+        elif comando == "2":
+            tipo = "motocicletta"
+            break
+        else:
+            print("Scelta non valida, riprova") 
+    id = input("id: ").strip()
+    while not id.isdigit():
+        print("L'id deve essere un numero intero valido")
+        id = input("id: ").strip()
+    marca = input("Marca: ").capitalize().strip()
+    while not marca.isalpha():
+        print("La marca deve essere una stringa valida")
+        marca = input("Marca: ").capitalize().strip()
+    modello = input("Modello: ").capitalize().strip()
+    while not modello.isalpha():
+        print("Il modello deve essere una stringa valida")
+        modello = input("Modello: ").capitalize().strip()
+    prezzo = input("Nuovo prezzo: ").strip()
+    while not prezzo.isdigit() or not prezzo.isdecimal():
+        print("Il prezzo deve essere un numero decimale valido")
+        prezzo = input("Nuovo prezzo: ")
+    disponibilita = input("Nuova disponibilità (True/False): ").lower().strip()
+    while disponibilita.lower() not in ['true', 'false']:
+        print("La disponibilità deve essere un valore booleano")
+        disponibilita = input("Nuova disponibilità (True/False): ").lower().strip()
+    filiale_id = input("filiale_id: ").strip()
+    while not filiale_id.isdigit():
+        print("L'id della filiale deve essere un numero decimale valido")
+        filiale_id = input("filiale_id: ").strip()
     dati = {"id":id, "tipo":tipo, "marca":marca, "modello":modello, "prezzo":prezzo, "disponibilita":disponibilita, "filiale_id":filiale_id}
     return dati
 
 def DeleteProduct():
-    print("Cosa stai modificando?")
-    print("1. Automobile")
-    print("2. Motocicletta")
-    comando = input()
-    if comando == "1":
-        tipo = "automobile"
-    elif comando == "2":
-        tipo = "motocicletta"
-    else:
-        print("Scelta non valida, riprova.") 
-    id = input("id: ")
-    marca = input("Marca: ")
-    modello = input("Modello: ")
+    while True:
+        print("Cosa stai modificando?")
+        print("1. Automobile")
+        print("2. Motocicletta")
+        comando = input().strip()
+        if comando == "1":
+            tipo = "automobile"
+            break
+        elif comando == "2":
+            tipo = "motocicletta"
+            break
+        else:
+            print("Scelta non valida, riprova") 
+    id = input("id: ").strip()
+    while not id.isdigit():
+        print("L'id deve essere un numero intero valido")
+        id = input("id: ").strip()
+    marca = input("Marca: ").capitalize().strip()
+    while not marca.isalpha():
+        print("La marca deve essere una stringa valida")
+        marca = input("Marca: ").capitalize().strip()
+    modello = input("Modello: ").capitalize().strip()
+    while not modello.isalpha():
+        print("Il modello deve essere una stringa valida")
+        modello = input("Modello: ").capitalize().strip()
     dati = {"id":id, "tipo":tipo, "marca":marca, "modello":modello}
     return dati
 
 def CheckFiliale():
     while True:
-        comando = input("Conosci l'id della filiale in cui inserire il tuo veicolo? [Y/N] \n")
+        comando = input("Conosci l'id della filiale in cui inserire il tuo veicolo? [Y/N] \n").strip()
         if comando.upper() == "Y":
             print("Buon lavoro!")
             break
@@ -98,3 +149,5 @@ def CheckFiliale():
                 sys.exit()
         else:
             print("comando non valido")
+            
+            

@@ -14,7 +14,7 @@ def login():
     try:
         jsonReq = request.json
         id = jsonReq.get("operator_id")
-        password = jsonReq.get("operator_password")
+        password = jsonReq.get("operator_password") 
         login_query = (f"SELECT id, password, admin FROM operator WHERE id = '{id}' AND password = '{password}'")
         result = db.read_in_db(connection, login_query)
         if result == 1:
@@ -81,7 +81,7 @@ def ReadProduct():
                     query = (f"""SELECT m.id, m.marca, m.modello, m.prezzo, fi.nome, fi.indirizzo
                             FROM motociclette m
                             JOIN filiali fi ON m.filiale_id = fi.id
-                            WHERE m.marca = '{marca} and m.modello = '{modello}''
+                            WHERE m.marca = '{marca}' and m.modello = '{modello}'
                             UNION
                             SELECT a.id, a.marca, a.modello, a.prezzo, fi.nome, fi.indirizzo
                             FROM automobili a

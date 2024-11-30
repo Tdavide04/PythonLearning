@@ -2,11 +2,17 @@ import requests, sys
 from util import *
 
 print("Benvenuto nella pagina dell'automercato")
-accesso = input("Vuoi fare l'accesso? [Y/N] \n")
+accesso = input("Vuoi fare l'accesso? [Y/N] \n").strip()
 
 if accesso.upper() == "Y":
-    id = input("id: ")
-    password = input("password: ")
+    id = input("id: ").strip()
+    while not id.isdigit():
+        print("L'id deve essere un numero intero valido")
+        id = input("id: ").strip()
+    password = input("password: ").strip()
+    while not password.isalpha():
+        print("La password deve essere una stringa valida")
+        password = input("password: ").strip()
     login_data = {"operator_id" : id, "operator_password" : password}
     api_url = base_url + "/login"
     try:
@@ -19,8 +25,8 @@ if accesso.upper() == "Y":
             operator_access = operator.get("access")
             operator_admin = operator.get("admin")
             print(f"Benvenuto operatore {operator_id}")
-        else:
-            print("Operatore non trovato")
+        elif response.status_code == 404:
+            print(data.get("Msg"))
             sys.exit()
         
     except:
@@ -35,7 +41,7 @@ if accesso.upper() == "Y":
         print("4. Elimina prodotto")
         print("5. Chiudi la sessione")
 
-        comando = input("Scegli l'operazione: ")
+        comando = input("Scegli l'operazione: ").strip()
         while True:
             if comando == "1":
                 CheckFiliale()
@@ -109,7 +115,7 @@ if accesso.upper() == "Y":
             print("5. Chiudi la sessione")
 
 
-            comando = input("Scegli l'operazione: ")
+            comando = input("Scegli l'operazione: ").strip()
             
 elif accesso.upper() == "N":
 
@@ -147,5 +153,8 @@ elif accesso.upper() == "N":
         print("Operazione disponibili:")
         print("1. Visiona prodotto")
         print("2. Esci dal sistema")
-        comando = input("Scegli l'operazione: ")    
+        comando = input("Scegli l'operazione: ").strip()   
 
+else:
+    print("Comando non riconosciuto")
+    sys.exit()
