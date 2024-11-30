@@ -40,6 +40,7 @@ if accesso.upper() == "Y":
         comando = input("Scegli l'operazione: ")
         while True:
             if comando == "1":
+                CheckFiliale()
                 api_url = base_url + "/create_product"
                 product_data = CreateProduct()
                 try:

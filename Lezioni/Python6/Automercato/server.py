@@ -203,5 +203,26 @@ def DeleteProduct():
         return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
     finally:
         db.close(connection)
+        
+@api.route("/check_filiale", methods = ["GET"])
+def CheckFiliale():
+    connection = db.connect()
+    if connection is None:
+        print("Connessione al DB fallita")
+        sys.exit()
+    try:
+        query = "SELECT * FROM filiali"
+        rows = db.read_all_row(connection, query)
+        if rows and len(rows) > 0:
+            print("Query eseguita con successo")
+            return jsonify({"Esito" : "200", "Msg" : "Filiali trovate", "filiali":rows}), 200
+        else:
+            print("Query fallita")
+            return jsonify({"Esito" : "404", "Msg" : "Query fallita, nessuna filiale trovata"}), 404
+    except:
+        return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
+    finally:
+        db.close(connection)
+    
     
 api.run(host="127.0.0.1", port=8080, ssl_context="adhoc", debug=True)
