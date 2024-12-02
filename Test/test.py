@@ -1,1 +1,1 @@
-print("   ciao".strip())
+print("Counter Strike".strip())
