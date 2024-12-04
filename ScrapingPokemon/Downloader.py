@@ -1,3 +1,4 @@
+from pathlib import Path
 import requests
 import re
 import os.path
@@ -24,8 +25,8 @@ def Download(FileName):
                 file.write(chunk)
         print("Downloaded: " + url)
 
-
-f = open("URLs/URLs.txt", "r")
+urls = Path("URLs/URLs.txt")
+f = open(urls, "r")
 Lines = f.readlines()
 URLs = []
 for line in Lines:
