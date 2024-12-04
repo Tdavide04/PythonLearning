@@ -998,9 +998,22 @@ Terapagos
 Pecharunt
 """
 pokedex = []
-try: 
-    with open("test.txt", 'w') as f:
-            for nome in line.split():
-                f.write("'" + nome + "'" + ", ")
-except:
-    print("Qualcosa è andato storto")
+# try: 
+#     with open("test.txt", 'w') as f:
+#             for nome in line.split():
+#                 f.write("'" + nome + "'" + ", ")
+# except:
+#     print("Qualcosa è andato storto")
+
+import os
+
+def count_files(directory):
+    # Lista dei file nella directory (esclude sottodirectory)
+    files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
+    print(f"Numero totale di file in '{directory}': {len(files)}")
+    return files
+
+# Specifica la directory
+directory = 'images_pokemon'  # Cambia con il percorso della tua directory
+files = count_files(directory)
+
