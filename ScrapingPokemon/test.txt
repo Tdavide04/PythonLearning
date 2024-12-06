@@ -6,11 +6,13 @@ Pawmi
 Pawmo
 Pawmot
 Tandemaus
+Maushold
 Fidough
 Dachsbun
 Smoliv
 Dolliv
 Arboliva
+Squawkabilly
 Nacli
 Naclstack
 Garganacl
@@ -43,6 +45,7 @@ Wiglett
 Wugtrio
 Bombirdier
 Finizen
+Palafin
 Varoom
 Revavroom
 Cyclizar
@@ -56,9 +59,11 @@ Cetoddle
 Cetitan
 Veluza
 Dondozo
+Tatsugiri
 Annihilape
 Clodsire
 Farigiraf
+Dudunsparce
 Kingambit
 Great_Tusk
 Scream_Tail
@@ -77,6 +82,10 @@ Arctibax
 Baxcalibur
 Gimmighoul
 Gholdengo
+Wo-Chien
+Chien-Pao
+Ting-Lu
+Chi-Yu
 Roaring_Moon
 Iron_Valiant
 Koraidon
