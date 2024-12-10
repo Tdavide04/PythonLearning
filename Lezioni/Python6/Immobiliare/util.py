@@ -1,5 +1,7 @@
 from datetime import datetime
 
+import requests
+
 base_url = "https://127.0.0.1:8080"
 
 def CercaCasaVendita():
@@ -105,7 +107,21 @@ def CercaCasaAffitto():
     return dati_filtri
 
 def VendiCasa():
-    pass
+    print("A quale filiale appartieni?")
+    filiale = input("Inserisci filiale: ")
+    api_url = base_url + "/check_filiale"
+    try:
+        response = requests.get(api_url, json={"filiale":filiale}, verify=False)
+        if response.status_code == 200:
+            pass
+        elif response.status_code == 404:
+            filiale = None
+    except:
+        print("Errore di connessione")
+        return None
+    print("Quale casa vuoi vendere?")
+    catastale = input("Inserisci il catastale: ")
+    return {"catastale" : catastale, "filiale":filiale}
 
 def AffittaCasa():
     pass

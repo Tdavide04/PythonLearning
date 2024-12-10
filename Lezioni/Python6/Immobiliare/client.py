@@ -37,7 +37,7 @@ if accesso.upper() == "Y":
         sys.exit()
 
 
-    if operator_type == "admin":
+    if operator_type == "filiale":
         if operator_access == True and operator_admin == True:
             print("Operazione disponibili:")
             print("1. Crea casa\n2. Visiona case\n3. Vendi casa\n4. Elimina prodotto\n5. Chiudi la sessione")
@@ -93,6 +93,29 @@ if accesso.upper() == "Y":
 
                         else:
                             print("Comando sbagliato, ritenta")
+
+                elif comando == "3":
+                    api_url = base_url + "/vendi_casa"
+                    dati_vendita = VendiCasa()
+                    try:
+                        response = requests.post(api_url, json=dati_vendita, verify=False)
+                        data = response.json()
+                        if response.status_code == 200:
+                            print(data.get("Msg"))
+                        elif response.status_code == 404:
+                            error = data.get("Msg")
+                            print(error)
+                    
+                    except:
+                        print("Problemi di comunicazione con il server, riprova più tardi")
+
+                elif comando == "4":
+                    pass
+
+                elif comando == "5":
+                    print("Arrivederci")
+                    sys.exit()
+
     elif operator_type == "marketing":
         if operator_access == True:
             pass

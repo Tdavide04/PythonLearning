@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Flask, request, jsonify
 import dbclient as db
 import sys
@@ -15,12 +16,13 @@ def login():
         jsonReq = request.json
         id = jsonReq.get("operator_id")
         password = jsonReq.get("operator_password") 
-        login_query = (f"SELECT id, password, admin FROM operatore WHERE id = '{id}' AND password = '{password}'")
-        result = db.read_in_db(connection, login_query)
-        if result == 1:
+        login_query = (f"SELECT id, password, admin, tipo FROM operatore WHERE id = '{id}' AND password = '{password}'")
+        result = db.read_next_row(connection, login_query)
+        if result[1]:
             admin = True
             access = True
-            operator = {"id" : id, "password" : password, "admin" : admin, "access" : access}
+            tipo = result[1][3]
+            operator = {"id" : id, "password" : password, "admin" : admin, "access" : access, "tipo":tipo}
             print(f"Benvenuto operatore {id}")
             return jsonify({"Esito" : "200", "Msg" : "Dati corretti", "operator" : operator}), 200
         elif result == 0:
@@ -90,7 +92,7 @@ def CercaCasaVendita():
         db.close(connection)
 
 @api.route("/case_in_affitto", methods = ["GET"])
-def CercaCasaVendita():
+def CercaCasaAffitto():
     connection = db.connect()
     if connection is None:
         print("Connessione al DB fallita")
@@ -137,5 +139,56 @@ def CercaCasaVendita():
     finally:
         db.close(connection)
 
+@api.route("/vendi_casa", methods = ["POST"])
+def VendiCasa():
+    connection = db.connect()
+    if connection is None:
+        print("Connessione al DB fallita")
+        sys.exit()
+    try:
+        dati = request.json
+        catastale = dati.get("catastale")
+        filiale = dati.get("filiale")
+        query = f"SELECT * FROM case_in_vendita WHERE catastale = '{catastale}'"
+        if db.read_in_db(connection, query) == 1:
+            row = db.read_next_row(connection,query)[1]
+        else:
+            return jsonify({"Esito": "404", "Msg": "Qualcosa è andato storto"}), 404
+        if row:
+            query = f"INSERT INTO vendute_casa (catastale, data_vendita, filiale_proponente, filiale_venditrice, prezzo_vendita) VALUES ('{row[0]}', '{datetime.now()}', '{row[8]}', '{filiale}','{row[6]}')"
+            if db.write_in_db(connection, query) == 0:
+                query = f"DELETE FROM case_in_vendita WHERE catastale = '{catastale}'"
+                db.write_in_db(connection, query)
+                if db.read_in_db(connection, query) == 0:
+                    print("Casa venduta con successo!")
+                    return jsonify({"Esito":"200", "Msg":"Casa venduta con successo"}), 200
+            else:
+                return jsonify({"Esito": "404", "Msg": "Qualcosa è andato storto"}), 404
+                
+        else:
+            return jsonify({"Esito": "404", "Msg": "Catastale non trovato"}), 404
+    except Exception as e:
+        print(f"Errore dettagliato: {str(e)}")
+        return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
+    finally:
+        db.close(connection)
 
+@api.route("/check_filiale", methods=["GET"])
+def CheckFiliale():
+    connection = db.connect()
+    if connection is None:
+        print("Connessione al DB fallita")
+        sys.exit()
+    try:
+        dati = request.json
+        filiale = dati.get("filiale")
+        query = f"SELECT * FROM filiali WHERE nome = '{filiale}'"
+        if db.read_in_db(connection, query) == 1:
+            return jsonify({"Esito":"200", "Msg":"Filiale trovata"}), 200
+        
+    except Exception as e:
+        print(f"Errore dettagliato: {str(e)}")
+        return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
+    finally:
+        db.close(connection)
 api.run(host="127.0.0.1", port=8080, ssl_context="adhoc", debug=True)
