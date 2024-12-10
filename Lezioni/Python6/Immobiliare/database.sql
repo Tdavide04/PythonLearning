@@ -59,16 +59,18 @@ CREATE TABLE affitti_casa (
 CREATE TABLE operatore (
     id SERIAL PRIMARY KEY,
     password VARCHAR(255) NOT NULL,
-    admin BOOLEAN NOT NULL
+    admin BOOLEAN NOT NULL,
+    tipo VARCHAR(255) NOT NULL
 );
 
-INSERT INTO operatore (password, admin) VALUES
-('Zagarolo', TRUE),
-('password2', FALSE),
-('password3', FALSE),
-('password4', TRUE),
-('password5', FALSE),
-('password6', TRUE)
+INSERT INTO operatore (password, admin, tipo) VALUES
+('Zagarolo', TRUE, 'marketing'),
+('password2', FALSE, 'filiale'),
+('password3', FALSE, 'filiale'),
+('password4', TRUE, 'marketing'),
+('password5', FALSE, 'filiale'),
+('password6', TRUE, 'marketing');
+
 
 INSERT INTO filiali (partita_iva, nome, indirizzo_sede, civico, telefono) VALUES
 ('12345678901', 'Filiale Roma', 'Via Nazionale', '25', '0678912345'),

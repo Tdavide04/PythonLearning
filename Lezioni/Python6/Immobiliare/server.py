@@ -79,7 +79,58 @@ def CercaCasaVendita():
         if rows and len(rows) > 0:
             print("Case trovate con successo!")
             return jsonify({"Esito":"ok","Msg":"Case trovate con successo!","case":rows}), 200
+        else:
+            print("Query fallita")
+            return jsonify({"Esito" : "404", "Msg" : f"Query fallita"}), 404
 
+    except Exception as e:
+        print(f"Errore dettagliato: {str(e)}")
+        return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
+    finally:
+        db.close(connection)
+
+@api.route("/case_in_affitto", methods = ["GET"])
+def CercaCasaVendita():
+    connection = db.connect()
+    if connection is None:
+        print("Connessione al DB fallita")
+        sys.exit()
+    try:
+        dati = request.json
+        catastale = dati.get("catastale")
+        indirizzo = dati.get("indirizzo")
+        tipo_affitto = dati.get("tipo_affitto")
+        bagno_personale = dati.get("bagno_personale")
+        prezzo_min = dati.get("prezzo_min")
+        prezzo_max = dati.get("prezzo_max")
+
+        conditions = []
+        if catastale:
+            conditions.append(f"catastale = '{catastale}'")
+        if indirizzo:
+            conditions.append(f"indirizzo = '{indirizzo}'")
+        if tipo_affitto:
+            conditions.append(f"piano = '{tipo_affitto}'")
+        if bagno_personale:
+            conditions.append(f"metri = '{bagno_personale}'")
+        if prezzo_min is not None and prezzo_max is not None:
+            conditions.append(f"prezzo BETWEEN {prezzo_min} AND {prezzo_max}")
+        elif prezzo_min is not None:
+            conditions.append(f"prezzo >= {prezzo_min}")
+        elif prezzo_max is not None:
+            conditions.append(f"prezzo <= {prezzo_max}")
+        where_clause = " AND ".join(conditions)
+        query = f"SELECT * FROM case_in_affitto"
+        if where_clause: 
+            query += f" WHERE {where_clause}"
+        
+        rows = db.read_all_row(connection, query)
+        if rows and len(rows) > 0:
+            print("Case trovate con successo!")
+            return jsonify({"Esito":"ok","Msg":"Case trovate con successo!","case":rows}), 200
+        else:
+            print("Query fallita")
+            return jsonify({"Esito" : "404", "Msg" : f"Query fallita"}), 404
     except Exception as e:
         print(f"Errore dettagliato: {str(e)}")
         return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500

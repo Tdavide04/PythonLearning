@@ -59,6 +59,7 @@ def CercaCasaAffitto():
     filtro = input("Quali opzioni scegli? Puoi usare più di un filtro dividendolo con virgole: ").strip()
 
     filtro_opzioni = {
+        "0": "nessun filtro",
         "1": "catastale",
         "2": "indirizzo",
         "3": "tipo_affitto",
@@ -70,6 +71,8 @@ def CercaCasaAffitto():
 
     if not filtri_scelti:
         print("Non hai selezionato filtri validi")
+    if "0" in filtri_scelti:
+        return {}
     else:
         print("Hai scelto i seguenti filtri: ")
         for f in filtri_scelti:
@@ -100,7 +103,6 @@ def CercaCasaAffitto():
             print(f"{filtro.capitalize()}: {valore}")
     
     return dati_filtri
-
 
 def VendiCasa():
     pass
