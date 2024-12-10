@@ -110,7 +110,19 @@ if accesso.upper() == "Y":
                         print("Problemi di comunicazione con il server, riprova più tardi")
 
                 elif comando == "4":
-                    pass
+                    api_url = base_url + "/delete_casa"
+                    dati = DeleteCasa()
+                    try:
+                        response = requests.get(api_url, json=dati, verify=False)
+                        data = response.json()
+                        if response.status_code == 200:
+                            print(data.get("Msg"))
+                        else:
+                            error = data.get("Msg")
+                            print(error)
+                    except:
+                        print("Problemi di comunicazione con il server, riprova più tardi")
+
 
                 elif comando == "5":
                     print("Arrivederci")

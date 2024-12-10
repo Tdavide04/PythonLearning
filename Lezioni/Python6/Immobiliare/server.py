@@ -191,4 +191,62 @@ def CheckFiliale():
         return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
     finally:
         db.close(connection)
+
+@api.route("/affitta_casa", methods = ["POST"])
+def VendiCasa():
+    connection = db.connect()
+    if connection is None:
+        print("Connessione al DB fallita")
+        sys.exit()
+    try:
+        dati = request.json
+        catastale = dati.get("catastale")
+        filiale = dati.get("filiale")
+        durata = dati.get("durata")
+        query = f"SELECT * FROM case_in_affitto WHERE catastale = '{catastale}'"
+        if db.read_in_db(connection, query) == 1:
+            row = db.read_next_row(connection,query)[1]
+        else:
+            return jsonify({"Esito": "404", "Msg": "Qualcosa è andato storto"}), 404
+        if row:
+            query = f"INSERT INTO vendute_casa (catastale, data_vendita, filiale_proponente, filiale_venditrice, prezzo_vendita) VALUES ('{row[0]}', '{datetime.now()}', '{row[8]}', '{filiale}','{row[6]}', '{durata}')"
+            if db.write_in_db(connection, query) == 0:
+                query = f"DELETE FROM case_in_vendita WHERE catastale = '{catastale}'"
+                db.write_in_db(connection, query)
+                if db.read_in_db(connection, query) == 0:
+                    print("Casa venduta con successo!")
+                    return jsonify({"Esito":"200", "Msg":"Casa venduta con successo"}), 200
+            else:
+                return jsonify({"Esito": "404", "Msg": "Qualcosa è andato storto"}), 404
+                
+        else:
+            return jsonify({"Esito": "404", "Msg": "Catastale non trovato"}), 404
+    except Exception as e:
+        print(f"Errore dettagliato: {str(e)}")
+        return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
+    finally:
+        db.close(connection)
+
+@api.route("vendi_casa", methods=["DELETE"])
+def DeleteCasa():
+    connection = db.connect()
+    if connection is None:
+        print("Connessione al DB fallita")
+        sys.exit()
+    try:
+        dati = request.json
+        catastale = dati.get("catastale")
+        query = f"DELETE FROM case_in_vendita WHERE catastale = '{catastale}'"
+        if db.write_in_db(connection, query) == 0:
+            return jsonify({"Esito":"200", "Msg":"Casa eliminata con successo"}), 200
+                
+        else:
+            return jsonify({"Esito": "404", "Msg": "Catastale non trovato"}), 404
+    except Exception as e:
+        print(f"Errore dettagliato: {str(e)}")
+        return jsonify({"Esito" : "500", "Msg" : "Errore con il server, riprova più tardi"}), 500
+    finally:
+        db.close(connection)
+
+
 api.run(host="127.0.0.1", port=8080, ssl_context="adhoc", debug=True)
