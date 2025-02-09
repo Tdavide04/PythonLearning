@@ -1,0 +1,11 @@
+{
+    "attempt_id": "a1b2c3d4",
+    "attempt_number" : 14,
+    "user_id": "12345",
+    "timestamp": "2025-02-09T14:00:00Z",
+    "user_input": ["ciao", "aldo", "cobo", "costo"],
+    "control_set_id": "cs_001", 
+    "results": [true, false, false, true],
+    "score": "2/4"
+  }
+  
