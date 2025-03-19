@@ -1,8 +1,6 @@
 import re
 import os
 import requests
-import logging
-logging.disable()
 
 URL = os.environ.get("URL", "http://gabibbo-says.challs.olicyber.it")
 
