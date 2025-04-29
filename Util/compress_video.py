@@ -1,3 +1,7 @@
+# HOW TO USE IT:
+# python3 compress_video.py video_orig.mp4 video_noaudio.mp4 --size 10 --remove-audio
+
+
 import subprocess
 import os
 
