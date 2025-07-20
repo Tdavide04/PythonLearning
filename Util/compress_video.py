@@ -1,5 +1,6 @@
 # HOW TO USE IT:
-# python compress_video.py video_orig.mp4 video_noaudio.mp4 --size 10 --remove-audio
+# python Util/compress_video.py video_orig.mp4 video_noaudio.mp4 --size 10 --remove-audio
+# python Util/compress_video.py "D:\SERYAL PC\Videos\magic.mp4" "D:\SERYAL PC\Videos\magic1.mp4" --size 10 --remove-audio
 
 
 import subprocess
