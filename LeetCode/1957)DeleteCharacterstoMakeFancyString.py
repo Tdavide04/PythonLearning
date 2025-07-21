@@ -56,3 +56,4 @@ class Solution:
 if __name__ == "__main__":
     sos = Solution()
     print(sos.makeFancyString("leeetcode")) # Output: "leetcode"
+    
